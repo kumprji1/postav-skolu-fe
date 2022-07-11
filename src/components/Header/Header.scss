@@ -2,7 +2,34 @@
 
 header {
     @include flexCenter();
-    background-color: $primaryColor;
+    background-color: white;
     &:hover {
+    }
+
+    /*Na prasáka*/
+    position: relative;
+}
+
+.header__logo-cele-wrapper {
+    width: 10rem;
+    img {
+        width: 100%;
+    }
+
+    /*Na prasáka*/
+    position: absolute;
+    left: 60px;
+    top: 20px;
+}
+
+.header__logo-znak-wrapper {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 30rem;
+    transform: rotateZ(15deg);
+    opacity: 20%;
+    img {
+        width: 100%;
     }
 }

@@ -4,16 +4,33 @@
     margin: 4rem;
     width: 20rem;
     height: 10rem;
-    background-color: $secondaryColor;
-    text-align: right;
+    background-color: white;
+    background-image: url('../../images/ProjectItem/pohoda.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align: center;
+    border-radius: 50px;
+    border: 3px solid $primaryColor;
     position: relative;
     font-family: $dancingFont;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .project-item__title {
-    font-size: 1.2rem;
+    font-size: 1.7rem;
+    padding: 0.2rem 0.4rem;
+    width: fit-content;
+    right: 0;
+    top: -.8rem;
+    color: $primaryColor;
     background-color: #e4e7eb;
+    border-radius: 5px;
+    box-shadow: 0px 5px 15px -3px rgba(0,0,0,0.1);
     display: inline-block;
+    position: absolute;
 }
 
 .project-item__percentage {
