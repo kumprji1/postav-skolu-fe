@@ -1,23 +1,18 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import Header from './components/Header/Header';
+import ProjectItem from './components/ProjectItem/ProjectItem';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+		<div class="grid-container">
+      <Header />
+			<main>
+        <ProjectItem title="Kup si svoji část pozemku" />
+			</main>
+		</div>
+		<footer>Zde je patička</footer>
     </div>
   );
 }

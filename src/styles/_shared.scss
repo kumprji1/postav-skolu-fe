@@ -1,0 +1,19 @@
+/*
+Colors
+*/
+$primaryColor: #009ee0;
+$secondaryColor: #e0f0ff;
+
+/*
+Fonts
+*/
+$dancingFont: 'Dancing Script', cursive;
+
+/*
+Functions
+*/
+@mixin flexCenter() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
