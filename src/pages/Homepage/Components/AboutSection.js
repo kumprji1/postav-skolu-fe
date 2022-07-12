@@ -11,11 +11,11 @@ const AboutSection = () => {
       <div className="left">
         <h1>Postavte s námi školu... </h1>
         <h2>buď ten, kvůli kterému někteří věří v dobro!</h2>
-        <Button classes='btn--primary'>Chci přispět</Button>
+        <Button classes='btn--primary'>Chci pomoci</Button>
       </div>
       <div className="right">
         <div className="img-wrapper">
-          <img src={SchoolImg} alt="Škola" />
+          {/* <img src={SchoolImg} alt="Škola" /> */}
         </div>
       </div>
     </section>

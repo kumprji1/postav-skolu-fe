@@ -1,52 +1,57 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 header {
-    @include flexCenter();
-    width: 100%;
-    /*Na prasáka*/
-    position: sticky;
-    top: 0;
-    // background-color: aqua;
-    margin-top: 2rem;
-    background-color: white;
-    z-index: 100;
+  @include flexCenter();
+  width: 100%;
+  position: sticky;
+  top: 0;
+  // background-color: transparent;
+  background-color: white;
+//   margin-top: 2rem;
+  z-index: 100;
 
+  // sticky bude
+  // background-color: white;
+  // a shadow
+  box-shadow: 0px 4px 21px -16px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 5px 21px -16px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4x 21px -16px rgba(0, 0, 0, 0.75);
 }
 
 .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .header__logo-cele-wrapper {
-    width: 10rem;
-    img {
-        width: 100%;
-    }
+  width: 10rem;
+  img {
+    width: 100%;
+  }
 
-    /*Na prasáka*/
-    // position: absolute;
-    // left: 60px;
-    // top: 20px;
+  /*Na prasáka*/
+  // position: absolute;
+  // left: 60px;
+  // top: 20px;
 }
 
 .header__logo-znak-wrapper {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    width: 30rem;
-    transform: rotateZ(15deg);
-    opacity: 20%;
-    img {
-        width: 100%;
-    }
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 30rem;
+  transform: rotateZ(15deg);
+  opacity: 20%;
+  img {
+    width: 100%;
+  }
 }
 
 @media (min-width: $contentMaxWidth) {
-    .header-content {
-        max-width: $contentMaxWidth;
-    }
+  .header-content {
+    max-width: $contentMaxWidth;
+  }
 }

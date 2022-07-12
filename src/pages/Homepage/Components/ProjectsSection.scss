@@ -1,3 +1,20 @@
+@import "../../../styles/shared";
+
 .projects-section {
-    padding-top: 5rem;
+  @include flexCenter();
+  position: relative;
+  flex-direction: column;
+  margin-top: 2.4rem;
+  padding-top: 3rem;
+  border-radius: 5px;
+  background-color: $secondaryColor;
+  .title {
+    padding: 0.5rem;
+    position: absolute;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    top: -0.0rem;
+    background-color: white;
+    font-weight: 400;
+  }
 }

@@ -11,7 +11,7 @@ const Projects = () => {
       <ProjectItem title="Zábavné učebny" />
       <ProjectItem title="Pohlazení duše" />
       <ProjectItem title="Nevídaná krása" />
-      <ProjectItem title="Aktivní světluška" />
+      <ProjectItem title="Aktivní Světluška" />
       <ProjectItem title="Práce šlechtí" />
       <ProjectItem title="Ráj na Zemi" />
       <ProjectItem title="Magický kruh bezpečí" />

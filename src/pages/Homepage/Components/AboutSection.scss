@@ -1,17 +1,20 @@
 @import '../../../styles/shared';
 
 .about-section {
-    padding-top: 2rem;
+    padding-top: 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     // background-color: rgb(110, 193, 174);
     .left {
         h1 {
-            font-size: 2.5rem;
-            font-weight: 500;
+            font-family: $dancingFont;
+            font-size: 3rem;
+            font-weight: 600;
         }
         h2 {
+            font-family: $dancingFont;
+            font-size: 2rem;
             font-weight: 500;
             color: $greyColor;
             padding-bottom: 1rem;
