@@ -3,7 +3,7 @@
 .project-item {
     // margin: 4rem;
     
-    width: 20rem;
+    width: 10rem;
     height: 10rem;
     background-color: white;
     background-image: url('../../images/ProjectItem/pohoda.jpg');
@@ -25,7 +25,7 @@
 
 .project-item__title {
     font-size: 1.7rem;
-    font-weight: 600 !important;
+    font-weight: 600;
     padding: 0.2rem 0.4rem;
     width: fit-content;
     right: 0;

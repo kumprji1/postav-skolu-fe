@@ -2,6 +2,7 @@
 
 header {
   @include flexCenter();
+  padding: 0 $leftRightSpace;
   width: 100%;
   position: sticky;
   top: 0;
@@ -38,17 +39,6 @@ header {
   // top: 20px;
 }
 
-.header__logo-znak-wrapper {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  width: 30rem;
-  transform: rotateZ(15deg);
-  opacity: 20%;
-  img {
-    width: 100%;
-  }
-}
 
 @media (min-width: $contentMaxWidth) {
   .header-content {

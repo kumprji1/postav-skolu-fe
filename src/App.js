@@ -1,13 +1,14 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Components
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 
-// Components
-import AboutSection from "./pages/Homepage/Components/AboutSection";
-import ImageSection from "./pages/Homepage/Components/ImageSection";
-import ProjectsSection from "./pages/Homepage/Components/ProjectsSection";
-
-import DiaLogoBG from "./images/Diakonie/Diakonie_Logo_znak.png";
+// Pages
+import Homepage from "./pages/Homepage/Homepage";
+import KupSiSvojiCastPozemkuPage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage";
+import ProjectDetailDonatePage from "./pages/ProjectDetailPage/ProjectDetailDonatePage";
 
 import "./App.scss";
 
@@ -15,16 +16,18 @@ function App() {
   return (
     <div className="App">
       <div class="grid-container">
-        <div className="background">
-          <div className="dia-logo-bg-up-wrapper">
-            <img src={DiaLogoBG} />
-          </div>
-        </div>
+        {/* Tady bylo DiaLogoBackground */}
         <Header />
         <Main>
-          <AboutSection />
-          <ImageSection />
-          <ProjectsSection />
+          <Router>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route
+                path="/kup-si-svoji-cast-pozemku"
+                element={<KupSiSvojiCastPozemkuPage />}
+              />
+            </Routes>
+          </Router>
         </Main>
       </div>
       <Footer />

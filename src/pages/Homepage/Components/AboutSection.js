@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../../components/UI/Button/Button";
 
-import SchoolImg from "../../../images/Skola/about.png";
+import DiaLogoBG from "../../../images/Diakonie/Diakonie_Logo_znak.png";
 
 import "./AboutSection.scss";
 
@@ -11,11 +11,11 @@ const AboutSection = () => {
       <div className="left">
         <h1>Postavte s námi školu... </h1>
         <h2>buď ten, kvůli kterému někteří věří v dobro!</h2>
-        <Button classes='btn--primary'>Chci pomoci</Button>
+        <Button classes="btn--primary">Chci pomoci</Button>
       </div>
       <div className="right">
         <div className="img-wrapper">
-          {/* <img src={SchoolImg} alt="Škola" /> */}
+          <img src={DiaLogoBG} />
         </div>
       </div>
     </section>
