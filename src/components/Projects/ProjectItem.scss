@@ -2,7 +2,7 @@
 
 .project-item {
     margin: 4rem;
-    width: 20rem;
+    max-width: 20rem;
     height: 10rem;
     background-color: white;
     background-image: url('../../images/ProjectItem/pohoda.jpg');
@@ -35,7 +35,7 @@
 
 .project-item__percentage {
     @include flexCenter();
-    top: -1rem;
+    bottom: -1rem;
     left: -1rem;
     width: 3rem;
     height: 3rem;

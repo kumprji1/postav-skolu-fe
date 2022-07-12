@@ -2,12 +2,19 @@
 
 header {
     @include flexCenter();
-    background-color: white;
-    &:hover {
-    }
-
+    background-color: green;
+    width: 100%;
     /*Na prasáka*/
     position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    width: 100%;
+    height: 100%;
 }
 
 .header__logo-cele-wrapper {
@@ -17,9 +24,9 @@ header {
     }
 
     /*Na prasáka*/
-    position: absolute;
-    left: 60px;
-    top: 20px;
+    // position: absolute;
+    // left: 60px;
+    // top: 20px;
 }
 
 .header__logo-znak-wrapper {
@@ -31,5 +38,11 @@ header {
     opacity: 20%;
     img {
         width: 100%;
+    }
+}
+
+@media (min-width: $contentMaxWidth) {
+    .header-content {
+        max-width: $contentMaxWidth;
     }
 }

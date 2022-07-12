@@ -8,11 +8,14 @@ import "./Header.scss";
 const Header = () => {
   return (
     <header>
-      <div className="header__logo-cele-wrapper">
-        <img src={DiakonieLogoCele} alt="Logo Diakonie" />
-      </div>
-      <div className="header__logo-znak-wrapper">
-        <img src={DiakonieLogoZnak} alt="Logo Diakonie" />
+      <div className="header-content">
+        <div className="header__logo-cele-wrapper">
+          <img src={DiakonieLogoCele} alt="Logo Diakonie" />
+        </div>
+        <div>Hamburger</div>
+        {/* <div className="header__logo-znak-wrapper">
+          <img src={DiakonieLogoZnak} alt="Logo Diakonie" />
+        </div> */}
       </div>
     </header>
   );
