@@ -1,0 +1,18 @@
+@import '../../styles/shared';
+
+footer {
+    @include flexCenter();
+    background-color: aquamarine;
+}
+
+.footer-content {
+    @include flexCenter();
+    width: 100%;
+    background-color: beige;
+}
+
+@media(min-width: $contentMaxWidth) {
+    .footer-content {
+        width: $contentMaxWidth;
+    }
+}

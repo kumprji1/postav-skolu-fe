@@ -2,17 +2,21 @@
 
 header {
     @include flexCenter();
-    background-color: green;
     width: 100%;
     /*Na prasáka*/
-    position: relative;
+    position: sticky;
+    top: 0;
+    // background-color: aqua;
+    margin-top: 2rem;
+    background-color: white;
+    z-index: 100;
+
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: aqua;
     width: 100%;
     height: 100%;
 }

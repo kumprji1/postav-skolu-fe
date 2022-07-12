@@ -12,7 +12,11 @@ const Header = () => {
         <div className="header__logo-cele-wrapper">
           <img src={DiakonieLogoCele} alt="Logo Diakonie" />
         </div>
-        <div>Hamburger</div>
+        <div className="right">
+        <span> Projekty </span>
+        <span> Web školy </span>
+        <span> Košík</span>
+        </div>
         {/* <div className="header__logo-znak-wrapper">
           <img src={DiakonieLogoZnak} alt="Logo Diakonie" />
         </div> */}

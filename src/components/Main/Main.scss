@@ -1,0 +1,19 @@
+@import '../../styles/shared';
+
+main {
+    @include flexCenter();
+    width: 100%;
+}
+
+.main-content {
+    width: 100%;
+}
+
+
+@media (min-width: $contentMaxWidth) {
+    .main-content {
+        width: $contentMaxWidth;
+    }
+}
+
+

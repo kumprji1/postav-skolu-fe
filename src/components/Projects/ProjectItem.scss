@@ -1,7 +1,8 @@
 @import '../../styles/shared';
 
 .project-item {
-    margin: 4rem;
+    // margin: 4rem;
+    
     max-width: 20rem;
     height: 10rem;
     background-color: white;
@@ -16,6 +17,9 @@
     font-family: $dancingFont;
     &:hover {
         cursor: pointer;
+    }
+    &:not(:first-child) {
+        margin-top: 4rem;
     }
 }
 

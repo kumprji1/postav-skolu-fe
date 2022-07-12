@@ -1,0 +1,21 @@
+@import "../../../styles/shared";
+
+button {
+  font-family: $mavenFont;
+  transition: all 100ms;
+}
+
+.btn--primary {
+  background-color: $primaryColor;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+  }
+}
