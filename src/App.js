@@ -11,6 +11,7 @@ import KupSiSvojiCastPozemkuPage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSv
 import ProjectDetailDonatePage from "./pages/ProjectDetailPage/ProjectDetailDonatePage";
 
 import "./App.scss";
+import ProjectDetailPage from "./pages/ProjectDetailPage/ProjectDetailPage";
 
 function App() {
   return (
@@ -18,13 +19,16 @@ function App() {
       <div class="grid-container">
         {/* Tady bylo DiaLogoBackground */}
         <Header />
-        <Main>
+        <Main classes="main-content--wide(tedNe)">
           <Router>
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route
                 path="/kup-si-svoji-cast-pozemku"
                 element={<KupSiSvojiCastPozemkuPage />}
+              />
+              <Route path={`/projekt/:urlPath`}
+              element={<ProjectDetailPage />}
               />
             </Routes>
           </Router>

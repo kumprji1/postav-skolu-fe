@@ -5,7 +5,7 @@ import './Main.scss'
 const Main = (props) => {
   return (
     <main>
-      <div className="main-content">{props.children}</div>
+      <div className={`main-content ${props.classes}`}>{props.children}</div>
     </main>
   );
 };

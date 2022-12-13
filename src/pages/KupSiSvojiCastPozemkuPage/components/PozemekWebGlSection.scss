@@ -1,9 +1,21 @@
+@import '../../../styles/shared';
+
 .pozemek-webgl-section {
     background-color: grey;
+    position: relative;
+    padding: 0;
     height: 40rem;
+    width: 100%;
+    position: relative;
+    border: 2px dashed black;
+}
 
-    .pozemek-webgl {
-        width: 100%;
-        height: 100%;
-    }
+canvas.pozemek-webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    // max-height: 100%;
 }

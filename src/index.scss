@@ -25,5 +25,17 @@ body {
 }
 
 section {
-//  margin: 0 $marginLeftRight;
+ padding: 0 $leftRightSpace;
+ width: 100%;
+}
+
+canvas {
+  width: 0;
+  height: 0;
+}
+
+@media(min-width: $contentMaxWidth) {
+  section {
+    width: $contentMaxWidth;
+  }
 }

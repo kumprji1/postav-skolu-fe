@@ -4,22 +4,34 @@ import ProjectItem from "./ProjectItem";
 
 import "./Projects.scss";
 
+const projectData = [{
+  type: 'donate',
+  title: 'Zábavné učebny',
+  urlPath: 'zabavne-ucebny',
+  desc: 'Popis',
+  photo: 'url_fotky',
+  earnedMoney: 11_000,
+  maxMoney: 50_000
+},{
+  type: 'products',
+  title: 'Zábavné učebny',
+  urlPath: 'zabavne-ucebny',
+  desc: 'Popis',
+  photo: 'url_fotky',
+  earnedMoney: 20_000,
+  maxMoney: 50_000
+},{
+  type: 'donate-land',
+  title: 'Zábavné učebny',
+  urlPath: 'zabavne-ucebny',
+  desc: 'Popis',
+  photo: 'url_fotky',
+  earnedMoney: 30_000,
+  maxMoney: 50_000
+}]
+
 const Projects = () => {
-  return (
-    <Fragment>
-      <ProjectItem title="Kup si svoji část pozemku" />
-      <ProjectItem title="Zábavné učebny" />
-      <ProjectItem title="Pohlazení duše" />
-      <ProjectItem title="Nevídaná krása" />
-      <ProjectItem title="Aktivní Světluška" />
-      <ProjectItem title="Práce šlechtí" />
-      <ProjectItem title="Ráj na Zemi" />
-      <ProjectItem title="Magický kruh bezpečí" />
-      <ProjectItem title="Splněný sen" />
-      <ProjectItem title="Věci s příběhem" />
-      <ProjectItem title="Krásné zbytečnosti" />
-    </Fragment>
-  );
+  return projectData.map(project => <ProjectItem key={project.urlPath} project={project} />)
 };
 
 export default Projects;
