@@ -30,8 +30,8 @@ const projectData = [{
   maxMoney: 50_000
 }]
 
-const Projects = () => {
-  return projectData.map(project => <ProjectItem key={project.urlPath} project={project} />)
+const Projects = ({projects}) => {
+  return projects.map(project => <ProjectItem key={project.urlTitle} project={project} />)
 };
 
 export default Projects;

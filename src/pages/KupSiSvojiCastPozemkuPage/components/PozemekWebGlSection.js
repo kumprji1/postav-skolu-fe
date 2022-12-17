@@ -7,7 +7,7 @@ import './PozemekWebGlSection.scss'
 const PozemekWebGlSection = (props) => {
   const webGlSectionRef = useRef();
     useEffect(() => {
-        pozemekThreeStart(webGlSectionRef.current, props.setSelectedToBuy)
+        pozemekThreeStart(webGlSectionRef.current, props.setSelectedToBuy, props.fetchFewLandPiecesO3, props.getCurrentLoadedO3)
     } , []);
 
     useLayoutEffect(() => {

@@ -2,26 +2,55 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui'
 
-
-export const pozemekThreeStart = (webGlSectionDOM, setSelectedToBuy) => {
-// console.log(setSelectedToBuy)
+const initOnce = () => {
+    
+}
      /**
  * Debug
  */
-const gui = new dat.GUI()
+     const gui = new dat.GUI()
 
-const parameters = {
-    //backgroundC: '#545454',
-    backgroundC: '#ffffff',
-    O3_hoverC: '#ff6600',
-    O4_hoverC :'#4033f0',
-    avaibleC: '#cccccc'
-}
+     const parameters = {
+         //backgroundC: '#545454',
+         backgroundC: '#ffffff',
+         O3_hoverC: '#ff6600',
+         O4_hoverC :'#4033f0',
+         avaibleC: '#cccccc'
+     }
+     
+     gui.addColor(parameters, 'backgroundC')
+     gui.addColor(parameters, 'O3_hoverC')
+     gui.addColor(parameters, 'O4_hoverC')
+     
+     
+/**
+ * Raycaster
+ */
+const raycaster = new THREE.Raycaster()
+const objectsToTest = []
+const areasToTest = []
 
-gui.addColor(parameters, 'backgroundC')
-gui.addColor(parameters, 'O3_hoverC')
-gui.addColor(parameters, 'O4_hoverC')
+const O3_group = new THREE.Group()
+O3_group.rotateZ(-0.15)
+O3_group.translateX(-490)
+O3_group.translateY(-102)
 
+const O3_rows = 100;
+const O3_columns = 70;
+const angle_90 = Math.PI / 2;
+const O3_radius = 1.4;
+const O3_geo = new THREE.CircleGeometry(O3_radius, 3, 0, 2 * Math.PI)
+
+let offsetY = 0;
+let offsetX = 0;
+
+// Scene
+const scene = new THREE.Scene()
+scene.background = new THREE.Color(parameters.backgroundC)
+
+
+export const pozemekThreeStart = (webGlSectionDOM, setSelectedToBuy, fetchFewLandPiecesO3, getCurrentLoadedO3) => {
+// console.log(setSelectedToBuy)
 /**
  * Textures
  */
@@ -52,20 +81,13 @@ const canvas = document.querySelector('canvas.pozemek-webgl')
 // const sectionDOM = document.getElementsByClassName('pozemek-webgl-section').style;
 // console.log(sectionDOM)
 
-// Scene
-const scene = new THREE.Scene()
-scene.background = new THREE.Color(parameters.backgroundC)
+
 
 // Axes Helper
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
-/**
- * Raycaster
- */
- const raycaster = new THREE.Raycaster()
- const objectsToTest = []
- const areasToTest = []
+
 
  /**
  * Mouse
@@ -129,104 +151,134 @@ window.addEventListener('mousemove', (event) =>
  * OrangeTriange (O3 - Object 3 edges(vertices)) 100,-
  */
 
-const O3_group = new THREE.Group()
 
-const O3_rows = 100;
-const O3_columns = 70;
-const angle_90 = Math.PI / 2;
-const O3_radius = 1.4;
-const O3_geo = new THREE.CircleGeometry(O3_radius, 3, 0, 2 * Math.PI)
+const initLoaded_O3 = () => {
+    let j = 0;
+    const loaded_O3 = getCurrentLoadedO3()
+    console.log('Délka pole: ', loaded_O3.length)
+    for (let i = 0; i < loaded_O3.length; i++) {
+        
+        
+        const o3Data = loaded_O3[i];
 
-
-
-let offsetY = 0;
-let offsetX = 0;
-for (let i = 1; i <= O3_rows; i++) {
-    for (let j = 1; j <= O3_columns; j++) {
-        let O3_mat;
-        if (i === j) {
-            O3_mat = new THREE.MeshBasicMaterial({ color:  parameters.O3_hoverC})
-
-        } else {
-            O3_mat = new THREE.MeshBasicMaterial({ color:  parameters.avaibleC})
-        } 
-        const O3_obj = new THREE.Mesh(O3_geo, O3_mat)
-        O3_obj.translateY(i * 3 + offsetY)
-        O3_obj.translateX(j * 3 + offsetX)
-        O3_obj.rotateZ(angle_90)
+        const O3_obj = new THREE.Mesh(O3_geo, new THREE.MeshBasicMaterial({ color:  parameters.O3_hoverC}))
+        // O3_obj.translateY(i * 3 + offsetY)
+        // O3_obj.translateX(j * 3 + offsetX)
+        // O3_obj.rotateZ(angle_90)
         O3_obj.userData = {
-            i: i,
-            j: j,
-            avaible: true,
-            selected: false
-        }
-        if (i === j) O3_obj.userData.selected = true
-        objectsToTest.push(O3_obj)
-        O3_group.add(O3_obj)
-        if (j % 10 === 0) {
-            offsetX += 5
-        }    
+                        i: i,
+                        j: j,
+                        avaible: !o3Data.isBought,
+                        selected: false
+                    }
+                    objectsToTest.push(O3_obj)
+                    O3_group.add(O3_obj)
+                   
+                    j = i % 10 == 0 ? j++ : j
     }
-    offsetX = 0
-    if (i % 20 === 0) {
-        offsetY += 5
-    }
+    // loaded_O3.forEach(o3 => {
+    //     const O3_obj = new THREE.Mesh(O3_geo, new THREE.MeshBasicMaterial({ color:  parameters.O3_hoverC}))
+        
+//         O3_obj.translateX(j * 3 + offsetX)
+//         O3_obj.rotateZ(angle_90)
+//         O3_obj.userData = {
+//             i: i,
+//             j: j,
+//             avaible: true,
+//             selected: false
+//         }
+//         if (i === j) O3_obj.userData.selected = true
+        // objectsToTest.push(O3_obj)
+        // O3_group.add(O3_obj)
+    // });
 }
-O3_group.rotateZ(-0.15)
-O3_group.translateX(-490)
-O3_group.translateY(-102)
+// for (let i = 1; i <= O3_rows; i++) {
+//     for (let j = 1; j <= O3_columns; j++) {
+//         let O3_mat;
+//         if (i === j) {
+//             O3_mat = new THREE.MeshBasicMaterial({ color:  parameters.O3_hoverC})
+
+//         } else {
+//             O3_mat = new THREE.MeshBasicMaterial({ color:  parameters.avaibleC})
+//         } 
+//         const O3_obj = new THREE.Mesh(O3_geo, O3_mat)
+//         O3_obj.translateY(i * 3 + offsetY)
+//         O3_obj.translateX(j * 3 + offsetX)
+//         O3_obj.rotateZ(angle_90)
+//         O3_obj.userData = {
+//             i: i,
+//             j: j,
+//             avaible: true,
+//             selected: false
+//         }
+//         if (i === j) O3_obj.userData.selected = true
+//         objectsToTest.push(O3_obj)
+//         O3_group.add(O3_obj)
+//         if (j % 10 === 0) {
+//             offsetX += 5
+//         }    
+//     }
+//     offsetX = 0
+//     if (i % 20 === 0) {
+//         offsetY += 5
+//     }
+// }
+
+// O3_group.rotateZ(-0.15)
+// O3_group.translateX(-490)
+// O3_group.translateY(-102)
 // scene.add(O3_group)
 
 /**
- * OrangeTriange (O3 - Object 3 edges(vertices)) 100,-
+ * BluePlane (O4 - Object 4 edges(vertices)) 200,-
  */
 
 const O4_group = new THREE.Group()
 
-const O4_rows = 100;
-const O4_columns = 30;
-const O4_radius = 2;
-const O4_geo = new THREE.PlaneGeometry(O4_radius, O4_radius)
+// const O4_rows = 100;
+// const O4_columns = 30;
+// const O4_radius = 2;
+// const O4_geo = new THREE.PlaneGeometry(O4_radius, O4_radius)
 
 
 
-offsetY = 0;
-offsetX = 0;
-for (let i = 1; i <= O4_rows; i++) {
-    for (let j = 1; j <= O4_columns; j++) {
-        let O4_mat;
-        if (i === j) {
-            O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.O4_hoverC})
+// offsetY = 0;
+// offsetX = 0;
+// for (let i = 1; i <= O4_rows; i++) {
+//     for (let j = 1; j <= O4_columns; j++) {
+//         let O4_mat;
+//         if (i === j) {
+//             O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.O4_hoverC})
 
-        } else {
-            O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.avaibleC})
-        } 
-        const O4_obj = new THREE.Mesh(O4_geo, O4_mat)
-        O4_obj.translateY(i * 3 + offsetY)
-        O4_obj.translateX(j * 3 + offsetX)
-        O4_obj.rotateZ(angle_90)
-        O4_obj.userData = {
-            i: i,
-            j: j,
-            avaible: true,
-            selected: false
-        }
-        if (i === j) O4_obj.userData.selected = true
-        objectsToTest.push(O4_obj)
-        O4_group.add(O4_obj)
-        // console.log('Trojúhelník č. '+ i +' přidán');    
-        if (j % 10 === 0) {
-            offsetX += 5
-        }    
-    }
-    offsetX = 0
-    if (i % 20 === 0) {
-        offsetY += 5
-    }
-}
-O4_group.rotateZ(-0.15)
-O4_group.translateX(-240)
-O4_group.translateY(-102)
+//         } else {
+//             O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.avaibleC})
+//         } 
+//         const O4_obj = new THREE.Mesh(O4_geo, O4_mat)
+//         O4_obj.translateY(i * 3 + offsetY)
+//         O4_obj.translateX(j * 3 + offsetX)
+//         O4_obj.rotateZ(angle_90)
+//         O4_obj.userData = {
+//             i: i,
+//             j: j,
+//             avaible: true,
+//             selected: false
+//         }
+//         if (i === j) O4_obj.userData.selected = true
+//         objectsToTest.push(O4_obj)
+//         O4_group.add(O4_obj)
+//         // console.log('Trojúhelník č. '+ i +' přidán');    
+//         if (j % 10 === 0) {
+//             offsetX += 5
+//         }    
+//     }
+//     offsetX = 0
+//     if (i % 20 === 0) {
+//         offsetY += 5
+//     }
+// }
+// O4_group.rotateZ(-0.15)
+// O4_group.translateX(-240)
+// O4_group.translateY(-102)
 // scene.add(O4_group)
 
 
@@ -269,15 +321,16 @@ const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 
 camera.position.set(-76, -8.09, 1713)
 scene.add(camera)
 
-window.addEventListener('click', () => {
+window.addEventListener('click', async () => {
     raycaster.setFromCamera(mouse, camera)
 
     
     // Clicks to Objects
     // Objects
+    console.log('objectsToTest in click listener: ', objectsToTest)
     const intersects = raycaster.intersectObjects(objectsToTest)
 
-    console.log(intersects);
+    console.log('Intersects: ', intersects);
     for(const intersect of intersects)
     {
         if (intersect.object.userData.avaible) {
@@ -304,15 +357,18 @@ window.addEventListener('click', () => {
         for(const intersect of intersectsAreas)
         {
             if (intersect.object.userData.area === 'O3') {
-                scene.add(O3_group)
-                isAreaChoosingMode = false
-                intersect.object.visible = false
-                
-                controls.target = O3_area.position;
-                console.log('Pozice oblasti: ', O3_area.position)
-                
-                // controls.position0 = new THREE.Vector3(...cameraPositions.O3_area)
-                camera.position.set( cameraPositions.O3_area.x, cameraPositions.O3_area.y, cameraPositions.O3_area.z)    
+                fetchFewLandPiecesO3().then((response) => {
+                    // initLoaded_O3()
+                    // scene.add(O3_group)
+                    isAreaChoosingMode = false
+                    intersect.object.visible = false
+                    
+                    controls.target = O3_area.position;
+                    console.log('Pozice oblasti: ', O3_area.position)
+                    
+                    // controls.position0 = new THREE.Vector3(...cameraPositions.O3_area)
+                    camera.position.set( cameraPositions.O3_area.x, cameraPositions.O3_area.y, cameraPositions.O3_area.z)   
+                }).catch(err => console.log(err))               
             }
             if (intersect.object.userData.area === 'O4') {
                 scene.add(O3_group)
@@ -429,4 +485,48 @@ const tick = () =>
 
 tick()
 
+}
+
+export const reRender_O3 = (loaded_O3) => {
+    objectsToTest.splice(0, objectsToTest.length)
+    scene.remove(O3_group)
+    let j = 0;
+    console.log('Délka pole: ', loaded_O3.length)
+    for (let i = 0; i < loaded_O3.length; i++) {
+        
+        
+        const o3Data = loaded_O3[i];
+        const O3_obj = new THREE.Mesh(O3_geo, new THREE.MeshBasicMaterial({ color:  o3Data.isBought ? parameters.O3_hoverC : parameters.avaibleC}))
+        O3_obj.translateY(i * 3 + offsetY)
+        O3_obj.translateX(j * 3 + offsetX)
+        O3_obj.rotateZ(angle_90)
+        O3_obj.userData = {
+                        i: i,
+                        j: j,
+                        avaible: !o3Data.isBought,
+                        selected: false
+                    }
+                    objectsToTest.push(O3_obj)
+                    O3_group.add(O3_obj)
+                   
+                    j = i % 10 == 0 ? j++ : j
+    }
+    console.log('ObjectsToTest: ', objectsToTest)
+    scene.add(O3_group)
+    // loaded_O3.forEach(o3 => {
+    //     const O3_obj = new THREE.Mesh(O3_geo, new THREE.MeshBasicMaterial({ color:  parameters.O3_hoverC}))
+        
+//         O3_obj.translateX(j * 3 + offsetX)
+//         O3_obj.rotateZ(angle_90)
+//         O3_obj.userData = {
+//             i: i,
+//             j: j,
+//             avaible: true,
+//             selected: false
+//         }
+//         if (i === j) O3_obj.userData.selected = true
+        // objectsToTest.push(O3_obj)
+        // O3_group.add(O3_obj)
+    // });
+    
 }
