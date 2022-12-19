@@ -339,10 +339,12 @@ window.addEventListener('click', async () => {
                 // pozemek již vybrán   
                intersect.object.material.color.set(parameters.avaibleC)
                intersect.object.userData.selected = false;
+               console.log('Odvybírám')
             } else {
                 // vybrání pozemku
             intersect.object.material.color.set(parameters.O3_hoverC)
             intersect.object.userData.selected = true;
+            console.log('Vybírám')
             console.log('selected:', {...intersect.object.userData})
             // setSelectedToBuy(prev => [...prev, {...intersect.object.userData}])
             }   
@@ -501,10 +503,11 @@ export const reRender_O3 = (loaded_O3) => {
         O3_obj.translateX(j * 3 + offsetX)
         O3_obj.rotateZ(angle_90)
         O3_obj.userData = {
+                        number: o3Data.number,
                         i: i,
                         j: j,
                         avaible: !o3Data.isBought,
-                        selected: false
+                        selected: false,
                     }
                     objectsToTest.push(O3_obj)
                     O3_group.add(O3_obj)

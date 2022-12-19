@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react'
 
 import { useHttp } from '../../hooks/http-hook'
+import BuyPieceOfLand_Data from './BuyPieceOfLand_Data';
 
 import { reRender_O3 } from './components/PozemekThreeJsScript'
 
@@ -9,6 +10,7 @@ import PozemekWebGlSection from './components/PozemekWebGlSection'
 import Pozemek_SelectedToBuy from './components/Pozemek_SelectedToBuy';
 
 const KupSiSvojiCastPozemkuPage = () => {
+  console.log('KupSiSvojiCastPozemkuPage - RENDER')
   // Utils
   const { sendRequest } = useHttp();
 
@@ -39,7 +41,8 @@ const KupSiSvojiCastPozemkuPage = () => {
   }, [])
   return (
     <Fragment>
-        <PozemekWebGlSection setSelectedToBuy={setSelectedToBuy} getCurrentLoadedO3={getCurrentLoadedO3} loaded_O4={loaded_O4} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
+        <BuyPieceOfLand_Data />
+        <PozemekWebGlSection setSelectedToBuy={setSelectedToBuy} getCurrentLoadedO3={getCurrentLoadedO3} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
         <Pozemek_SelectedToBuy selectedToBuy={selectedToBuy} />
         <p>Tady Dole začne další sekce{selectedToBuy}</p>
     </Fragment>
