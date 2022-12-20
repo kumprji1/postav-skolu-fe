@@ -19,6 +19,10 @@ const KupSiSvojiCastPozemkuPage = () => {
   const [loaded_O4, setLoaded_O4] = useState([]);  
   const [selectedToBuy, setSelectedToBuy] = useState([]);
 
+  const addToBuy = (data) => {
+    setSelectedToBuy(prev => [...prev, {...data}])
+  }
+
   // Fetching functions
   const fetchFewLandPiecesO3 = useCallback(async () => {
     try {
@@ -42,9 +46,9 @@ const KupSiSvojiCastPozemkuPage = () => {
   return (
     <Fragment>
         <BuyPieceOfLand_Data />
-        <PozemekWebGlSection setSelectedToBuy={setSelectedToBuy} getCurrentLoadedO3={getCurrentLoadedO3} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
+        <PozemekWebGlSection addToBuy={addToBuy} getCurrentLoadedO3={getCurrentLoadedO3} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
         <Pozemek_SelectedToBuy selectedToBuy={selectedToBuy} />
-        <p>Tady Dole začne další sekce{selectedToBuy}</p>
+        <p>Tady Dole začne další sekce</p>
     </Fragment>
   )
 }

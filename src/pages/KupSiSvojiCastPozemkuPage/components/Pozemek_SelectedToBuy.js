@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './Pozemek_SelectedToBuy.scss'
 
 const Pozemek_SelectedToBuy = (props) => {
+  const [selectedPieces, setSelectedPieces] = useState([])
   console.log(props.selectedToBuy)
   return (
-    <section className='pozemek-selected-to-buy-section'>Pozemek_SelectedToBuy{props.selectedToBuy.map(piece => <p>{piece.i}</p>)}</section>
+    <section className='pozemek-selected-to-buy-section'>Pozemek_SelectedToBuy{props.selectedToBuy.map(piece => <p>{piece.number}</p>)}<button>Koupit</button></section>
   )
 }
 

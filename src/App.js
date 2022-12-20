@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import Homepage from "./pages/Homepage/Homepage";
 import KupSiSvojiCastPozemkuPage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage";
 import ProjectDetailDonatePage from "./pages/ProjectDetailPage/ProjectDetailDonatePage";
+import SignupUserPage from "./pages/Auth/SignupUserPage";
 
 import "./App.scss";
 import ProjectDetailPage from "./pages/ProjectDetailPage/ProjectDetailPage";
@@ -29,6 +30,10 @@ function App() {
               />
               <Route path={`/projekt/:urlPath`}
               element={<ProjectDetailPage />}
+              />
+              <Route 
+              path="/registrace"
+              element={<SignupUserPage />}
               />
             </Routes>
           </Router>
