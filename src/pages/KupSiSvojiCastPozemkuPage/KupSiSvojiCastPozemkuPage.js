@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react'
 
 import { useHttp } from '../../hooks/http-hook'
+import { useLandPieces } from '../../hooks/landPieces-hook';
+
 import BuyPieceOfLand_Data from './BuyPieceOfLand_Data';
 
 import { reRender_O3 } from './components/PozemekThreeJsScript'
@@ -13,6 +15,7 @@ const KupSiSvojiCastPozemkuPage = () => {
   console.log('KupSiSvojiCastPozemkuPage - RENDER')
   // Utils
   const { sendRequest } = useHttp();
+  const { addPiece, landPiecesState } = useLandPieces([])
 
   // Data
   const [loaded_O3, setLoaded_O3] = useState([]);
@@ -23,11 +26,19 @@ const KupSiSvojiCastPozemkuPage = () => {
     setSelectedToBuy(prev => [...prev, {...data}])
   }
 
+  const buyPieces = async () => {
+    try {
+      const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/`)
+    } catch (err) {
+      
+    }
+  }
+
   // Fetching functions
   const fetchFewLandPiecesO3 = useCallback(async () => {
     try {
-      const responseData = await sendRequest('http://localhost:5000/few-land-pieces-o3')
-      console.log('MAIN: ', responseData)
+      const responseData =
+      await sendRequest('http://localhost:5000/few-land-pieces-o3')
       reRender_O3(responseData)
       setLoaded_O3(responseData)
     } catch (err) {
