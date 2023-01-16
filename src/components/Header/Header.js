@@ -1,11 +1,12 @@
-import react from "react";
-import { Link } from 'react-router-dom'
+import react, { Fragment } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 import DiakonieLogoCele from "../../images/Diakonie/Diakonie_Logo_Cele.png";
 
 import "./Header.scss";
 
-const Header = () => {
+const Header = (props) => {
+
   return (
     <header>
       <div className="header-content">
@@ -13,7 +14,16 @@ const Header = () => {
           <img src={DiakonieLogoCele} alt="Logo Diakonie" />
         </div>
         <div className="right">
-        {/* <span> Projekty </span>
+          {props.auth.token ? (
+            <button onClick={props.auth.logout}>Odhlásit se</button>
+          ) : (
+            <Fragment>
+              <NavLink to="/prihlaseni">Přihlásit se</NavLink>
+              <NavLink to="/registrace">Registrace</NavLink>
+            </Fragment>
+          )}
+
+          {/* <span> Projekty </span>
         <span> Web školy </span>
         <span> Košík</span> */}
         </div>

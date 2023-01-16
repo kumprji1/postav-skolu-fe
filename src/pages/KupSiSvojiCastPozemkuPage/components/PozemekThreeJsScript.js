@@ -5,7 +5,7 @@ import * as dat from 'lil-gui'
 const initOnce = () => {
     
 }
-     /**
+/**
  * Debug
  */
      const gui = new dat.GUI()
@@ -21,8 +21,7 @@ const initOnce = () => {
      gui.addColor(parameters, 'backgroundC')
      gui.addColor(parameters, 'O3_hoverC')
      gui.addColor(parameters, 'O4_hoverC')
-     
-     
+          
 /**
  * Raycaster
  */
@@ -82,12 +81,9 @@ const canvas = document.querySelector('canvas.pozemek-webgl')
 // console.log(sectionDOM)
 
 
-
 // Axes Helper
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
-
-
 
  /**
  * Mouse
@@ -104,11 +100,18 @@ window.addEventListener('mousemove', (event) =>
 /**
  * Map
  */
- const mapGeo = new THREE.PlaneGeometry( 1772, 785 );
- const MapGreyMat = new THREE.MeshBasicMaterial( { map: texturaPozemku_seda} );
- const MapColorMat = new THREE.MeshBasicMaterial( { map: texturaPozemku_barevno_pruhledna, transparent: true } );
- const mapGrey = new THREE.Mesh( mapGeo, MapGreyMat );
- const mapColor = new THREE.Mesh( mapGeo, MapColorMat );
+ const mapGeo = new THREE.
+    PlaneGeometry( 1772, 785 );
+ const MapGreyMat = new THREE.
+    MeshBasicMaterial( { map: texturaPozemku_seda} );
+ const MapColorMat = new THREE.
+    MeshBasicMaterial( 
+    { map: texturaPozemku_barevno_pruhledna,
+         transparent: true } );
+ const mapGrey = new THREE.
+    Mesh( mapGeo, MapGreyMat );
+ const mapColor = new THREE.
+    Mesh( mapGeo, MapColorMat );
  mapGrey.translateZ(-10)
  mapColor.translateZ(-5)
  const map = new THREE.Group()
@@ -123,9 +126,17 @@ window.addEventListener('mousemove', (event) =>
  // O3 Area
  const O3_area = new THREE.Mesh(
     new THREE.PlaneGeometry(250, 318),
-    new THREE.MeshBasicMaterial({color: new THREE.Color('white'), transparent: true, opacity: 0.75, map: textura_O3_area})
+    new THREE.MeshBasicMaterial({
+        color: new THREE.Color('white'), 
+        transparent: true, 
+        opacity: 0.75, 
+        map: textura_O3_area
+    })
  )
- O3_area.userData = { text: 'Pro děti z kasičky (100,-)', area: 'O3'}
+ scene.add(O3_area)
+ O3_area.userData = { 
+    text: 'Pro děti z kasičky (100,-)', 
+    area: 'O3'}
  O3_area.rotateZ(-0.15)
  O3_area.translateX(-362)
  O3_area.translateY(59)
@@ -317,7 +328,12 @@ window.addEventListener('resize', () =>
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(35, sizes.width / sizes.height, 0.1, 5000)
+const camera = new THREE
+.PerspectiveCamera(
+    35,
+    sizes.width / sizes.height,
+    0.1,
+    5000)
 camera.position.set(-76, -8.09, 1713)
 scene.add(camera)
 
@@ -340,6 +356,7 @@ window.addEventListener('click', async () => {
                intersect.object.material.color.set(parameters.avaibleC)
                intersect.object.userData.selected = false;
                console.log('Odvybírám')
+               // odebrat z košíku
             } else {
                 // vybrání pozemku
             intersect.object.material.color.set(parameters.O3_hoverC)
@@ -491,14 +508,17 @@ tick()
 
 export const reRender_O3 = (loaded_O3) => {
     objectsToTest.splice(0, objectsToTest.length)
+    console.log('Délka pole: ', loaded_O3.length)
     scene.remove(O3_group)
     let j = 0;
-    console.log('Délka pole: ', loaded_O3.length)
-    for (let i = 0; i < loaded_O3.length; i++) {
-        
-        
+    for (let i = 0; i < loaded_O3.length; i++) {        
         const o3Data = loaded_O3[i];
-        const O3_obj = new THREE.Mesh(O3_geo, new THREE.MeshBasicMaterial({ color:  o3Data.isBought ? parameters.O3_hoverC : parameters.avaibleC}))
+        const O3_obj = new THREE.Mesh(
+            O3_geo, 
+            new THREE.MeshBasicMaterial({ 
+                color:  o3Data.isBought ? 
+                parameters.O3_hoverC : parameters.avaibleC
+            }))
         O3_obj.translateY(i * 3 + offsetY)
         O3_obj.translateX(j * 3 + offsetX)
         O3_obj.rotateZ(angle_90)
@@ -511,7 +531,6 @@ export const reRender_O3 = (loaded_O3) => {
                     }
                     objectsToTest.push(O3_obj)
                     O3_group.add(O3_obj)
-                   
                     j = i % 10 == 0 ? j++ : j
     }
     console.log('ObjectsToTest: ', objectsToTest)

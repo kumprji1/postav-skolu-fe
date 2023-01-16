@@ -10,22 +10,31 @@ import Homepage from "./pages/Homepage/Homepage";
 import KupSiSvojiCastPozemkuPage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage";
 import ProjectDetailDonatePage from "./pages/ProjectDetailPage/ProjectDetailDonatePage";
 import SignupUserPage from "./pages/Auth/SignupUserPage";
-
-import "./App.scss";
+import SigninPage from "./pages/Auth/SigninPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage/ProjectDetailPage";
 
+import { AuthContext } from "./contexts/AuthContext";
+import { useAuth } from "./hooks/auth-hook";
+
+import "./App.scss";
+
 function App() {
+  const auth = useAuth()
   return (
+    <AuthContext.Provider
+    value = {auth}
+    >
     <div className="App">
       <div class="grid-container">
         {/* Tady bylo DiaLogoBackground */}
-        <Header />
+        <Router>
+        <Header auth={auth} />
         <Main classes="main-content--wide(tedNe)">
-          <Router>
+          
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route
-                path="/kup-si-svoji-cast-pozemku"
+                path="/projekt/kup-si-svoji-cast-pozemku"
                 element={<KupSiSvojiCastPozemkuPage />}
               />
               <Route path={`/projekt/:urlPath`}
@@ -35,12 +44,18 @@ function App() {
               path="/registrace"
               element={<SignupUserPage />}
               />
+              <Route 
+              path="/prihlaseni"
+              element={<SigninPage />}
+              />
             </Routes>
-          </Router>
+          
         </Main>
+       </Router>
       </div>
       <Footer />
     </div>
+    </AuthContext.Provider>
   );
 }
 
