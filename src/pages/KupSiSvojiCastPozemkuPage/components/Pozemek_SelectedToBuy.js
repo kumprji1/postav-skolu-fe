@@ -7,7 +7,7 @@ const Pozemek_SelectedToBuy = (props) => {
   const [ selectedPieces, setSelectedPieces ] = useState([])
   console.log(props.selectedToBuy)
   return (
-    <section className='pozemek-selected-to-buy-section'>Pozemek_SelectedToBuy{props.selectedToBuy.map(piece => <p>{piece.number}</p>)}<button>Koupit</button></section>
+    <section className='pozemek-selected-to-buy-section'>Pozemek_SelectedToBuy{props.landPiecesState.piecesToBuy.map(piece => <p key={piece.number}>{piece.number}</p>)}<button onClick={props.buyPieces}>Koupit</button></section>
   )
 }
 

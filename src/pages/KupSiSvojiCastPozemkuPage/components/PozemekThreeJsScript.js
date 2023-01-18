@@ -48,8 +48,8 @@ const scene = new THREE.Scene()
 scene.background = new THREE.Color(parameters.backgroundC)
 
 
-export const pozemekThreeStart = (webGlSectionDOM, addToBuy, fetchFewLandPiecesO3, getCurrentLoadedO3) => {
-// console.log(setSelectedToBuy)
+export const pozemekThreeStart = (webGlSectionDOM, addToBuy, removePiece, fetchFewLandPiecesO3, getCurrentLoadedO3) => {
+    
 /**
  * Textures
  */
@@ -356,6 +356,7 @@ window.addEventListener('click', async () => {
                intersect.object.material.color.set(parameters.avaibleC)
                intersect.object.userData.selected = false;
                console.log('Odvybírám')
+               removePiece(intersect.object.userData.number)
                // odebrat z košíku
             } else {
                 // vybrání pozemku

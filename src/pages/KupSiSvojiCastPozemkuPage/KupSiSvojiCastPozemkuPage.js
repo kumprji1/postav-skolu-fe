@@ -15,7 +15,9 @@ const KupSiSvojiCastPozemkuPage = () => {
   console.log('KupSiSvojiCastPozemkuPage - RENDER')
   // Utils
   const { sendRequest } = useHttp();
-  const { addPiece, landPiecesState } = useLandPieces([])
+  const { addPiece, removePiece, landPiecesState } = useLandPieces({
+    piecesToBuy: []
+  })
 
   // Data
   const [loaded_O3, setLoaded_O3] = useState([]);
@@ -28,7 +30,13 @@ const KupSiSvojiCastPozemkuPage = () => {
 
   const buyPieces = async () => {
     try {
-      const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/`)
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/api/buy-pieces`, 
+        'POST', 
+        JSON.stringify({landPiecesState}), 
+        {
+        "Content-Type": "application/json"
+      })
     } catch (err) {
       
     }
@@ -38,7 +46,7 @@ const KupSiSvojiCastPozemkuPage = () => {
   const fetchFewLandPiecesO3 = useCallback(async () => {
     try {
       const responseData =
-      await sendRequest('http://localhost:5000/few-land-pieces-o3')
+      await sendRequest('http://localhost:5000/api/few-land-pieces-o3')
       reRender_O3(responseData)
       setLoaded_O3(responseData)
     } catch (err) {
@@ -57,8 +65,8 @@ const KupSiSvojiCastPozemkuPage = () => {
   return (
     <Fragment>
         <BuyPieceOfLand_Data />
-        <PozemekWebGlSection addToBuy={addToBuy} getCurrentLoadedO3={getCurrentLoadedO3} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
-        <Pozemek_SelectedToBuy selectedToBuy={selectedToBuy} />
+        <PozemekWebGlSection addToBuy={addPiece} removePiece={removePiece} getCurrentLoadedO3={getCurrentLoadedO3} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
+        <Pozemek_SelectedToBuy landPiecesState={landPiecesState} buyPieces={buyPieces}/>
         <p>Tady Dole začne další sekce</p>
     </Fragment>
   )

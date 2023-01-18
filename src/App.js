@@ -48,8 +48,7 @@ function App() {
               path="/prihlaseni"
               element={<SigninPage />}
               />
-            </Routes>
-          
+            </Routes>          
         </Main>
        </Router>
       </div>
