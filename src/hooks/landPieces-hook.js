@@ -1,19 +1,31 @@
 import { useReducer } from 'react'
 
+function updateLocalStorage(newState) {
+    // localStorage.setItem("selectedPiecesDKnL",
+    // JSON.stringify({
+    //     pieces: newState.piecesToBuy
+    // }))
+}
+
 const reducer = (state, action) => {
     switch(action.type) {
         case 'SET_DATA': {
             console.log('SET_DATA')
-            return { piecesToBuy: [...action.data] }
+            const newState = { piecesToBuy: [...action.data] }
+            return newState
         }
         case 'ADD_PIECE': {
             console.log('ADD_PIECE (reducer), data:', action.data)
-            return { piecesToBuy: [...state.piecesToBuy, {...action.data}] }
+            const newState = { piecesToBuy: [...state.piecesToBuy, {...action.data}] }
+            updateLocalStorage(newState)
+            return newState
         }
         case 'REMOVE_PIECE': {
             console.log('useLandPieceHook - REMOVE_PIECE')
             const updatedPieces = state.piecesToBuy.filter(piece => piece.number !== action.number)
-            return {piecesToBuy: updatedPieces}
+            const newState = {piecesToBuy: updatedPieces}
+            updateLocalStorage(newState)
+            return newState
         }
                 default:
             throw new Error('Špatný action v useLandPieces()')

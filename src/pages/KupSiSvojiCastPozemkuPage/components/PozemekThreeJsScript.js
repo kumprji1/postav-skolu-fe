@@ -368,6 +368,7 @@ window.addEventListener('click', async () => {
             }   
         } else {
             // pozemek již zakoupen (zobrazení jména kupujícího v html)
+            console.log('Show in HTML')
         }
     }
 
@@ -529,6 +530,10 @@ export const reRender_O3 = (loaded_O3) => {
                         j: j,
                         avaible: !o3Data.isBought,
                         selected: false,
+                        title: o3Data.title,
+                        price: o3Data.price,
+                        photo: o3Data.photo,
+                        isAnonymous: o3Data.photo
                     }
                     objectsToTest.push(O3_obj)
                     O3_group.add(O3_obj)

@@ -1,14 +1,29 @@
-import React, { useState } from 'react'
-import { useLandPieces } from '../../../hooks/landPieces-hook'
+import React, { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { CartContext } from "../../../contexts/CartContext";
+import { useLandPieces } from "../../../hooks/landPieces-hook";
 
-import './Pozemek_SelectedToBuy.scss'
+import "./Pozemek_SelectedToBuy.scss";
 
 const Pozemek_SelectedToBuy = (props) => {
-  const [ selectedPieces, setSelectedPieces ] = useState([])
-  console.log(props.selectedToBuy)
+  const cart = useContext(CartContext);
+  const [selectedPieces, setSelectedPieces] = useState([]);
+  console.log(props.selectedToBuy);
   return (
-    <section className='pozemek-selected-to-buy-section'>Pozemek_SelectedToBuy{props.landPiecesState.piecesToBuy.map(piece => <p key={piece.number}>{piece.number}</p>)}<button onClick={props.buyPieces}>Koupit</button></section>
-  )
-}
+    <section className="pozemek-selected-to-buy-section">
+      {props.landPiecesState.piecesToBuy.map((piece) => (
+        <p key={piece.number}>
+          {piece.title} ({piece.number}), cena: {piece.price},-
+        </p>
+      ))}
+      <NavLink
+        to={`/kosik`}
+        onClick={() => cart.addDonations(props.landPiecesState.piecesToBuy)}
+      >
+        Koupit
+      </NavLink>
+    </section>
+  );
+};
 
-export default Pozemek_SelectedToBuy
+export default Pozemek_SelectedToBuy;
