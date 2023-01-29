@@ -20,7 +20,7 @@ const Pozemek_SelectedToBuy = (props) => {
         to={`/kosik`}
         onClick={() => cart.addDonations(props.landPiecesState.piecesToBuy)}
       >
-        Koupit
+        Do košíku
       </NavLink>
     </section>
   );

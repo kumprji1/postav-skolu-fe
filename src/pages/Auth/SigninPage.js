@@ -22,7 +22,7 @@ const SigninPage = () => {
   const navigate = useNavigate();
 
   const formInitialValues = {
-    username: "",
+    email: "",
     password: "",
   };
 
@@ -34,7 +34,7 @@ const SigninPage = () => {
         `${process.env.REACT_APP_BACKEND_URL}/api/auth/login`,
         "POST",
         JSON.stringify({
-          username: values.username,
+          email: values.email,
           password: values.password,
         }),
         {
@@ -63,9 +63,9 @@ const SigninPage = () => {
         <Form className="custom_form">
           <Field
             className="text-input"
-            name="username"
+            name="email"
             type="text"
-            placeholder="Uživatelské jméno"
+            placeholder="Email"
           />
           <Field
             className="text-input"

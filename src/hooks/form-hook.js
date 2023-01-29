@@ -24,6 +24,7 @@ const formReducer = (state, action) => {
       };
     case 'SET_DATA':
       return {
+        ...state,
         inputs: action.inputs,
         isValid: action.formIsValid
       };
@@ -35,7 +36,9 @@ const formReducer = (state, action) => {
 export const useForm = (initialInputs, initialFormValidity) => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
-    formIsValid: initialFormValidity
+    paymentMethod: null,
+    deliveryMethod: null,
+    isValid: initialFormValidity
   });
 
   const inputHandler = useCallback((id, value, isValid) => {

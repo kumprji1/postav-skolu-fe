@@ -20,6 +20,7 @@ const Header = (props) => {
             <Fragment>
               <NavLink to="/prihlaseni">Přihlásit se</NavLink>
               <NavLink to="/registrace">Registrace</NavLink>
+              <NavLink to="/kosik">Košík</NavLink>
             </Fragment>
           )}
 
