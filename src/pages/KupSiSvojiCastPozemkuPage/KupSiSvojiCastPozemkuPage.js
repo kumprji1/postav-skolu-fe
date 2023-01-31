@@ -49,6 +49,7 @@ const KupSiSvojiCastPozemkuPage = () => {
       await sendRequest('http://localhost:5000/api/few-land-pieces-o3')
       reRender_O3(responseData)
       setLoaded_O3(responseData)
+      console.log('responseData', responseData)
     } catch (err) {
       console.log(err)
     }

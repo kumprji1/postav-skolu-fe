@@ -35,7 +35,7 @@ const OrderFillingInfoPage = () => {
   const postCreateOrder = async () => {
     try {
       const formData = {
-        personalInfo: {
+        contact: {
           name: formState.inputs.name.value,
           surname: formState.inputs.surname.value,
           email: formState.inputs.email.value,
@@ -56,7 +56,8 @@ const OrderFillingInfoPage = () => {
           zipCode: wantsCertificate ? formState.inputs.zipCode.value : ''
         },
         products: cart.cartState.products,
-        donations: cart.cartState.donations
+        donations: cart.cartState.donations,
+        pieces: cart.cartState.pieces
       }
       console.log(formData)
 
@@ -202,7 +203,7 @@ const OrderFillingInfoPage = () => {
       {areDonations && <h2>V košíku jsou i fyzické produkty, sdělte nám prosím doručovací adresu</h2>}
       <p>Validní vše: {formState.isValid ? "Ano" : "Ne"}</p>
       <h2>Shrnutí objednávky</h2>
-      {cart.cartState.donations.map(don => <p key={don.number}>Název: {don.title} Cena: {don.price}</p>)}
+      {cart.cartState.pieces.map(p => <p key={p.number}>Název: {p.title} Cena: {p.price}</p>)}
       <button onClick={postCreateOrder}>Dokončit ojednávku</button>
     </section>
   );

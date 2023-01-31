@@ -18,7 +18,7 @@ const Pozemek_SelectedToBuy = (props) => {
       ))}
       <NavLink
         to={`/kosik`}
-        onClick={() => cart.addDonations(props.landPiecesState.piecesToBuy)}
+        onClick={() => cart.addPieces(props.landPiecesState.piecesToBuy)}
       >
         Do košíku
       </NavLink>

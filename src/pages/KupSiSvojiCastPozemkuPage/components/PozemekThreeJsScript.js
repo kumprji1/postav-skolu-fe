@@ -525,6 +525,7 @@ export const reRender_O3 = (loaded_O3) => {
         O3_obj.translateX(j * 3 + offsetX)
         O3_obj.rotateZ(angle_90)
         O3_obj.userData = {
+                        id: o3Data._id,
                         number: o3Data.number,
                         i: i,
                         j: j,

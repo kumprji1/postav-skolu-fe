@@ -6,6 +6,7 @@ function updateLocalStorage(newState) {
     JSON.stringify({
       donations: newState.donations,
       products: newState.products,
+      pieces: newState.pieces
     })
   );
 }
@@ -13,17 +14,17 @@ function updateLocalStorage(newState) {
 const reducer = (state, action) => {
   switch (action.type) {
     case actions.SET_DATA: {
-      console.log("SET_DATA");
-      const newState = { piecesToBuy: [...action.data] };
-      return newState;
+      // console.log("SET_DATA");
+      // const newState = { piecesToBuy: [...action.data] };
+      // return newState;
     }
     case actions.ADD_DONATION: {
-      console.log("ADD_PIECE (reducer), data:", action.data);
-      const newState = {
-        piecesToBuy: [...state.piecesToBuy, { ...action.data }],
-      };
-      updateLocalStorage(newState);
-      return newState;
+      // console.log("ADD_PIECE (reducer), data:", action.data);
+      // const newState = {
+      //   piecesToBuy: [...state.piecesToBuy, { ...action.data }],
+      // };
+      // updateLocalStorage(newState);
+      // return newState;
     }
     case actions.REMOVE_DONATION: {
       console.log("useLandPieceHook - REMOVE_PIECE");
@@ -41,6 +42,19 @@ const reducer = (state, action) => {
       updateLocalStorage(newState)
       return newState;
     }
+    case actions.ADD_PIECES: {
+      const newState = { ...state, pieces: [...state.pieces, ...action.pieces] }
+      updateLocalStorage(newState)
+      return newState;
+    }
+    case actions.REMOVE_PIECE: {
+      const updatedPieces = state.pieces.filter(
+        (piece) => piece.number !== action.number
+      );
+      const newState = {...state, pieces: updatedPieces };
+      updateLocalStorage(newState);
+      return newState;
+    }
     default:
       throw new Error("Špatný action v useCart()");
   }
@@ -51,6 +65,8 @@ const actions = {
   ADD_DONATION: "ADD_DONATION",
   REMOVE_DONATION: "REMOVE_DONATION",
   ADD_DONATIONS: "ADD_DONATIONS",
+  ADD_PIECES: "ADD_PIECES",
+  REMOVE_PIECE: "REMOVE_PIECE"
 };
 
 export const useCart = (initState) => {
@@ -72,5 +88,13 @@ export const useCart = (initState) => {
     dispatch({ type: actions.ADD_DONATIONS, donations: donations });
   };
 
-  return { cartState, setData, addDonation, removeDonation, addDonations };
+  const addPieces = (pieces) => {
+    dispatch({ type: actions.ADD_PIECES, pieces: pieces });
+  }
+
+  const removePieces = (number) => {
+    dispatch({ type: actions.REMOVE_PIECE, number: number });
+  }
+
+  return { cartState, setData, addDonation, removeDonation, addDonations, addPieces, removePieces };
 };

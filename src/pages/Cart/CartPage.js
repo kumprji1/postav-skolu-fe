@@ -12,6 +12,7 @@ const CartPage = () => {
         <h1>Košík</h1>
         <h2>Darovat</h2>
         {cart.cartState.donations && cart.cartState.donations.map(don => <p key={don.number}>{don.title}</p>)}
+        {cart.cartState.pieces && cart.cartState.pieces.map(p => <p key={p.number}>{p.title}</p>)}
         <h2>Produkty</h2>
         {cart.cartState.products && cart.cartState.products.map(prod => <p key={prod.number}>{prod.title}</p>)}
         <p>Cena celkem: 0</p>

@@ -30,7 +30,8 @@ function App() {
   const storedCart = JSON.parse(localStorage.getItem("cartItems"));
   const cart = useCart({
     donations: storedCart ? storedCart.donations : [],
-    products: storedCart ? storedCart.products : []
+    products: storedCart ? storedCart.products : [],
+    pieces: storedCart ? storedCart.pieces : []    
   }) 
 
   return (
