@@ -512,8 +512,14 @@ export const reRender_O3 = (loaded_O3) => {
     objectsToTest.splice(0, objectsToTest.length)
     console.log('Délka pole: ', loaded_O3.length)
     scene.remove(O3_group)
-    let j = 0;
-    for (let i = 0; i < loaded_O3.length; i++) {        
+    let my_X = 0
+    let my_Y = 0
+    let j = 1;
+    let offX = 0
+    let offY = 0
+    let tempJ = 0 
+    for (let i = 0; i < loaded_O3.length; i++) { 
+        console.log('I: ', i, ' J: ', j) 
         const o3Data = loaded_O3[i];
         const O3_obj = new THREE.Mesh(
             O3_geo, 
@@ -521,8 +527,8 @@ export const reRender_O3 = (loaded_O3) => {
                 color:  o3Data.isBought ? 
                 parameters.O3_hoverC : parameters.avaibleC
             }))
-        O3_obj.translateY(i * 3 + offsetY)
-        O3_obj.translateX(j * 3 + offsetX)
+        O3_obj.translateY(my_Y * 3)
+        O3_obj.translateX(my_X * 3 + offsetX)
         O3_obj.rotateZ(angle_90)
         O3_obj.userData = {
                         id: o3Data._id,
@@ -536,12 +542,22 @@ export const reRender_O3 = (loaded_O3) => {
                         photo: o3Data.photo,
                         isAnonymous: o3Data.photo
                     }
-                    objectsToTest.push(O3_obj)
-                    O3_group.add(O3_obj)
-                    j = i % 10 == 0 ? j++ : j
-    }
-    console.log('ObjectsToTest: ', objectsToTest)
+        objectsToTest.push(O3_obj)
+        O3_group.add(O3_obj)
+        console.log('Increment J?: ', i % 10 == 0)    
+        my_Y = my_Y + 1
+        if (my_Y % 20 == 0) {
+            my_X = my_X + 1
+            my_Y = my_Y - 20
+        }
+        if (my_X % 10 == 0 && my_X != 0) {
+            offsetX = offsetX + 5
+        }
+    } 
     scene.add(O3_group)
+}
+
+
     // loaded_O3.forEach(o3 => {
     //     const O3_obj = new THREE.Mesh(O3_geo, new THREE.MeshBasicMaterial({ color:  parameters.O3_hoverC}))
         
@@ -557,5 +573,3 @@ export const reRender_O3 = (loaded_O3) => {
         // objectsToTest.push(O3_obj)
         // O3_group.add(O3_obj)
     // });
-    
-}
