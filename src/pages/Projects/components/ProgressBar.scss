@@ -1,0 +1,26 @@
+.container-progress-bar {
+    margin: 100px auto;
+    width: 500px;
+    text-align: center;
+  }
+
+  .progress {
+    padding: 6px;
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.25);  
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .progress-moved .progress-bar {
+    width: 85%; 
+    height: 0.5rem;
+    background-color: #EF476F;  
+    animation: progressAnimation 6s;
+    border-radius: 1rem;
+
+  }
+
+  @keyframes progressAnimation {
+    0%   { width: 5%; background-color: #b52849;}
+    100% { width: 85%; background-color: #19b808; }
+  }

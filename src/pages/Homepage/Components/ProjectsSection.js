@@ -13,7 +13,7 @@ const ProjectsSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const responseData = await sendRequest('http://localhost:5000/api/get-projects-by-category/dvur')
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/get-projects-by-category/dvur`)
         setProjects(responseData)
       } catch (err) {
       }

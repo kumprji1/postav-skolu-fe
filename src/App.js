@@ -8,10 +8,10 @@ import Footer from "./components/Footer/Footer";
 // Pages
 import Homepage from "./pages/Homepage/Homepage";
 import KupSiSvojiCastPozemkuPage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage";
-import ProjectDetailDonatePage from "./pages/ProjectDetailPage/ProjectDetailDonatePage";
+import ProjectDetailDonatePage from "./pages/Projects/ProjectDetailPage/ProjectDetailDonatePage";
 import SignupUserPage from "./pages/Auth/SignupUserPage";
 import SigninPage from "./pages/Auth/SigninPage";
-import ProjectDetailPage from "./pages/ProjectDetailPage/ProjectDetailPage";
+import ProjectDetailPage from "./pages/Projects/ProjectDetailPage/ProjectDetailPage";
 import CartPage from "./pages/Cart/CartPage";
 import OrderFillingInfoPage from "./pages/OrderFillingInfoPage/OrderFillingInfoPage";
 
@@ -33,14 +33,14 @@ function App() {
     products: storedCart ? storedCart.products : [],
     pieces: storedCart ? storedCart.pieces : []    
   }) 
-
+  console.log(cart)
   return (
     <AuthContext.Provider
     value = {auth}
     >
       <CartContext.Provider value={cart}>
     <div className="App">
-      <div class="grid-container">
+      <div className="grid-container">
         {/* Tady bylo DiaLogoBackground */}
         <Router>
         <Header auth={auth} />
