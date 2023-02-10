@@ -23,7 +23,7 @@ const ProjectsSection = () => {
 
   return (
     <section className='projects-section'>
-      <h1 className='title'>Přehled projektů s výtěžkem pro výstavbu školy</h1>
+      <h1 className='title'>Přehled projektů s výtěžkem pro výstavbu školy:</h1>
         <Projects projects={projects}/>
     </section>
   )

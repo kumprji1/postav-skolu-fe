@@ -6,10 +6,12 @@ import "./ProjectItem.scss";
 const ProjectItem = ({project}) => {
   return (
     <Link to={`/projekt/${project.urlTitle}`} className="project-item">
-      {project.type !== 'products' && <div className="project-item__percentage">{project.earnedMoney / project.maxMoney * 100}%</div>}
       <h1 className="project-item__title">
         &rsquo;&rsquo;{project.title}&rsquo;&rsquo;
       </h1>
+      <div className="project-item__img--wrapper">
+        <img className="project-item__img" src={`${process.env.REACT_APP_BACKEND_URL}` + project.photo}/>
+      </div>
     </Link>
   );
 };

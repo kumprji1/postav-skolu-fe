@@ -4,7 +4,8 @@
     // left: 50%;
     // transform: translateX(-50%);
   position: relative;
-  padding-top: 6rem;
+  padding-top: 4.5rem;
+  padding-bottom: 4rem;
   // width: 100%;
   img {
     width: 100%;
@@ -20,7 +21,7 @@
     border-top-right-radius: 5px;
     background-color: white;
     position: absolute;
-    bottom: -0.7rem;
+    bottom: 3.5rem;
     right: 10%;
     transform: translateX(-50%);
   }

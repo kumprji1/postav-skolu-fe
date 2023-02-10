@@ -22,13 +22,15 @@ body {
     font-family: $coprIdentityFont;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: $mavenFont;
 }
 
 section {
+ @include flexCenterDir(column);
  padding: 0 $leftRightSpace;
  width: 100%;
 }
+
+.section
 
 canvas {
   width: 0;

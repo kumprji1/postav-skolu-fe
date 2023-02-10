@@ -5,17 +5,30 @@
   position: relative;
   flex-direction: column;
   margin-top: 2.4rem;
-  padding-top: 3rem;
+  padding-top: 2.5rem;
+
   border-radius: 5px;
-  background-color: $secondaryColor;
+  // background-color: $primaryColor;
   width: 100%;
   .title {
-    padding: 0.5rem;
+    padding: 0.5rem 0 0.2rem 0;
     position: absolute;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom: 2px solid $lightPrimaryColor;
     top: -0.0rem;
     background-color: white;
     font-weight: 400;
+  }
+}
+
+@media (min-width: 32rem) {
+  .projects-section {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: $contentMaxWidth) {
+  .projects-section {
+     flex-direction: row;
   }
 }

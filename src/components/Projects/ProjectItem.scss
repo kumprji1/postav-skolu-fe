@@ -1,52 +1,77 @@
-@import '../../styles/shared';
+@import "../../styles/shared";
 
 .project-item {
-    // margin: 4rem;
-    
-    width: 10rem;
-    height: 10rem;
-    background-color: white;
-    background-image: url('../../images/ProjectItem/pohoda.jpg');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    text-align: center;
-    border-radius: 5px;
-    border: 3px solid $primaryColor;
-    position: relative;
-    font-family: $dancingFont;
-    &:hover {
-        cursor: pointer;
-    }
-    &:not(:first-child) {
-        margin-top: 4rem;
+    padding: 0.2rem;
+  min-width: 10rem;
+  min-height: 10rem;
+  background-color: white;
+  background-image: url("../../images/ProjectItem/pohoda.jpg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid $lightPrimaryColor;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $primaryColor;
+    .project-item__title {
+        background-color: $primaryColor;
     }
 }
+  &:not(:first-child) {
+    margin-top: 6rem;
+  }
+  transition: all $transMedium;
+}
 
+.project-item__img--wrapper {
+    max-width: 100%;
+}
+
+.project-item__img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 .project-item__title {
-    font-size: 1.7rem;
-    font-weight: 600;
-    padding: 0.2rem 0.4rem;
-    width: fit-content;
-    right: 0;
-    top: -.8rem;
-    color: white;
-    // background-color: #e4e7eb;
-    background-color: $greyColor;
-    border-radius: 5px;
-    box-shadow: 0px 5px 15px -3px rgba(0,0,0,0.1);
-    display: inline-block;
-    position: absolute;
+  font-size: 1.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  width: fit-content;
+  right: 0;
+  top: -0.8rem;
+  color: white;
+  // background-color: #e4e7eb;
+  background-color: $primaryColor;
+  border-radius: 5px;
+  box-shadow: 0px 5px 15px -3px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  position: absolute;
+  transition: all $transMedium;
 }
 
 .project-item__percentage {
-    @include flexCenter();
-    bottom: -1rem;
-    left: -1rem;
-    width: 3rem;
-    height: 3rem;
-    background-color: green;
-    color: white;
-    border-radius: 50%;
-    position: absolute;
+  @include flexCenter();
+  bottom: -1rem;
+  left: -1rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: green;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+}
+
+@media (min-width: 32rem) {
+  .project-item {
+    width: 30rem;
+  }
+
+  .project-item__title {
+  right: -1rem;
+  top: -0.8rem;
+
+}
 }

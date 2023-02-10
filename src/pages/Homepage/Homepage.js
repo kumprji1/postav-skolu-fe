@@ -8,8 +8,8 @@ const Homepage = () => {
   return (
     <Fragment>
       <AboutSection />
-      <ImageSection />
       <ProjectsSection />
+      <ImageSection />
     </Fragment>
   );
 };

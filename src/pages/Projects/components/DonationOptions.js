@@ -5,7 +5,7 @@ import { useBaseDonation } from "../../../hooks/base-donation-hook";
 
 const DonationOptions = (props) => {
   const { baseDonationState, selectDonation, inputHandler, selectCustomBtn } = useBaseDonation({
-    options: props.project.preparedPrices.map((p) => ({
+    options: props.donatable.preparedPrices.map((p) => ({
       price: p,
       isSelected: false,
     })),
@@ -45,8 +45,8 @@ const DonationOptions = (props) => {
       to={'/kosik'}
       onClick={() => cart.addDonations([{
         price: baseDonationState.price,
-        projectId: props.project._id,
-        title: props.project.title
+        projectId: props.donatable.projectId,
+        title: props.donatable.title
       }])}>Přispět { baseDonationState.price} </NavLink>
     </Fragment>
   );

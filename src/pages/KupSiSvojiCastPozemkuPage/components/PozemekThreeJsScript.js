@@ -8,7 +8,7 @@ const initOnce = () => {
 /**
  * Debug
  */
-     const gui = new dat.GUI()
+    //  const gui = new dat.GUI()
 
      const parameters = {
          //backgroundC: '#545454',
@@ -18,9 +18,9 @@ const initOnce = () => {
          avaibleC: '#cccccc'
      }
      
-     gui.addColor(parameters, 'backgroundC')
-     gui.addColor(parameters, 'O3_hoverC')
-     gui.addColor(parameters, 'O4_hoverC')
+    //  gui.addColor(parameters, 'backgroundC')
+    //  gui.addColor(parameters, 'O3_hoverC')
+    //  gui.addColor(parameters, 'O4_hoverC')
           
 /**
  * Raycaster
