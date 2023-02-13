@@ -21,7 +21,7 @@ const DonationOptions = (props) => {
     <Fragment>
       {baseDonationState.options.map((option) => (
         <button
-          className={option.isSelected ? `donate-btn-price-selected` : ""}
+          className={option.isSelected ? `donate-btn-price-selected donate-btn-price` : "donate-btn-price-not-selected donate-btn-price"}
           onClick={() => selectDonation(option.price)}
           key={option.price}
         >
@@ -29,19 +29,21 @@ const DonationOptions = (props) => {
         </button>
       ))}
       <button
-        className={baseDonationState.wantsCustom ? `donate-btn-price-selected` : ""}
+        className={baseDonationState.wantsCustom ? `donate-btn-price-selected donate-btn-price` : "donate-btn-price-not-selected donate-btn-price"}
         onClick={selectCustomBtn}
       >
         Vlastní částka
       </button>
       {baseDonationState.wantsCustom && (
         <input
+          className="donatable-input-custom-price"
           type="text"
           onChange={(e) => inputHandler(e.currentTarget.value)}
           value={baseDonationState.price}
         ></input>
       )}
       <NavLink
+      className={'donate-btn-to-cart'}
       to={'/kosik'}
       onClick={() => cart.addDonations([{
         price: baseDonationState.price,

@@ -19,6 +19,7 @@ $coprIdentityFont: 'Helvetica', 'Arial', sans-serif;
 $dancingFont: 'Dancing Script', cursive;
 $libreFont: 'Libre Franklin', sans-serif;
 $mavenFont: 'Maven Pro', sans-serif;
+
 /*
 Layout
 */
@@ -39,4 +40,10 @@ Functions
     flex-direction: $direction;
     justify-content: center;
     align-items: center;
+}
+
+@mixin useShadows() {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(117,117,117,1);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(117,117,117,1);
+    box-shadow: 0px 0px 5px 0px rgba(117,117,117,1);
 }

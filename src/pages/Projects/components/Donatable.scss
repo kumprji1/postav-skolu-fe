@@ -1,0 +1,81 @@
+@import '../../../styles/shared';
+
+.donatable {
+    @include flexCenterDir(column);
+    margin-bottom: 4rem;
+    background-color: rgb(181, 208, 226);
+    // border: 1px solid $greyColor;
+    @include useShadows()
+}
+
+.donatable-upper-part {
+    padding: 1rem;
+    @include flexCenterDir(column);
+    background-color: white;
+}
+
+.donatable-title-desc--wrapper {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.donatable-title {
+    color: $primaryColor;
+}
+
+.donatable-photo--wrapper {
+    width: 15rem;
+    border-radius: 5px;
+    img {
+        width: 100%;
+        border-radius: 5px;
+        display: block;
+    }
+}
+
+.donatable-bottom-part {
+    color: white;
+    background-color: $primaryColor;
+    width: 100%;
+}
+
+.donatable-money-stats {
+    @include flexCenterDir(column);
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: normal;
+    .donatable-earnedMoney {
+        color: $greyColor;
+        text-align: center;
+    }
+    
+    .donatable-demandedMoney {
+        color: $primaryColor;
+        text-align: center;
+    }
+    
+}
+
+@media (min-width: $contentMaxWidth) {
+    .donatable {
+
+    }
+
+    .donatable-upper-part {
+        @include flexCenterDir(row);
+    }
+    .donatable-title-desc--wrapper {
+        // @include flexCenterDir(row)
+        text-align: left;
+
+        .donatable-title {
+            padding: 0 1.5rem;
+        }
+
+        .donatable-desc {
+            padding: 0 1.5rem;
+            max-width: 100%;
+        }
+
+    }
+}
