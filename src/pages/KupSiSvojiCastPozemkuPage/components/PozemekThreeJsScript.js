@@ -119,39 +119,81 @@ window.addEventListener('mousemove', (event) =>
 //  map.add(mapColor)
  scene.add(map);
 
- const testDonations = [{
-    price: 100,
-    name: 'Jiří Kumprecht',
-    isAnonymous: false
- }
+
+ // Test Data
+ const testDonations = [
+//     {
+//     price: 100,
+//     name: 'Jiří Kumprecht',
+//     isAnonymous: false,
+//     color: 'yellow'
+//  },
 //  {
-//     price: 100,
+//     price: 300,
 //     name: 'Jiří Kumprecht',
-//     isAnonymous: false
-//  },{
-//     price: 100,
+//     isAnonymous: false,
+//     color: 'green'
+//  },
+//  {
+//     price: 200,
 //     name: 'Jiří Kumprecht',
-//     isAnonymous: false
+//     isAnonymous: false,
+//     color: 'blue'
 //  }
 ]
 
-const A_LENGTH = 2.420571;
+for (let i = 0; i < 5; i++) {
+    testDonations.push({
+        price: 10_000,
+        name: 'Jiří Kumprecht',
+        isAnonymous: false,
+        color: 'blue'
+     })
+}
 
- const planeFrame = new THREE.Mesh(new THREE.PlaneGeometry(870,330), new THREE.MeshBasicMaterial({color: 'green', transparent:true, opacity:0.2}))
+console.log('Donations Count: ', testDonations.length)
+
+// A_LENGTH - Length of an edge of ona square landPiece (100,-)
+const A_LENGTH = 2.4205750708;
+
+// frameWidth - Width (x length) of whole land
+const frameWidth = 870;
+
+ const planeFrame = new THREE.Mesh(new THREE.PlaneGeometry(frameWidth,330), new THREE.MeshBasicMaterial({color: 'green', transparent:true, opacity:0.2}))
  planeFrame.rotateZ(-0.16)
  planeFrame.translateY(50)
  planeFrame.translateX(-60)
- planeFrame.translateZ(-0.1)
+ planeFrame.translateZ(-2)
  scene.add(planeFrame)
 
-
+ let landPieceOffset_X = 0;
+ let landPieceOffset_Y = 0;
+ let avaibleWidth = frameWidth;
  const createPlanes = () => {
     for (let i = 0; i < testDonations.length; i++) {
-        const landPiece = new THREE.Mesh(new THREE.PlaneGeometry((testDonations[i].price / 100) * A_LENGTH, A_LENGTH), new THREE.MeshBasicMaterial({color: 'blue', transparent:true, opacity:0.4}))
+        //
+        const donationWidth = (testDonations[i].price / 100) * A_LENGTH;
+        if (avaibleWidth < donationWidth) {
+            // Start on the left on a new row
+            landPieceOffset_Y -= A_LENGTH
+            landPieceOffset_X = 0
+            avaibleWidth = frameWidth
+        }
+        if (true) {
+        // If the donanation can be placed on the row (no need to split it)
+        
+        // Update avaible width for next donation(landPiece)
+        avaibleWidth -= donationWidth
+
+        const landPiece = new THREE.Mesh(new THREE.PlaneGeometry((testDonations[i].price / 100) * A_LENGTH, A_LENGTH), new THREE.MeshBasicMaterial({color: testDonations[i].color, transparent:true, opacity:0.4}))
+        landPieceOffset_X += ((testDonations[i].price / 100) * A_LENGTH) / 2
         landPiece.rotateZ(-0.16)
-        landPiece.translateX(-489)
-        landPiece.translateY(213.75)
+        landPiece.translateX(-495 + landPieceOffset_X)
+        landPiece.translateY(213.75 + landPieceOffset_Y)
         scene.add(landPiece)
+        landPieceOffset_X += ((testDonations[i].price / 100) * A_LENGTH) / 2;
+
+        }
     }
  }
 

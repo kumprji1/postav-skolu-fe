@@ -35,11 +35,8 @@ const reducer = (state, action) => {
       return newState;
     }
     case actions.ADD_DONATIONS: {
-      console.log("ADD_DONATIONS <3, donations: ", action.donations);
-      console.log(state)
       // Check if each new donation is not already in list (by number)
       const newState = { ...state, donations: [...state.donations, ...action.donations] }
-      console.log('newState: whats wrong')
       updateLocalStorage(newState)
       return newState;
     }

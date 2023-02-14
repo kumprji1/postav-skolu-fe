@@ -33,7 +33,6 @@ function App() {
     products: storedCart ? storedCart.products : [],
     pieces: storedCart ? storedCart.pieces : []    
   }) 
-  console.log(cart)
   return (
     <AuthContext.Provider
     value = {auth}
