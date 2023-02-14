@@ -27,11 +27,10 @@ const reducer = (state, action) => {
       // return newState;
     }
     case actions.REMOVE_DONATION: {
-      console.log("useLandPieceHook - REMOVE_PIECE");
-      const updatedPieces = state.piecesToBuy.filter(
-        (piece) => piece.number !== action.number
+      const updatedDonations = state.donations.filter(
+        (don) => don.id !== action.id
       );
-      const newState = { piecesToBuy: updatedPieces };
+      const newState = { ...state, donations: updatedDonations };
       updateLocalStorage(newState);
       return newState;
     }
@@ -82,8 +81,8 @@ export const useCart = (initState) => {
     dispatch({ type: actions.ADD_DONATION, data: donation });
   };
 
-  const removeDonation = (number) => {
-    dispatch({ type: actions.REMOVE_DONATION, number: number });
+  const removeDonation = (id) => {
+    dispatch({ type: actions.REMOVE_DONATION, id: id });
   };
 
   const addDonations = (donations) => {

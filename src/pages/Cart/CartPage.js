@@ -1,7 +1,13 @@
 import React, { Fragment, useContext } from "react";
 import { NavLink } from "react-router-dom";
+
+// Contexts
 import { AuthContext } from "../../contexts/AuthContext";
 import { CartContext } from "../../contexts/CartContext";
+
+// Components
+import BTitle from "../../components/Base/BTitle/BTitle";
+import CartItem_Donation from "./components/CartItems/CartItem_Donation";
 
 const CartPage = () => {
   const auth = useContext(AuthContext);
@@ -14,14 +20,17 @@ const CartPage = () => {
 
   return (
     <section className="cart-section">
-      <h1>Košík</h1>
-      <h2>Darovat</h2>
-      {cart.cartState.donations &&
-        cart.cartState.donations.map((don) => (
-          <p key={don.number}>
-            {don.title} {don.price}
-          </p>
-        ))}
+      <BTitle>Košík</BTitle>
+      {cart.cartState.donations && (
+        <Fragment>
+          {/* <h2>Darovat</h2> */}
+          <section className="cart-items-donations-section">
+          {cart.cartState.donations.map((don, i) => (
+            <CartItem_Donation key={i} don={don} removeF={() => cart.removeDonation(don.id)} />
+          ))}
+          </section>
+        </Fragment>
+      )}
       {cart.cartState.pieces &&
         cart.cartState.pieces.map((p) => <p key={p.number}>{p.title}</p>)}
       <h2>Produkty</h2>

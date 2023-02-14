@@ -47,8 +47,10 @@ const DonationOptions = (props) => {
       to={'/kosik'}
       onClick={() => cart.addDonations([{
         price: baseDonationState.price,
-        projectId: props.donatable.projectId,
-        title: props.donatable.title
+        donatableId: props.donatable._id,
+        title: props.donatable.title,
+        photo: props.donatable.photo,
+        id: new Date().toISOString()
       }])}>Přispět { baseDonationState.price} </NavLink>
     </Fragment>
   );

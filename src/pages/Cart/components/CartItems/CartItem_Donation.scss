@@ -1,0 +1,35 @@
+@import '../../../../styles/shared';
+
+.cart-item-donation {
+    max-width: 30rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    color: $primaryColor;
+    @include flexCenterDir(row);
+    @include useShadows();
+    &:first-child {
+        margin-top: 1rem;
+    }
+}
+
+.cart-item-donation-photo--wrapper {
+    max-width: 7rem;
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+.cart-item-donation-title {
+    padding: 0.2rem;
+    font-size: 1.2rem;
+}
+
+.cart-item-donation-remove-icon--wrapper {
+    max-width: 2rem;
+    cursor: pointer;
+    img {
+        width: 100%;
+        display: block;
+    }
+}
