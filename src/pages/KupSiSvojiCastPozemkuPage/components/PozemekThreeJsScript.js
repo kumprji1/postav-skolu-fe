@@ -119,6 +119,10 @@ window.addEventListener('mousemove', (event) =>
 //  map.add(mapColor)
  scene.add(map);
 
+ /**
+  * New Version Of Visualization
+  * 
+  */
 
  // Test Data
  const testDonations = [
@@ -142,18 +146,42 @@ window.addEventListener('mousemove', (event) =>
 //  }
 ]
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 1; i++) {
     testDonations.push({
-        price: 10_000,
+        price: 100000,
         name: 'Jiří Kumprecht',
         isAnonymous: false,
         color: 'blue'
-     })
+     },{
+        price: 35900,
+        name: 'Jiří Kumprecht',
+        isAnonymous: false,
+        color: 'green'
+     },
+    //  {
+    //     price: 2_000,
+    //     name: 'Jiří Kumprecht',
+    //     isAnonymous: false,
+    //     color: 'yellow'
+    //  },
+    //  {
+    //     price: 1_000,
+    //     name: 'Jiří Kumprecht',
+    //     isAnonymous: false,
+    //     color: 'green'
+    //  },
+    //  {
+    //     price: 500,
+    //     name: 'Jiří Kumprecht',
+    //     isAnonymous: false,
+    //     color: 'orange'
+    //  },
+     )
 }
 
 console.log('Donations Count: ', testDonations.length)
 
-// A_LENGTH - Length of an edge of ona square landPiece (100,-)
+// A_LENGTH - Length of an edge of one square landPiece (100,-) (the smallest)
 const A_LENGTH = 2.4205750708;
 
 // frameWidth - Width (x length) of whole land
@@ -168,31 +196,56 @@ const frameWidth = 870;
 
  let landPieceOffset_X = 0;
  let landPieceOffset_Y = 0;
- let avaibleWidth = frameWidth;
+ let avaibleRowWidth = frameWidth;
+
+ const startNewRow = () => {
+    landPieceOffset_Y -= A_LENGTH
+    landPieceOffset_X = 0
+    avaibleRowWidth = frameWidth
+ }
+
+ const drawLandPiece = (donationWidth, donation) => {
+
+    const landPiece = new THREE.Mesh(new THREE.PlaneGeometry(donationWidth, A_LENGTH), new THREE.MeshBasicMaterial({color: donation.color, transparent:true, opacity:0.4}))
+    // Move to the center of donation to display
+    landPieceOffset_X += donationWidth / 2
+    landPiece.rotateZ(-0.16)
+    landPiece.translateX(-495 + landPieceOffset_X)
+    landPiece.translateY(213.75 + landPieceOffset_Y)
+    scene.add(landPiece)
+    // Sum the second half of donation to get at the end of last don
+    landPieceOffset_X += donationWidth / 2;
+
+    // Update avaible width for next donation(landPiece)
+    avaibleRowWidth -= donationWidth
+}
+ 
+
  const createPlanes = () => {
     for (let i = 0; i < testDonations.length; i++) {
-        //
-        const donationWidth = (testDonations[i].price / 100) * A_LENGTH;
-        if (avaibleWidth < donationWidth) {
-            // Start on the left on a new row
-            landPieceOffset_Y -= A_LENGTH
-            landPieceOffset_X = 0
-            avaibleWidth = frameWidth
-        }
-        if (true) {
-        // If the donanation can be placed on the row (no need to split it)
-        
-        // Update avaible width for next donation(landPiece)
-        avaibleWidth -= donationWidth
+        let donationIsWholeDrawn = false;
+        let donationWidth = (testDonations[i].price / 100) * A_LENGTH;
 
-        const landPiece = new THREE.Mesh(new THREE.PlaneGeometry((testDonations[i].price / 100) * A_LENGTH, A_LENGTH), new THREE.MeshBasicMaterial({color: testDonations[i].color, transparent:true, opacity:0.4}))
-        landPieceOffset_X += ((testDonations[i].price / 100) * A_LENGTH) / 2
-        landPiece.rotateZ(-0.16)
-        landPiece.translateX(-495 + landPieceOffset_X)
-        landPiece.translateY(213.75 + landPieceOffset_Y)
-        scene.add(landPiece)
-        landPieceOffset_X += ((testDonations[i].price / 100) * A_LENGTH) / 2;
+        console.log('Donation width: ', donationWidth)
 
+        while (!donationIsWholeDrawn) {
+            // if (avaibleRowWidth < A_LENGTH) {
+            //     // Start a new row when current row is fully filled (these is no place on the current row even for the smallest donation)
+            //     startNewRow()
+            // }
+            if (avaibleRowWidth < donationWidth) {
+                // Drawing to the end of row
+                console.log('Kreslím do konce řádku: ', avaibleRowWidth)
+                const widthToDrawNext = donationWidth - avaibleRowWidth;
+                drawLandPiece(avaibleRowWidth, testDonations[i])
+                donationWidth = widthToDrawNext
+                startNewRow()
+                console.log('Zbývá vykreslit: ', widthToDrawNext, donationWidth)
+            } 
+            if (donationWidth <= avaibleRowWidth) {
+                drawLandPiece(donationWidth, testDonations[i])
+                donationIsWholeDrawn = true;
+            }
         }
     }
  }
