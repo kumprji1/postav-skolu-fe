@@ -116,9 +116,46 @@ window.addEventListener('mousemove', (event) =>
  mapColor.translateZ(-5)
  const map = new THREE.Group()
  map.add(mapGrey)
- map.add(mapColor)
+//  map.add(mapColor)
  scene.add(map);
 
+ const testDonations = [{
+    price: 100,
+    name: 'Jiří Kumprecht',
+    isAnonymous: false
+ }
+//  {
+//     price: 100,
+//     name: 'Jiří Kumprecht',
+//     isAnonymous: false
+//  },{
+//     price: 100,
+//     name: 'Jiří Kumprecht',
+//     isAnonymous: false
+//  }
+]
+
+const A_LENGTH = 2.420571;
+
+ const planeFrame = new THREE.Mesh(new THREE.PlaneGeometry(870,330), new THREE.MeshBasicMaterial({color: 'green', transparent:true, opacity:0.2}))
+ planeFrame.rotateZ(-0.16)
+ planeFrame.translateY(50)
+ planeFrame.translateX(-60)
+ planeFrame.translateZ(-0.1)
+ scene.add(planeFrame)
+
+
+ const createPlanes = () => {
+    for (let i = 0; i < testDonations.length; i++) {
+        const landPiece = new THREE.Mesh(new THREE.PlaneGeometry((testDonations[i].price / 100) * A_LENGTH, A_LENGTH), new THREE.MeshBasicMaterial({color: 'blue', transparent:true, opacity:0.4}))
+        landPiece.rotateZ(-0.16)
+        landPiece.translateX(-489)
+        landPiece.translateY(213.75)
+        scene.add(landPiece)
+    }
+ }
+
+ createPlanes()
  /**
   * Map areas
   */
@@ -133,7 +170,7 @@ window.addEventListener('mousemove', (event) =>
         map: textura_O3_area
     })
  )
- scene.add(O3_area)
+//  scene.add(O3_area)
  O3_area.userData = { 
     text: 'Pro děti z kasičky (100,-)', 
     area: 'O3'}
@@ -142,9 +179,9 @@ window.addEventListener('mousemove', (event) =>
  O3_area.translateY(59)
  O3_area.position.z = 10
  O3_area.visible = false
- scene.add(O3_area)
+//  scene.add(O3_area)
  // for hovering
- areasToTest.push(O3_area)
+//  areasToTest.push(O3_area)
 
   // O4 Area
   const O4_area = new THREE.Mesh(
@@ -154,14 +191,13 @@ window.addEventListener('mousemove', (event) =>
  O4_area.userData = { text: 'Pro babičky a dědy z důchodu', area: 'O4'}
  O4_area.position.z = 10
  O4_area.visible = false
- scene.add(O4_area)
+//  scene.add(O4_area)
  // for hovering
- areasToTest.push(O4_area)
+//  areasToTest.push(O4_area)
 
 /**
  * OrangeTriange (O3 - Object 3 edges(vertices)) 100,-
  */
-
 
 const initLoaded_O3 = () => {
     let j = 0;
