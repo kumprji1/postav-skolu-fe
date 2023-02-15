@@ -1,0 +1,10 @@
+@import '../../../styles/shared';
+
+.land-pieces-donation-options-section {
+    margin-top: 1rem;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    padding: 1rem;
+    @include useShadows();
+}

@@ -3,13 +3,14 @@ import React, { Fragment, useState, useEffect, useCallback } from 'react'
 import { useHttp } from '../../hooks/http-hook'
 import { useLandPieces } from '../../hooks/landPieces-hook';
 
-import BuyPieceOfLand_Data from './BuyPieceOfLand_Data';
-
 import { reRender_O3 } from './components/PozemekThreeJsScript'
 
 // Components
 import PozemekWebGlSection from './components/PozemekWebGlSection'
 import Pozemek_SelectedToBuy from './components/Pozemek_SelectedToBuy';
+import LandPiecesDonationOptions from './components/LandPiecesDonationOptions.js.js';
+import { useBaseDonation } from '../../hooks/base-donation-hook';
+import ThreeJS_Canvas_Land from './components/ThreeJS/ThreeJS_Canvas_Land';
 
 const KupSiSvojiCastPozemkuPage = () => {
   console.log('KupSiSvojiCastPozemkuPage - RENDER')
@@ -23,6 +24,35 @@ const KupSiSvojiCastPozemkuPage = () => {
   const [loaded_O3, setLoaded_O3] = useState([]);
   const [loaded_O4, setLoaded_O4] = useState([]);  
   const [selectedToBuy, setSelectedToBuy] = useState([]);
+  
+
+  // New Version
+  const baseDonationData =
+  useBaseDonation({
+    options: [
+      {
+        price: 100,
+        isSelected: false,
+      },
+      {
+        price: 200,
+        isSelected: false,
+      },
+      {
+        price: 500,
+        isSelected: false,
+      },
+      {
+        price: 1_000,
+        isSelected: false,
+      },
+    ],
+    price: null,
+    isSelected: false,
+    wantsCustom: false,
+  });
+
+
 
   const addToBuy = (data) => {
     setSelectedToBuy(prev => [...prev, {...data}])
@@ -65,9 +95,10 @@ const KupSiSvojiCastPozemkuPage = () => {
   }, [])
   return (
     <Fragment>
-        <BuyPieceOfLand_Data />
-        <PozemekWebGlSection addToBuy={addPiece} removePiece={removePiece} getCurrentLoadedO3={getCurrentLoadedO3} fetchFewLandPiecesO3={fetchFewLandPiecesO3} />
-        <Pozemek_SelectedToBuy landPiecesState={landPiecesState} buyPieces={buyPieces}/>
+        <LandPiecesDonationOptions baseDonationData={baseDonationData} />
+        {/* <PozemekWebGlSection addToBuy={addPiece} removePiece={removePiece} priceToDonate={baseDonationData.baseDonationState.price} fetchFewLandPiecesO3={fetchFewLandPiecesO3} /> */}
+        <ThreeJS_Canvas_Land />
+        {/* <Pozemek_SelectedToBuy landPiecesState={landPiecesState} buyPieces={buyPieces}/> */}
         <p>Tady Dole začne další sekce</p>
     </Fragment>
   )

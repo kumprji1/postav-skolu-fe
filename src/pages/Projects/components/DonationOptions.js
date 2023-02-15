@@ -15,7 +15,6 @@ const DonationOptions = (props) => {
   });
 
   const cart = useContext(CartContext)
-  console.log(cart)
 
   return (
     <Fragment>
@@ -51,7 +50,7 @@ const DonationOptions = (props) => {
         title: props.donatable.title,
         photo: props.donatable.photo,
         id: new Date().toISOString()
-      }])}>Přispět { baseDonationState.price} </NavLink>
+      }])}>Přispět { baseDonationState.price}{baseDonationState.price && ',-'}</NavLink>
     </Fragment>
   );
 };

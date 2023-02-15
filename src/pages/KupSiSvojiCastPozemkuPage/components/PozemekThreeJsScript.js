@@ -2,6 +2,15 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'lil-gui'
 
+/**
+ * Globals
+ */
+
+
+const cancelScene = () => {
+
+}
+
 const initOnce = () => {
     
 }
@@ -47,8 +56,149 @@ let offsetX = 0;
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(parameters.backgroundC)
 
+ /**
+  * New Version Of Visualization
+  * 
+  */
 
-export const pozemekThreeStart = (webGlSectionDOM, addToBuy, removePiece, fetchFewLandPiecesO3, getCurrentLoadedO3) => {
+ // Colors 
+ const getColorByPrice = (price) => {
+    switch (price) {
+        case 100: return 'orange'
+        case 200: return 'blue'
+        case 300: return 'red'
+        case price > 300: return 'yellow'
+    }
+ }
+
+ // Test Data
+ const testDonations = [
+//     {
+//     price: 100,
+//     name: 'Jiří Kumprecht',
+//     isAnonymous: false,
+//     color: 'yellow'
+//  },
+//  {
+//     price: 300,
+//     name: 'Jiří Kumprecht',
+//     isAnonymous: false,
+//     color: 'green'
+//  },
+//  {
+//     price: 200,
+//     name: 'Jiří Kumprecht',
+//     isAnonymous: false,
+//     color: 'blue'
+//  }
+]
+
+for (let i = 0; i < 1; i++) {
+    testDonations.push({
+        price: 1_000,
+        name: 'Jiří Kumprecht',
+        isAnonymous: false,
+        color: 'blue'
+     }
+    //  {
+    //     price: 2_000,
+    //     name: 'Jiří Kumprecht',
+    //     isAnonymous: false,
+    //     color: 'yellow'
+    //  },
+    //  {
+    //     price: 1_000,
+    //     name: 'Jiří Kumprecht',
+    //     isAnonymous: false,
+    //     color: 'green'
+    //  },
+    //  {
+    //     price: 500,
+    //     name: 'Jiří Kumprecht',
+    //     isAnonymous: false,
+    //     color: 'orange'
+    //  },
+     )
+}
+
+console.log('Donations Count: ', testDonations.length)
+
+// A_LENGTH - Length of an edge of one square landPiece (100,-) (the smallest)
+const A_LENGTH = 2.4205750708;
+
+// frameWidth - Width (x length) of whole land
+const frameWidth = 870;
+
+ const planeFrame = new THREE.Mesh(new THREE.PlaneGeometry(frameWidth,330), new THREE.MeshBasicMaterial({color: 'green', transparent:true, opacity:0.2}))
+ planeFrame.rotateZ(-0.16)
+ planeFrame.translateY(50)
+ planeFrame.translateX(-60)
+ planeFrame.translateZ(-2)
+ scene.add(planeFrame)
+
+ let landPieceOffset_X = 0;
+ let landPieceOffset_Y = 0;
+ let avaibleRowWidth = frameWidth;
+
+ const startNewRow = () => {
+    landPieceOffset_Y -= A_LENGTH
+    landPieceOffset_X = 0
+    avaibleRowWidth = frameWidth
+ }
+
+ const drawLandPiece = (donationWidth, donation) => {
+
+    const landPiece = new THREE.Mesh(new THREE.PlaneGeometry(donationWidth, A_LENGTH), new THREE.MeshBasicMaterial({color: getColorByPrice(donation.price), transparent:true, opacity:0.4}))
+    // Move to the center of donation piece to display
+    landPieceOffset_X += donationWidth / 2
+
+    // Move piece to top left, then apply offsets
+    landPiece.rotateZ(-0.16)
+    landPiece.translateX(-495 + landPieceOffset_X)
+    landPiece.translateY(213.75 + landPieceOffset_Y)
+    scene.add(landPiece)
+    // Sum the second half of donation to get at the end of last don
+    landPieceOffset_X += donationWidth / 2;
+
+    // Update avaible width for next donation(landPiece)
+    avaibleRowWidth -= donationWidth
+}
+ 
+
+ const createPlanes = () => {
+    for (let i = 0; i < testDonations.length; i++) {
+        let donationIsWholeDrawn = false;
+        let donationWidth = (testDonations[i].price / 100) * A_LENGTH;
+
+        console.log('Donation width: ', donationWidth)
+
+        while (!donationIsWholeDrawn) {
+            // if (avaibleRowWidth < A_LENGTH) {
+            // //     Start a new row when current row is fully filled (these is no place on the current row even for the smallest donation)
+            //     startNewRow()
+            //  }
+            if (avaibleRowWidth < donationWidth) {
+                // Drawing to the end of row
+                console.log('Kreslím do konce řádku: ', avaibleRowWidth)
+                const widthToDrawNext = donationWidth - avaibleRowWidth;
+                drawLandPiece(avaibleRowWidth, testDonations[i])
+                donationWidth = widthToDrawNext
+                startNewRow()
+                console.log('Zbývá vykreslit: ', widthToDrawNext, donationWidth)
+            } 
+            if (donationWidth <= avaibleRowWidth) {
+                drawLandPiece(donationWidth, testDonations[i])
+                donationIsWholeDrawn = true;
+            }
+        }
+    }
+ }
+
+ createPlanes()
+
+
+
+export const pozemekThreeStart = (webGlSectionDOM, addToBuy, removePiece, priceToDonate, getCurrentLoadedO3) => {
     
 /**
  * Textures
@@ -119,138 +269,12 @@ window.addEventListener('mousemove', (event) =>
 //  map.add(mapColor)
  scene.add(map);
 
- /**
-  * New Version Of Visualization
-  * 
-  */
 
- // Test Data
- const testDonations = [
-//     {
-//     price: 100,
-//     name: 'Jiří Kumprecht',
-//     isAnonymous: false,
-//     color: 'yellow'
-//  },
-//  {
-//     price: 300,
-//     name: 'Jiří Kumprecht',
-//     isAnonymous: false,
-//     color: 'green'
-//  },
-//  {
-//     price: 200,
-//     name: 'Jiří Kumprecht',
-//     isAnonymous: false,
-//     color: 'blue'
-//  }
-]
 
-for (let i = 0; i < 1; i++) {
-    testDonations.push({
-        price: 100000,
-        name: 'Jiří Kumprecht',
-        isAnonymous: false,
-        color: 'blue'
-     },{
-        price: 35900,
-        name: 'Jiří Kumprecht',
-        isAnonymous: false,
-        color: 'green'
-     },
-    //  {
-    //     price: 2_000,
-    //     name: 'Jiří Kumprecht',
-    //     isAnonymous: false,
-    //     color: 'yellow'
-    //  },
-    //  {
-    //     price: 1_000,
-    //     name: 'Jiří Kumprecht',
-    //     isAnonymous: false,
-    //     color: 'green'
-    //  },
-    //  {
-    //     price: 500,
-    //     name: 'Jiří Kumprecht',
-    //     isAnonymous: false,
-    //     color: 'orange'
-    //  },
-     )
-}
-
-console.log('Donations Count: ', testDonations.length)
-
-// A_LENGTH - Length of an edge of one square landPiece (100,-) (the smallest)
-const A_LENGTH = 2.4205750708;
-
-// frameWidth - Width (x length) of whole land
-const frameWidth = 870;
-
- const planeFrame = new THREE.Mesh(new THREE.PlaneGeometry(frameWidth,330), new THREE.MeshBasicMaterial({color: 'green', transparent:true, opacity:0.2}))
- planeFrame.rotateZ(-0.16)
- planeFrame.translateY(50)
- planeFrame.translateX(-60)
- planeFrame.translateZ(-2)
- scene.add(planeFrame)
-
- let landPieceOffset_X = 0;
- let landPieceOffset_Y = 0;
- let avaibleRowWidth = frameWidth;
-
- const startNewRow = () => {
-    landPieceOffset_Y -= A_LENGTH
-    landPieceOffset_X = 0
-    avaibleRowWidth = frameWidth
+ if (priceToDonate) {
+    console.log('Budu kreslit kolik chci přispět: ', priceToDonate)
+    visualizePriceOnMap(priceToDonate)
  }
-
- const drawLandPiece = (donationWidth, donation) => {
-
-    const landPiece = new THREE.Mesh(new THREE.PlaneGeometry(donationWidth, A_LENGTH), new THREE.MeshBasicMaterial({color: donation.color, transparent:true, opacity:0.4}))
-    // Move to the center of donation to display
-    landPieceOffset_X += donationWidth / 2
-    landPiece.rotateZ(-0.16)
-    landPiece.translateX(-495 + landPieceOffset_X)
-    landPiece.translateY(213.75 + landPieceOffset_Y)
-    scene.add(landPiece)
-    // Sum the second half of donation to get at the end of last don
-    landPieceOffset_X += donationWidth / 2;
-
-    // Update avaible width for next donation(landPiece)
-    avaibleRowWidth -= donationWidth
-}
- 
-
- const createPlanes = () => {
-    for (let i = 0; i < testDonations.length; i++) {
-        let donationIsWholeDrawn = false;
-        let donationWidth = (testDonations[i].price / 100) * A_LENGTH;
-
-        console.log('Donation width: ', donationWidth)
-
-        while (!donationIsWholeDrawn) {
-            // if (avaibleRowWidth < A_LENGTH) {
-            //     // Start a new row when current row is fully filled (these is no place on the current row even for the smallest donation)
-            //     startNewRow()
-            // }
-            if (avaibleRowWidth < donationWidth) {
-                // Drawing to the end of row
-                console.log('Kreslím do konce řádku: ', avaibleRowWidth)
-                const widthToDrawNext = donationWidth - avaibleRowWidth;
-                drawLandPiece(avaibleRowWidth, testDonations[i])
-                donationWidth = widthToDrawNext
-                startNewRow()
-                console.log('Zbývá vykreslit: ', widthToDrawNext, donationWidth)
-            } 
-            if (donationWidth <= avaibleRowWidth) {
-                drawLandPiece(donationWidth, testDonations[i])
-                donationIsWholeDrawn = true;
-            }
-        }
-    }
- }
-
- createPlanes()
  /**
   * Map areas
   */
@@ -509,18 +533,18 @@ window.addEventListener('click', async () => {
         for(const intersect of intersectsAreas)
         {
             if (intersect.object.userData.area === 'O3') {
-                fetchFewLandPiecesO3().then((response) => {
-                    // initLoaded_O3()
-                    // scene.add(O3_group)
-                    isAreaChoosingMode = false
-                    intersect.object.visible = false
+                // fetchFewLandPiecesO3().then((response) => {
+                //     // initLoaded_O3()
+                //     // scene.add(O3_group)
+                //     isAreaChoosingMode = false
+                //     intersect.object.visible = false
                     
-                    controls.target = O3_area.position;
-                    console.log('Pozice oblasti: ', O3_area.position)
+                //     controls.target = O3_area.position;
+                //     console.log('Pozice oblasti: ', O3_area.position)
                     
-                    // controls.position0 = new THREE.Vector3(...cameraPositions.O3_area)
-                    camera.position.set( cameraPositions.O3_area.x, cameraPositions.O3_area.y, cameraPositions.O3_area.z)   
-                }).catch(err => console.log(err))               
+                //     // controls.position0 = new THREE.Vector3(...cameraPositions.O3_area)
+                //     camera.position.set( cameraPositions.O3_area.x, cameraPositions.O3_area.y, cameraPositions.O3_area.z)   
+                // }).catch(err => console.log(err))               
             }
             if (intersect.object.userData.area === 'O4') {
                 scene.add(O3_group)
@@ -637,6 +661,7 @@ const tick = () =>
 
 tick()
 
+ return { visualizePriceOnMap }
 }
 
 export const reRender_O3 = (loaded_O3) => {
@@ -687,6 +712,13 @@ export const reRender_O3 = (loaded_O3) => {
     } 
     scene.add(O3_group)
 }
+
+  // Show Price to Donate
+ export const visualizePriceOnMap = (price) => {
+    console.log('Vizualizuji!')
+    const width = (price / 100) * A_LENGTH
+    drawLandPiece(width, {price: price})
+ }
 
 
     // loaded_O3.forEach(o3 => {
