@@ -121,7 +121,7 @@ for (let i = 0; i < 1; i++) {
      )
 }
 
-console.log('Donations Count: ', testDonations.length)
+// console.log('Donations Count: ', testDonations.length)
 
 // A_LENGTH - Length of an edge of one square landPiece (100,-) (the smallest)
 const A_LENGTH = 2.4205750708;
@@ -194,7 +194,7 @@ const frameWidth = 870;
     }
  }
 
- createPlanes()
+//  createPlanes()
 
 
 

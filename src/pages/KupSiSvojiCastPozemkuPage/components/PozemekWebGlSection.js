@@ -7,12 +7,12 @@ import './PozemekWebGlSection.scss'
 const PozemekWebGlSection = (props) => {
   const webGlSectionRef = useRef();
     useEffect(() => {
-        // const { visualizePriceOnMap } = pozemekThreeStart(webGlSectionRef.current, props.addToBuy, props.removePiece, props.priceToDonate, props.getCurrentLoadedO3)
-        // visualizePriceOnMap(100)
+        const { visualizePriceOnMap } = pozemekThreeStart(webGlSectionRef.current, props.addToBuy, props.removePiece, props.priceToDonate, props.getCurrentLoadedO3)
+        visualizePriceOnMap(100)
       } , []);
 
     useEffect(() => {
-      // visualizePriceOnMap(props.priceToDonate)
+      visualizePriceOnMap(props.priceToDonate)
     }, [props.priceToDonate])
 
     useLayoutEffect(() => {

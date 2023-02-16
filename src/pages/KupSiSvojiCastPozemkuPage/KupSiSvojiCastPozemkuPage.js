@@ -13,7 +13,7 @@ import { useBaseDonation } from '../../hooks/base-donation-hook';
 import ThreeJS_Canvas_Land from './components/ThreeJS/ThreeJS_Canvas_Land';
 
 const KupSiSvojiCastPozemkuPage = () => {
-  console.log('KupSiSvojiCastPozemkuPage - RENDER')
+
   // Utils
   const { sendRequest } = useHttp();
   const { addPiece, removePiece, landPiecesState } = useLandPieces({
@@ -97,7 +97,7 @@ const KupSiSvojiCastPozemkuPage = () => {
     <Fragment>
         <LandPiecesDonationOptions baseDonationData={baseDonationData} />
         {/* <PozemekWebGlSection addToBuy={addPiece} removePiece={removePiece} priceToDonate={baseDonationData.baseDonationState.price} fetchFewLandPiecesO3={fetchFewLandPiecesO3} /> */}
-        <ThreeJS_Canvas_Land />
+        <ThreeJS_Canvas_Land priceToDonate={baseDonationData.baseDonationState.price} />
         {/* <Pozemek_SelectedToBuy landPiecesState={landPiecesState} buyPieces={buyPieces}/> */}
         <p>Tady Dole začne další sekce</p>
     </Fragment>

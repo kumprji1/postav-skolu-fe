@@ -1,22 +1,24 @@
-import { Canvas, useThree, useLoader, extend } from '@react-three/fiber'
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OrbitControls } from '@react-three/drei';
 
-extend({ OrbitControls })
-const Experience_Land = () => {
-    const {camera, gl} = useThree();
-    // Textures 
-const greyMap = useLoader(TextureLoader, '../../../../images/PozemekWebGl/textures/pozemek/mapa_pozemku_letecka_seda2.png')
+// Objects
+import Map from './Objects/Map';
+import LandFrame from './Objects/LandFrame';
+import LandPieces from './Objects/LandPieces';
+import LandPieceToDonate from './Objects/LandPieceToDonate';
+
+const Experience_Land = (props) => {
 
 return (
     <>
-    <orbitControls args={[ camera, gl.domElement ]}/>
-    <ambientLight intensity={0.2} />
+    <OrbitControls zoomSpeed={2} />
+    <ambientLight intensity={0.5} />
     <directionalLight />
-      <mesh>
-        <planeGeometry args={[1772, 785]} />
-        <meshStandardMaterial map={greyMap}  />
-      </mesh>
+    <axesHelper args={[50, 50, 50]}/>
+      <Map />
+      <LandFrame />
+      <LandPieces />
+      // Visualization of the landPiece that donator wants to donate
+      <LandPieceToDonate priceToDonate={props.priceToDonate} />
     </>
   );
 };

@@ -4,7 +4,7 @@ import React from 'react'
 import { Canvas } from '@react-three/fiber'
 import Experience_Land from './Experience_Land'
 
-const ThreeJS_Canvas_Land = () => {
+const ThreeJS_Canvas_Land = (props) => {
   return (
     <Canvas
     camera={{
@@ -13,7 +13,7 @@ const ThreeJS_Canvas_Land = () => {
         far: 5000,
         position: [-76, -8.09, 1713]
     }}>
-        <Experience_Land />
+        <Experience_Land priceToDonate={props.priceToDonate} />
     </Canvas>
   )
 }
