@@ -8,5 +8,6 @@ export const CartContext = createContext({
     removeDonation: () => {},
     addDonations: () => {},
     addPieces: () => {},
-    removePiece: () => {}
+    removePiece: () => {},
+    clearCart: () => {}
 })

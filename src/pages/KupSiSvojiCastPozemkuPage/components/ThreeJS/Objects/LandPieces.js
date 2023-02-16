@@ -68,7 +68,7 @@ const testDonations = [
 ];
 
 
-const LandPieces = () => {
+const LandPieces = (props) => {
   const [landPieces, setLandPieces] = useState([])
   useEffect(() => {
     console.log('LandPieces(useEffect)')
@@ -105,9 +105,9 @@ const createLandPiece = (donationWidth, donation) => {
 
 
 const createLandPieces = () => {
-  for (let i = 0; i < testDonations.length; i++) {
+  for (let i = 0; i < props.donations.length; i++) {
     let donationIsWholeDrawn = false;
-    let donationWidth = (testDonations[i].price / 100) * A_LENGTH;
+    let donationWidth = (props.donations[i].price / 100) * A_LENGTH;
 
     while (!donationIsWholeDrawn) {
       // if (avaibleRowWidth < A_LENGTH) {
@@ -118,22 +118,22 @@ const createLandPieces = () => {
         // Drawing to the end of row
         console.log("Kreslím do konce řádku: ", avaibleRowWidth);
         const widthToDrawNext = donationWidth - avaibleRowWidth;
-        // drawLandPiece(avaibleRowWidth, testDonations[i])
-        createLandPiece(avaibleRowWidth, testDonations[i])
-        // createdLandPieces.push({ ...testDonations[i], width: avaibleRowWidth, offsetX: landPieceOffset_X, offsetY: landPieceOffset_Y });
+        // drawLandPiece(avaibleRowWidth, props.donations[i])
+        createLandPiece(avaibleRowWidth, props.donations[i])
+        // createdLandPieces.push({ ...props.donations[i], width: avaibleRowWidth, offsetX: landPieceOffset_X, offsetY: landPieceOffset_Y });
         donationWidth = widthToDrawNext;
         startNewRow();
         console.log("Zbývá vykreslit: ", widthToDrawNext, donationWidth);
       }
       if (donationWidth <= avaibleRowWidth) {
         console.log('Donation (no-split)')
-        // drawLandPiece(donationWidth, testDonations[i]);
-        createLandPiece(donationWidth, testDonations[i])
-        // createdLandPieces.push({ ...testDonations[i], width: donationWidth, offsetX: landPieceOffset_X, offsetY: landPieceOffset_Y });
+        // drawLandPiece(donationWidth, props.donations[i]);
+        createLandPiece(donationWidth, props.donations[i])
+        // createdLandPieces.push({ ...props.donations[i], width: donationWidth, offsetX: landPieceOffset_X, offsetY: landPieceOffset_Y });
         donationIsWholeDrawn = true;
       }
     }
-    if (i + 1 == testDonations.length) {
+    if (i + 1 == props.donations.length) {
       setLastOffsets(landPieceOffset_X, landPieceOffset_Y)
     }
   }
@@ -145,7 +145,7 @@ setLandPieces(createdLandPieces)
   }, []);
   return (
     <>
-      {/* {testDonations.map((landPiece) => (
+      {/* {props.donations.map((landPiece) => (
         <LandPiece landPiece={landPiece} />
       ))} */}
       {landPieces}

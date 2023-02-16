@@ -14,6 +14,7 @@ import SigninPage from "./pages/Auth/SigninPage";
 import ProjectDetailPage from "./pages/Projects/ProjectDetailPage/ProjectDetailPage";
 import CartPage from "./pages/Cart/CartPage";
 import OrderFillingInfoPage from "./pages/OrderFillingInfoPage/OrderFillingInfoPage";
+import OrderCreatedPage from "./pages/OrderCreatedPage/OrderCreatedPage";
 
 import { AuthContext } from "./contexts/AuthContext";
 import { CartContext } from './contexts/CartContext'
@@ -56,6 +57,7 @@ function App() {
               />
               <Route path="/kosik" element={<CartPage />}/>
               <Route path="/nakup" element={<OrderFillingInfoPage />} />
+              <Route path="/objednavka/:orderId" element={<OrderCreatedPage />} />
               <Route 
               path="/registrace"
               element={<SignupUserPage />}

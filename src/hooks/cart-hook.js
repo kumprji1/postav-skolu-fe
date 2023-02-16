@@ -53,6 +53,15 @@ const reducer = (state, action) => {
       updateLocalStorage(newState);
       return newState;
     }
+    case actions.CLEAR_CART: {
+      const newState = {
+        donations: [],
+        products: [],
+        pieces: []
+      };
+      updateLocalStorage(newState);
+      return newState;
+    }
     default:
       throw new Error("Špatný action v useCart()");
   }
@@ -64,7 +73,8 @@ const actions = {
   REMOVE_DONATION: "REMOVE_DONATION",
   ADD_DONATIONS: "ADD_DONATIONS",
   ADD_PIECES: "ADD_PIECES",
-  REMOVE_PIECE: "REMOVE_PIECE"
+  REMOVE_PIECE: "REMOVE_PIECE",
+  CLEAR_CART: "CLEAR_CART"
 };
 
 export const useCart = (initState) => {
@@ -94,5 +104,9 @@ export const useCart = (initState) => {
     dispatch({ type: actions.REMOVE_PIECE, number: number });
   }
 
-  return { cartState, setData, addDonation, removeDonation, addDonations, addPieces, removePieces };
+  const clearCart = () => {
+    dispatch({ type: actions.CLEAR_CART });
+  }
+
+  return { cartState, setData, addDonation, removeDonation, addDonations, addPieces, removePieces, clearCart };
 };

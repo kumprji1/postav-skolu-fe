@@ -28,10 +28,23 @@ const reducer = (state, action) => {
       return updatedState;
     }
     case act.INPUT_HANDLER: {
-
       const updatedState = {
         ...state,
         price: Number(action.price),
+      };
+      return updatedState;
+    }
+    case act.INPUT_NOTE: {
+      const updatedState = {
+        ...state,
+        note: action.note,
+      };
+      return updatedState;
+    }
+    case act.SET_ANONYMOUS_MODE: {
+      const updatedState = {
+        ...state,
+        isAnonymous: action.value,
       };
       return updatedState;
     }
@@ -53,6 +66,8 @@ const act = {
   SELECT_DONATION: "SELECT_DONATION",
   INPUT_HANDLER: "INPUT_HANDLER",
   SELECT_CUSTOM_BTN: "SELECT_CUSTOM_BTN",
+  INPUT_NOTE: 'INPUT_NOTE',
+  SET_ANONYMOUS_MODE: 'SET_ANONYMOUS_MODE'
 };
 
 export const useBaseDonation = (initState) => {
@@ -70,5 +85,14 @@ export const useBaseDonation = (initState) => {
     dispatch({ type: act.SELECT_CUSTOM_BTN });
   };
 
-  return { baseDonationState, selectDonation, inputHandler, selectCustomBtn };
+  const inputNote = (note) => {
+    dispatch({ type: act.INPUT_NOTE, note });
+  };
+
+  const setAnonymousMode = (value) => {
+    dispatch({ type: act.SET_ANONYMOUS_MODE, value });
+  };
+
+
+  return { baseDonationState, selectDonation, inputHandler, inputNote, selectCustomBtn, setAnonymousMode };
 };

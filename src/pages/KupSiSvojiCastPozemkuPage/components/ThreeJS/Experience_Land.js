@@ -16,7 +16,7 @@ return (
     <axesHelper args={[50, 50, 50]}/>
       <Map />
       <LandFrame />
-      <LandPieces />
+      <LandPieces donations={props.donations} />
       // Visualization of the landPiece that donator wants to donate
       <LandPieceToDonate priceToDonate={props.priceToDonate} />
     </>

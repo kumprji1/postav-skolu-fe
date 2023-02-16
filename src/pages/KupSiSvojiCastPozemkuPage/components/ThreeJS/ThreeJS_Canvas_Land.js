@@ -13,7 +13,7 @@ const ThreeJS_Canvas_Land = (props) => {
         far: 5000,
         position: [-76, -8.09, 1713]
     }}>
-        <Experience_Land priceToDonate={props.priceToDonate} />
+        <Experience_Land donations={props.donations} priceToDonate={props.priceToDonate} />
     </Canvas>
   )
 }

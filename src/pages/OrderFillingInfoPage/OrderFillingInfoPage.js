@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Input from "../../components/UI/FormElements/Input";
 
@@ -17,6 +18,8 @@ import {
 } from "../../utils/validators";
 
 const OrderFillingInfoPage = () => {
+
+  const navigate = useNavigate()
   const { sendRequest } = useHttp()
 
   // Data
@@ -68,6 +71,11 @@ const OrderFillingInfoPage = () => {
         {
           'Content-type': 'application/json'
         })
+
+      if (responseData.orderId) {
+        cart.clearCart()
+        navigate(`/objednavka/${responseData.orderId}`)
+      }
     } catch (err) {}
   }
 

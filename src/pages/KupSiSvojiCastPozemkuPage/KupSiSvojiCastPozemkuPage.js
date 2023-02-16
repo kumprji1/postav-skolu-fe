@@ -11,6 +11,7 @@ import Pozemek_SelectedToBuy from './components/Pozemek_SelectedToBuy';
 import LandPiecesDonationOptions from './components/LandPiecesDonationOptions.js.js';
 import { useBaseDonation } from '../../hooks/base-donation-hook';
 import ThreeJS_Canvas_Land from './components/ThreeJS/ThreeJS_Canvas_Land';
+import LandPiece_DonationInfo from './components/LandPiece_DonationInfo';
 
 const KupSiSvojiCastPozemkuPage = () => {
 
@@ -27,6 +28,7 @@ const KupSiSvojiCastPozemkuPage = () => {
   
 
   // New Version
+  const [donations, setDonations] = useState([])
   const baseDonationData =
   useBaseDonation({
     options: [
@@ -50,9 +52,9 @@ const KupSiSvojiCastPozemkuPage = () => {
     price: null,
     isSelected: false,
     wantsCustom: false,
+    note: '',
+    isAnonymous: false
   });
-
-
 
   const addToBuy = (data) => {
     setSelectedToBuy(prev => [...prev, {...data}])
@@ -91,13 +93,23 @@ const KupSiSvojiCastPozemkuPage = () => {
 
   // Fetch Land Pieces
   useEffect(() => {
-    // fetchFewLandPiecesO3()
-  }, [])
+    const fetchDonations = async () => {
+      try {
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/donations/63ee1999742b27920b98e55b`)
+        console.log('responseData: ', responseData)
+        setDonations(responseData)
+      } catch (err) {
+        
+      }
+    }
+    fetchDonations()
+  }, [sendRequest])
   return (
     <Fragment>
         <LandPiecesDonationOptions baseDonationData={baseDonationData} />
         {/* <PozemekWebGlSection addToBuy={addPiece} removePiece={removePiece} priceToDonate={baseDonationData.baseDonationState.price} fetchFewLandPiecesO3={fetchFewLandPiecesO3} /> */}
-        <ThreeJS_Canvas_Land priceToDonate={baseDonationData.baseDonationState.price} />
+        <ThreeJS_Canvas_Land donations={donations} priceToDonate={baseDonationData.baseDonationState.price} />
+        <LandPiece_DonationInfo />
         {/* <Pozemek_SelectedToBuy landPiecesState={landPiecesState} buyPieces={buyPieces}/> */}
         <p>Tady Dole začne další sekce</p>
     </Fragment>

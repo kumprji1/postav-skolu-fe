@@ -42,7 +42,25 @@ Base-Componenets
 */
 
 .bbutton {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid $primaryColor;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  background-color: $primaryColor;
+  transition: all $transMedium;
+}
 
+.bbutton-outline {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid $primaryColor;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: $primaryColor;
+  background-color: white;
+  transition: all $transMedium;
 }
 
 @media(min-width: $contentMaxWidth) {

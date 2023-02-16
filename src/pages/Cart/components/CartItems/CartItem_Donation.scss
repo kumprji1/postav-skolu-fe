@@ -5,11 +5,15 @@
     padding: 0.5rem;
     margin-bottom: 1rem;
     color: $primaryColor;
-    @include flexCenterDir(row);
+    @include flexCenterDir(column);
     @include useShadows();
     &:first-child {
         margin-top: 1rem;
     }
+}
+
+.cart-item-donation-upper {
+    @include flexCenterDir(row);
 }
 
 .cart-item-donation-photo--wrapper {
