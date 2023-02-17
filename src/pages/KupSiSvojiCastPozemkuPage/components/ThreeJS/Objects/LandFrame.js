@@ -1,3 +1,4 @@
+import { Edges } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
 import { landFrameData } from "../globals";
 
@@ -15,7 +16,8 @@ const LandFrame = () => {
         rotation-z={landFrameData.rotZ}
       >
         <planeGeometry args={[landFrameData.width, landFrameData.height]} />
-        <meshBasicMaterial color={"green"} transparent opacity={0.2} />
+        <Edges color={'#009ee0'} />
+        <meshBasicMaterial color={'#009ee0'} transparent opacity={0.2} />
       </mesh>
     </group>
   );

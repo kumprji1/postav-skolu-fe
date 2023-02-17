@@ -1,12 +1,17 @@
 import { Bounds } from '@react-three/drei'
-import React from 'react'
+import { useFrame } from '@react-three/fiber'
+import React, { useState } from 'react'
 import { A_LENGTH, getColorByPrice, landPieceInitPosAndRot, lastOffsets } from '../globals'
 import SelectToZoom from './SelectToZoom'
 
 const LandPieceToDonate = (props) => {
     console.log(props.priceToDonate)
+    const [opacity, setOpacity] = useState(0.4)
+    useFrame((state, delta) => {
+      // change opacity from 0.4 to 0.8 in time and back to 0.4
+    })
   return (
-    <Bounds fit margin={1.8}>
+    <Bounds fit margin={20}>
     <SelectToZoom>
     <mesh 
     // Tranforms

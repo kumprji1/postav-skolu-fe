@@ -20,12 +20,16 @@ canvas.pozemek-webgl {
 }
 
 .canvas-land {
-    width: 80vw !important;
+    // min-width: 80vw !important;
     min-height: 40vh !important;
 }
 
 .landPiece-donation-info--wrapper {
-    position: absolute;
-    left: 0;
-    background-color: goldenrod;
+    top: 1rem;
+    padding: 1rem;
+    min-width: 15rem;
+    width: auto;
+    background-color: white;
+    color: $primaryColor;
+    @include useShadows();
 }

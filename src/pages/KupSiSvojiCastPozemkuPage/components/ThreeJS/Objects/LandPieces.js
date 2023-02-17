@@ -101,7 +101,7 @@ const LandPieces = (props) => {
           offsetX={landPieceOffset_X}
           offsetY={landPieceOffset_Y}
           donation={donation}
-          setSelectedPiece={props.setSelectedPiece}
+          // setSelectedPiece={props.setSelectedPiece}
         />
       );
 

@@ -1,25 +1,23 @@
+import { Html } from "@react-three/drei";
 import React, { useEffect, useState } from "react";
 import { A_LENGTH, getColorByPrice, landPieceInitPosAndRot } from "../globals";
 
 const LandPiece = (props) => {
-  const [hovered, setHovered] = useState(false)
-  useEffect(() => {
-    document.body.style.cursor = hovered ? 'pointer' : 'auto'
-  }, [hovered])
+  const [showHTML, setShowHTML] = useState(false)
   return (
     <mesh 
       // Events
       onPointerEnter={(e) => {
         e.object.material.opacity = 1
-        setHovered(true)
+        setShowHTML(true)
       }}
       onPointerOut={(e) => {
         e.object.material.opacity = 0.4
-        setHovered(false)
+        setShowHTML(false)
       }}
       onClick={(e) => {
-        props.setSelectedPiece(e.object.userData)
-        console.log(e.object)
+        // props.setSelectedPiece(e.object.userData)
+        setShowHTML(true)
       }}
 
       // Tranforms
@@ -37,7 +35,13 @@ const LandPiece = (props) => {
       }}
     >
       <planeGeometry args={[props.width, A_LENGTH]} />
-      <meshBasicMaterial color={getColorByPrice(props.donation.price)} transparent opacity={0.4} />
+      <meshToonMaterial color={getColorByPrice(props.donation.price)} transparent opacity={0.4} />
+      {showHTML && <Html className="landPiece-donation-info--wrapper">
+        <p>Dárce: {props.donation.name}</p>
+        <p>Částka: {props.donation.price}</p>
+        <p>Rozloha: Teprve se chystá</p>
+        <p>Chci sdělit: {props.donation.note}</p>
+        </Html>}
     </mesh>
   );
 };

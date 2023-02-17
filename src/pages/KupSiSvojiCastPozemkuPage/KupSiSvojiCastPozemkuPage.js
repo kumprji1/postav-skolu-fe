@@ -114,16 +114,16 @@ const KupSiSvojiCastPozemkuPage = (props) => {
         </div>
         <p className="project-detail-desc">{props.project.desc}</p>
       </section>
-      <LandPiecesDonationOptions baseDonationData={baseDonationData} />
       {/* <PozemekWebGlSection addToBuy={addPiece} removePiece={removePiece} priceToDonate={baseDonationData.baseDonationState.price} fetchFewLandPiecesO3={fetchFewLandPiecesO3} /> */}
       <ThreeJS_Canvas_Land
         donations={donations}
         priceToDonate={baseDonationData.baseDonationState.price}
-        setSelectedPiece={setSelectedPiece}
+        // setSelectedPiece={setSelectedPiece}
       />
-      {selectedPiece && (
+            <LandPiecesDonationOptions baseDonationData={baseDonationData} />
+      {/* {selectedPiece && (
         <LandPiece_DonationInfo selectedPiece={selectedPiece} />
-      )}
+      )} */}
       {/* <Pozemek_SelectedToBuy landPiecesState={landPiecesState} buyPieces={buyPieces}/> */}
       <p>Tady Dole začne další sekce</p>
     </Fragment>
