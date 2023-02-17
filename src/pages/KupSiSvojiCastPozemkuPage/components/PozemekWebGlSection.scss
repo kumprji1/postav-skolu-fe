@@ -18,3 +18,14 @@ canvas.pozemek-webgl {
     height: 100vh;
     z-index: 0;
 }
+
+.canvas-land {
+    width: 80vw !important;
+    min-height: 40vh !important;
+}
+
+.landPiece-donation-info--wrapper {
+    position: absolute;
+    left: 0;
+    background-color: goldenrod;
+}

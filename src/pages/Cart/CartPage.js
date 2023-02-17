@@ -33,14 +33,14 @@ const CartPage = () => {
       )}
       {cart.cartState.pieces &&
         cart.cartState.pieces.map((p) => <p key={p.number}>{p.title}</p>)}
-      <h2>Produkty</h2>
+      {/* {cart.cartState.products && <h2>Produkty</h2>} */}
       {cart.cartState.products &&
         cart.cartState.products.map((prod) => (
           <p key={prod.number}>{prod.title}</p>
         ))}
       <p>Cena celkem: {totalPrice}</p>
       {!auth.token ? (
-        <NavLink to={`/nakup`}>Nákup bez registrace</NavLink>
+        <NavLink className='bbutton' to={`/nakup`}>Nákup bez registrace</NavLink>
       ) : (
         <NavLink to={`/nakup`}>Nakoupit</NavLink>
       )}

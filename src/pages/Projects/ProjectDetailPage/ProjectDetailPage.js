@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useHttp } from '../../../hooks/http-hook'
+import KupSiSvojiCastPozemkuPage from '../../KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage'
 import ProjectDetailDonatePage from './ProjectDetailDonatePage'
 import ProjectDetailProductsPage from './ProjectDetailProductsPage'
 
@@ -23,7 +24,7 @@ const ProjectDetailPage = () => {
         switch (project.type) {
             case 'donate': return <ProjectDetailDonatePage project={project} />; break;
             case 'products': return <ProjectDetailProductsPage project={project} />; break;
-            case 'donate-land':
+            case 'donate-land': return <KupSiSvojiCastPozemkuPage project={project} />
             default: new Error('Unknown project type')
         }
     }

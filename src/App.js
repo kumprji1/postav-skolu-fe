@@ -48,10 +48,10 @@ function App() {
           
             <Routes>
               <Route path="/" element={<Homepage />} />
-              <Route
+              {/* <Route
                 path="/projekt/kup-si-svoji-cast-pozemku"
                 element={<KupSiSvojiCastPozemkuPage />}
-              />
+              /> */}
               <Route path={`/projekt/:urlPath`}
               element={<ProjectDetailPage />}
               />

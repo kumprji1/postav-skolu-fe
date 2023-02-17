@@ -11,6 +11,7 @@ const DonationOptions = (props) => {
     })),
     price: null,
     isSelected: false,
+    isAnonymous: false,
     wantsCustom: false,
   });
 
@@ -49,7 +50,8 @@ const DonationOptions = (props) => {
         donatableId: props.donatable._id,
         title: props.donatable.title,
         photo: props.donatable.photo,
-        id: new Date().toISOString()
+        id: new Date().toISOString(),
+        isAnonymous: baseDonationState.isAnonymous
       }])}>Přispět { baseDonationState.price}{baseDonationState.price && ',-'}</NavLink>
     </Fragment>
   );

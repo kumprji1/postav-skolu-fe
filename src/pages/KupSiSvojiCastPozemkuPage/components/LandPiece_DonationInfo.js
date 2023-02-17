@@ -1,8 +1,13 @@
 import React from 'react'
 
-const LandPiece_DonationInfo = () => {
+const LandPiece_DonationInfo = (props) => {
+    console.log(props)
   return (
-    <div>LandPiece_DonationInfo</div>
+    <div>
+        <p>Dárce: {props.selectedPiece.name}</p>
+        <p>Cena: {props.selectedPiece.price}</p>
+        <p>Poznámka: {props.selectedPiece.note}</p>
+    </div>
   )
 }
 

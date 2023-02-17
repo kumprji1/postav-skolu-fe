@@ -1,13 +1,14 @@
 @import '../../../styles/shared';
 
 .land-pieces-donation-options-section {
-    position: fixed;
-    margin-top: 1rem;
-    left: 50%;
-    top: 10vw;
+    // position: fixed;
+    // left: 50%;
+    // top: 10vw;
     z-index: 1;
     background-color: white;
     padding: 1rem;
-    transform: translateX(-50%);
-    @include useShadows();
 }
+
+.land-pieces-donation-options--wrapper {
+    @include useShadows();
+}    
