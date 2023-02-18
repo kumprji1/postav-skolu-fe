@@ -1,5 +1,10 @@
 @import '../../../styles/shared';
 
+.project-detail-admin-section {
+    margin-top: 0.2rem;
+    @include flexCenterDir(row);
+}
+
 .project-detail-info-section {
     .project-detail-title {
         color: white;

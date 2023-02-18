@@ -65,6 +65,71 @@ Base-Componenets
   transition: all $transMedium;
 }
 
+// Buttons - danger
+
+.btn-danger-outline {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid $wineCol;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: $wineCol;
+  background-color: transparent;
+  transition: all $transMedium;
+}
+
+.btn-danger {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid $primaryColor;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: $wineCol;
+  background-color: $wineCol;
+  transition: all $transMedium;
+}
+
+.btn-warning {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid $orangeCol;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  background-color: $orangeCol;
+  transition: all $transMedium;
+}
+
+.btn-warning-outline {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+  border: 1px solid $orangeCol;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: $orangeCol;
+  background-color: transparent;
+  transition: all $transMedium;
+}
+
+// Buttons sizes
+.btn-small {
+  font-size: 1rem;
+  padding: 0.2rem 0.4rem;
+  margin: 0.4rem 0.8rem;
+}
+
+// Form Components
+
+.input-text {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 1rem;
+}
+
+
 @media(min-width: $contentMaxWidth) {
   section {
     width: $contentMaxWidth;

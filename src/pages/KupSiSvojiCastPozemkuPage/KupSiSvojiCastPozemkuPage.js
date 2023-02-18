@@ -61,7 +61,7 @@ const KupSiSvojiCastPozemkuPage = (props) => {
   }, [loaded_O3]);
 
   // New Version
-  const [selectedPiece, setSelectedPiece] = useState();
+  // const [selectedPiece, setSelectedPiece] = useState();
   const [donations, setDonations] = useState([]);
   const baseDonationData = useBaseDonation({
     options: [

@@ -15,9 +15,10 @@ import ProjectDetailPage from "./pages/Projects/ProjectDetailPage/ProjectDetailP
 import CartPage from "./pages/Cart/CartPage";
 import OrderFillingInfoPage from "./pages/OrderFillingInfoPage/OrderFillingInfoPage";
 import OrderCreatedPage from "./pages/OrderCreatedPage/OrderCreatedPage";
+import EditProjectPage from "./pages/Admin/EditProjectPage/EditProjectPage";
 
 import { AuthContext } from "./contexts/AuthContext";
-import { CartContext } from './contexts/CartContext'
+import { CartContext } from "./contexts/CartContext";
 
 import { useAuth } from "./hooks/auth-hook";
 import { useCart } from "./hooks/cart-hook";
@@ -25,54 +26,50 @@ import { useCart } from "./hooks/cart-hook";
 import "./App.scss";
 
 function App() {
-  const auth = useAuth()
+  const auth = useAuth();
 
   // Loading Cart Data from LocalStorage
   const storedCart = JSON.parse(localStorage.getItem("cartItems"));
   const cart = useCart({
     donations: storedCart ? storedCart.donations : [],
     products: storedCart ? storedCart.products : [],
-    pieces: storedCart ? storedCart.pieces : []    
-  }) 
+    pieces: storedCart ? storedCart.pieces : [],
+  });
   return (
-    <AuthContext.Provider
-    value = {auth}
-    >
+    <AuthContext.Provider value={auth}>
       <CartContext.Provider value={cart}>
-    <div className="App">
-      <div className="grid-container">
-        {/* Tady bylo DiaLogoBackground */}
-        <Router>
-        <Header auth={auth} />
-        <Main classes="main-content--wide(tedNe)">
-          
-            <Routes>
-              <Route path="/" element={<Homepage />} />
-              {/* <Route
-                path="/projekt/kup-si-svoji-cast-pozemku"
-                element={<KupSiSvojiCastPozemkuPage />}
-              /> */}
-              <Route path={`/projekt/:urlPath`}
-              element={<ProjectDetailPage />}
-              />
-              <Route path="/kosik" element={<CartPage />}/>
-              <Route path="/nakup" element={<OrderFillingInfoPage />} />
-              <Route path="/objednavka/:orderId" element={<OrderCreatedPage />} />
-              <Route 
-              path="/registrace"
-              element={<SignupUserPage />}
-              />
-              <Route 
-              path="/prihlaseni"
-              element={<SigninPage />}
-              />
-            </Routes>          
-        </Main>
-       </Router>
-      </div>
-      <Footer />
-    </div>
-    </CartContext.Provider>
+        <div className="App">
+          <div className="grid-container">
+            {/* Tady bylo DiaLogoBackground */}
+            <Router>
+              <Header auth={auth} />
+              <Main classes="main-content--wide(tedNe)">
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+
+                  // Projects
+                  <Route
+                    path={`/projekt/:urlTitle`}
+                    element={<ProjectDetailPage />}
+                  />
+                  <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />
+                  <Route path="/kosik" element={<CartPage />} />
+                  <Route path="/nakup" element={<OrderFillingInfoPage />} />
+                  <Route
+                    path="/objednavka/:orderId"
+                    element={<OrderCreatedPage />}
+                  />
+
+                  // Auth
+                  <Route path="/registrace" element={<SignupUserPage />} />
+                  <Route path="/prihlaseni" element={<SigninPage />} />
+                </Routes>
+              </Main>
+            </Router>
+          </div>
+          <Footer />
+        </div>
+      </CartContext.Provider>
     </AuthContext.Provider>
   );
 }

@@ -1,17 +1,22 @@
-import React, { Fragment, useCallback, useState } from "react";
-import Section from "../../../components/Section/Section";
-import { useCart } from "../../../hooks/cart-hook";
+import React, { Fragment, useCallback, useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import { AuthContext } from '../../../contexts/AuthContext' 
+import { Roles } from "../../../utils/roles";
+
 import Donatables from "../components/Donatables";
-import DonationOptions from "../components/DonationOptions";
-import ProgressBar from "../components/ProgressBar";
+
 
 import "./ProjectDetailDonatePage.scss";
 
 const ProjectDetailDonatePage = (props) => {
-  const { addDonations } = useCart();
-
+  const auth = useContext(AuthContext)
   return (
     <Fragment>
+      {auth.role === Roles.ADMIN && <section className="project-detail-admin-section admin-section">
+        <NavLink to={'/upravit/projekt/' + props.project._id} className="btn-warning">Upravit</NavLink>
+        <button className="btn-danger-outline btn-small">Odstranit</button>
+      </section>}
       <section className="project-detail-info-section">
       <h1 className="project-detail-title">{props.project.title}</h1>
         <div className="project-detail-main-img--wrapper">

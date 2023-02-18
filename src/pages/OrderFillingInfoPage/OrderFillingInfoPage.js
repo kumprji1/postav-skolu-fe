@@ -7,7 +7,7 @@ import Input from "../../components/UI/FormElements/Input";
 import { CartContext } from "../../contexts/CartContext";
 
 // Hooks
-import { useForm } from "../../hooks/form-hook";
+import { useMyForm } from "../../hooks/form-hook";
 import { useHttp } from "../../hooks/http-hook";
 
 // Validators
@@ -33,7 +33,7 @@ const OrderFillingInfoPage = () => {
   const areProducts = true;
   const areDonations = cart.cartState.donations.length > 0;
 
-  const [formState, inputHandler, setFormData] = useForm();
+  const [formState, inputHandler, setFormData] = useMyForm();
 
   const postCreateOrder = async () => {
     try {

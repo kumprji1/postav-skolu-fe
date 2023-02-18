@@ -8,18 +8,18 @@ import ProjectDetailProductsPage from './ProjectDetailProductsPage'
 const ProjectDetailPage = () => { 
   const [project, setProject] = useState()
   const { sendRequest } = useHttp()
-  const { urlPath } = useParams();
+  const { urlTitle } = useParams();
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/project/${urlPath}`)  
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/projects-by-title/${urlTitle}`)  
         setProject(responseData)
       } catch (err) {  
       }  
     }
     fetchProject();
-  }, [urlPath])
-  console.log(urlPath)
+  }, [urlTitle])
+  console.log(urlTitle)
     const choosePage = () => {
         switch (project.type) {
             case 'donate': return <ProjectDetailDonatePage project={project} />; break;

@@ -33,7 +33,7 @@ const formReducer = (state, action) => {
   }
 };
 
-export const useForm = (initialInputs, initialFormValidity) => {
+export const useMyForm = (initialInputs, initialFormValidity) => {
   const [formState, dispatch] = useReducer(formReducer, {
     inputs: initialInputs,
     paymentMethod: null,

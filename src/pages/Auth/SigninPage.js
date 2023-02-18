@@ -12,7 +12,7 @@ import { useHttp } from "../../hooks/http-hook";
 import { AuthContext } from "../../contexts/AuthContext";
 
 // Utils
-import { Role } from "../../utils/roles";
+import { Roles } from "../../utils/roles";
 
 // import "./SigninPage.css";
 
@@ -52,7 +52,7 @@ const SigninPage = () => {
       );
 
       // Redirects for user and admin
-      if (responseData.role === Role.USER) navigate("/");
+      if (responseData.role === Roles.USER) navigate("/");
       else navigate("/");
     } catch (err) {}
   };
