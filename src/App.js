@@ -23,6 +23,8 @@ import { CartContext } from "./contexts/CartContext";
 import { useAuth } from "./hooks/auth-hook";
 import { useCart } from "./hooks/cart-hook";
 
+import { Roles } from "./utils/roles";
+
 import "./App.scss";
 
 function App() {
@@ -52,7 +54,7 @@ function App() {
                     path={`/projekt/:urlTitle`}
                     element={<ProjectDetailPage />}
                   />
-                  <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />
+                  { <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />}
                   <Route path="/kosik" element={<CartPage />} />
                   <Route path="/nakup" element={<OrderFillingInfoPage />} />
                   <Route

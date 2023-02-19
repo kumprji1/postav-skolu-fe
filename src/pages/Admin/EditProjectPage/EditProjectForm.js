@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+
 import { useHttp } from "../../../hooks/http-hook";
 
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+
 const EditProjectForm = (props) => {
+  const auth = useContext(AuthContext)
+  const navigate = useNavigate()
   const { sendRequest } = useHttp();
   // Form (react-hook-form)
   const {
@@ -18,10 +25,14 @@ const EditProjectForm = (props) => {
     },
   });
 
-  console.log(errors)
   const onSubmit = async (data) => {
     try {
-        await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/edit-project/${props.project._id}`)
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/edit-project/${props.project._id}`, 'PATCH', JSON.stringify(data), {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + auth.token
+        })
+        console.log('data:', data)
+        if (responseData.msg === 'OK') navigate(`/projekt/${data.urlTitle}`)
     } catch (err) {}
   };
 
@@ -59,8 +70,7 @@ const EditProjectForm = (props) => {
           maxLength: 2000,
         })}
       />
-
-      {Object.keys(errors).length === 0 && <input type="submit" />} 
+      {Object.keys(errors).length === 0 && <input type="submit" className="btn-warning-outline" value='Aktualizovat' />} 
     </form>
   );
 };

@@ -4,10 +4,11 @@ import { useHttp } from '../../../hooks/http-hook'
 import KupSiSvojiCastPozemkuPage from '../../KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage'
 import ProjectDetailDonatePage from './ProjectDetailDonatePage'
 import ProjectDetailProductsPage from './ProjectDetailProductsPage'
+import ErrorModal from '../../../components/Error/ErrorModal'
 
 const ProjectDetailPage = () => { 
   const [project, setProject] = useState()
-  const { sendRequest } = useHttp()
+  const { sendRequest, error, clearError } = useHttp()
   const { urlTitle } = useParams();
   useEffect(() => {
     const fetchProject = async () => {
@@ -29,8 +30,10 @@ const ProjectDetailPage = () => {
         }
     }
 
-  return (
-    project ? choosePage() : null
+  return (<>
+      {project ? choosePage() : null}
+        {error && <ErrorModal error={error} onClear={clearError}/>}
+  </>
   )
 }
 
