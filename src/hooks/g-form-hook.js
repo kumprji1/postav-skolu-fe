@@ -26,13 +26,29 @@ import { validate } from '../utils/validators'
  */
 
 const formReducer = (state, action) => {
-  const isFormValid = () => {
+  const checkFormIsValid = () => {
     return true;
   };
+
+  const checkPartIsValid = (partId) => {
+    let partIsValid = true;
+    for (const inputId in state.parts[partId].inputs) {
+      if (!state.parts[partId].inputs[inputId]) {
+        continue;
+      }
+      if (inputId !== action.inputId) {
+        partIsValid = partIsValid && state.parts[partId].inputs[inputId].isValid;
+      }
+    }
+    return partIsValid
+  }
 
   switch (action.type) {
     case act.INPUT_CHANGE:
       console.log('inputChange action: ', action)
+      let partIsValid = checkPartIsValid(action.partId)
+      let currentInputIsValid = validate(action.value, action.validators)
+      partIsValid = partIsValid && currentInputIsValid
       return {
         ...state,
         parts: {
@@ -44,12 +60,13 @@ const formReducer = (state, action) => {
               [action.inputId]: {
                 ...state.parts[action.partId].inputs[action.inputId],
                 value: action.value,
-                isValid: validate(action.value, action.validators)
+                isValid: currentInputIsValid
               },
             },
+            partIsValid: partIsValid
           },
         },
-        formIsValid: isFormValid(),
+        formIsValid: checkFormIsValid(),
       }
       case act.TOUCH_HANDLER: {
         return {
@@ -67,7 +84,7 @@ const formReducer = (state, action) => {
                 },
               },
             },
-            formIsValid: isFormValid(),
+            formIsValid: checkFormIsValid(),
           }
       }
     default:

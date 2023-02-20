@@ -21,6 +21,22 @@ const TestingFormPage = () => {
           },
         },
       },
+      addressPart: {
+        required: true,
+        partIsValid: false,
+        inputs: {
+          city: {
+            value: "",
+            isTouched: false,
+            isValid: false,
+          },
+          zipCode: {
+            value: "",
+            isTouched: false,
+            isValid: false,
+          },
+        },
+      },
     },
     formIsValid: false,
   };
@@ -54,6 +70,35 @@ const TestingFormPage = () => {
         />
         {formState.parts.contactPart.inputs.surname.isValid && <p>isValid</p>}
       </div>
+      <p>contactPart: {formState.parts.contactPart.partIsValid && 'isValid'}</p>
+      <div>
+        <label>Město</label>
+        <input
+          type={"text"}
+          value={formState.parts.addressPart.inputs.city.value}
+          placeholder="city"
+          onChange={(e) =>
+            inputChange("addressPart", "city", e.currentTarget.value, [VALIDATOR_REQUIRE()])
+          }
+          onBlur={() => touchHandler("addressPart", "city")}
+        />
+        {formState.parts.addressPart.inputs.city.isValid && <p>isValid</p>}
+      </div>
+      <div>
+        <label>PSČ</label>
+        <input
+          type={"text"}
+          value={formState.parts.addressPart.inputs.zipCode.value}
+          placeholder="PSČ"
+          onChange={(e) =>
+            inputChange("addressPart", "zipCode", e.currentTarget.value, [VALIDATOR_REQUIRE()])
+          }
+          onBlur={() => touchHandler("addressPart", "zipCode")}
+        />
+        {formState.parts.addressPart.inputs.zipCode.isValid && <p>isValid</p>}
+      </div>
+      <p>addressPart: {formState.parts.addressPart.partIsValid && 'isValid'}</p>
+
     </form>
   );
 };
