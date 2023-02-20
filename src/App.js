@@ -16,6 +16,9 @@ import CartPage from "./pages/Cart/CartPage";
 import OrderFillingInfoPage from "./pages/OrderFillingInfoPage/OrderFillingInfoPage";
 import OrderCreatedPage from "./pages/OrderCreatedPage/OrderCreatedPage";
 import EditProjectPage from "./pages/Admin/EditProjectPage/EditProjectPage";
+import CreateProjectPage from "./pages/Admin/CreateProjectPage/CreateProjectPage";
+import CreateDonatablePage from "./pages/Admin/CreateDonatablePage/CreateDonatablePage";
+import TestingFormPage from "./pages/testing/TestingFormPage";
 
 import { AuthContext } from "./contexts/AuthContext";
 import { CartContext } from "./contexts/CartContext";
@@ -50,11 +53,16 @@ function App() {
                   <Route path="/" element={<Homepage />} />
 
                   // Projects
+                  {auth.role == Roles.ADMIN && <Route path="/novy-projekt" element={<CreateProjectPage />} />}
+                  {auth.role == Roles.ADMIN && <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />}
                   <Route
                     path={`/projekt/:urlTitle`}
                     element={<ProjectDetailPage />}
                   />
-                  { <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />}
+
+                  // Donatables
+                  {auth.role == Roles.ADMIN && <Route path="/novy-darovatelny-box/:projectId" element={<CreateDonatablePage />} />}
+
                   <Route path="/kosik" element={<CartPage />} />
                   <Route path="/nakup" element={<OrderFillingInfoPage />} />
                   <Route
@@ -65,6 +73,8 @@ function App() {
                   // Auth
                   <Route path="/registrace" element={<SignupUserPage />} />
                   <Route path="/prihlaseni" element={<SigninPage />} />
+
+                  <Route path="/testovaci-formular" element={<TestingFormPage />} />
                 </Routes>
               </Main>
             </Router>
