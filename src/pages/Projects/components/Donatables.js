@@ -1,9 +1,12 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useContext, useEffect, useState } from 'react'
 import Donatable from './Donatable'
 import { useHttp } from '../../../hooks/http-hook'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../../contexts/AuthContext'
+import { Roles } from '../../../utils/roles'
 
 const Donatables = (props) => {
+  const auth = useContext(AuthContext)
   const projectId = props.project._id
   const { sendRequest } = useHttp()  
 
@@ -22,7 +25,7 @@ const Donatables = (props) => {
     <section className='section-donatables'>
         <h2 className='donatables-na-co-chci-darovat'>Na co chci darovat: </h2>
         {donatable.map(d => <Donatable donatable={d}/>)}
-        <NavLink className='bbutton-outline' to={`/novy-darovatelny-box/${projectId}`}>Přidat darovatelný box</NavLink>
+        {auth.role == Roles.ADMIN &&  <NavLink className='bbutton-outline' to={`/novy-darovatelny-box/${projectId}`}>Přidat darovatelný box</NavLink>}
     </section>
   )
 }

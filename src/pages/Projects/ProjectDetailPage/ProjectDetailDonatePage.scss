@@ -27,45 +27,6 @@
     margin-bottom: 2rem;
 }
 
-// Buttons - Donatable Options
-.donate-btn-price {
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 1rem;
-    border: 1px solid $primaryColor;
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.donate-btn-price-selected {
-    background-color: $primaryColor;
-    color: white;
-    border: 1px solid white;
-}
-
-.donate-btn-price-not-selected {
-    background-color: $primaryColor;
-    color: white;
-    border: 1px solid $primaryColor;
-}
-
-.donate-btn-to-cart {
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 1rem;
-    border: 1px solid $primaryColor;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: $primaryColor;
-    background-color: white;
-    float: right;
-}
-
-.donatable-input-custom-price {
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-    max-width: 8rem;
-}
 
 
 

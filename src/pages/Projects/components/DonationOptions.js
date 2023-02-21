@@ -1,58 +1,164 @@
 import React, { Fragment, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CartContext } from "../../../contexts/CartContext";
 import { useBaseDonation } from "../../../hooks/base-donation-hook";
+import { useGortozForm } from "../../../hooks/g-form-hook";
+import {
+  VALIDATOR_MIN,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
+} from "../../../utils/validators";
 
 const DonationOptions = (props) => {
-  const { baseDonationState, selectDonation, inputHandler, selectCustomBtn } = useBaseDonation({
-    options: props.donatable.preparedPrices.map((p) => ({
-      price: p,
-      isSelected: false,
-    })),
-    price: null,
-    isSelected: false,
-    isAnonymous: false,
-    wantsCustom: false,
+  const { formState, inputChange } = useGortozForm({
+    parts: {
+      basePart: {
+        partIsValid: false,
+        required: true,
+        inputs: {
+          price: {
+            value: null,
+            isValid: false,
+            isTouched: false,
+          },
+          wantsCustom: {
+            value: false,
+            isValid: false,
+            isTouched: false,
+          },
+          isAnonymous: {
+            value: null,
+            isValid: false,
+            isTouched: false,
+          },
+        },
+      },
+    },
+    formIsValid: false,
   });
+  // const { baseDonationState, selectDonation, inputHandler, selectCustomBtn } = useBaseDonation({
+  //   options: props.donatable.preparedPrices.map((p) => ({
+  //     price: p,
+  //     isSelected: false,
+  //   })),
+  //   price: null,
+  //   isSelected: false,
+  //   isAnonymous: false,
+  //   wantsCustom: false,
+  // });
 
-  const cart = useContext(CartContext)
+  const cart = useContext(CartContext);
+  const navigate = useNavigate();
 
   return (
     <Fragment>
-      {baseDonationState.options.map((option) => (
+      {props.donatable.preparedPrices.map((p) => (
         <button
-          className={option.isSelected ? `donate-btn-price-selected donate-btn-price` : "donate-btn-price-not-selected donate-btn-price"}
-          onClick={() => selectDonation(option.price)}
-          key={option.price}
+          className={
+            p == formState.parts.basePart.inputs.price.value
+              ? `donate-btn-price-selected donate-btn-price`
+              : "donate-btn-price-not-selected donate-btn-price"
+          }
+          onClick={() => {
+            inputChange("basePart", "price", p, [VALIDATOR_MIN(2)]);
+            inputChange("basePart", "wantsCustom", false, []);
+          }}
+          key={p}
         >
-          {option.price}
+          {p}
         </button>
       ))}
       <button
-        className={baseDonationState.wantsCustom ? `donate-btn-price-selected donate-btn-price` : "donate-btn-price-not-selected donate-btn-price"}
-        onClick={selectCustomBtn}
+        className={
+          formState.parts.basePart.inputs.wantsCustom.value
+            ? `donate-btn-price-selected donate-btn-price`
+            : "donate-btn-price-not-selected donate-btn-price"
+        }
+        onClick={() =>
+          inputChange(
+            "basePart",
+            "wantsCustom",
+            !formState.parts.basePart.inputs.wantsCustom.value,
+            []
+          )
+        }
       >
         Vlastní částka
       </button>
-      {baseDonationState.wantsCustom && (
+      {formState.parts.basePart.inputs.wantsCustom.value && (
         <input
           className="donatable-input-custom-price"
           type="text"
-          onChange={(e) => inputHandler(e.currentTarget.value)}
-          value={baseDonationState.price}
+          onChange={(e) => {
+            inputChange("basePart", "price", e.currentTarget.value, [
+              VALIDATOR_MIN(100),
+            ]);
+          }}
+          value={formState.parts.basePart.inputs.price.value}
         ></input>
       )}
-      <NavLink
-      className={'donate-btn-to-cart'}
-      to={'/kosik'}
-      onClick={() => cart.addDonations([{
-        price: baseDonationState.price,
-        donatableId: props.donatable._id,
-        title: props.donatable.title,
-        photo: props.donatable.photo,
-        id: new Date().toISOString(),
-        isAnonymous: baseDonationState.isAnonymous
-      }])}>Přispět { baseDonationState.price}{baseDonationState.price && ',-'}</NavLink>
+      {
+        <div
+          className={`donatable-choose-visibility--wrapper ${
+            formState.parts.basePart.inputs.price.isValid &&
+            " donatable-choose-visibility--wrapper-show"
+          }`}
+        >
+          <h1 className="donatable-choose-visibility-title">
+            Zvolte viditelnost jména dárce
+          </h1>
+          <button
+            className={`${
+              formState.parts.basePart.inputs.isAnonymous.value === false
+                ? "bbutton"
+                : "bbutton-outline"
+            }`}
+            onClick={(e) =>
+              inputChange("basePart", "isAnonymous", false, [
+                VALIDATOR_REQUIRE(),
+              ])
+            }
+          >
+            Zvěřejnit jméno u daru
+          </button>
+          <button
+            className={`${
+              formState.parts.basePart.inputs.isAnonymous.value === true
+                ? "bbutton"
+                : "bbutton-outline"
+            }`}
+            onClick={(e) =>
+              inputChange("basePart", "isAnonymous", true, [
+                VALIDATOR_REQUIRE(),
+              ])
+            }
+          >
+            Skrýt jméno (Anonymní dar)
+          </button>
+        </div>
+      }
+      <div className="donate-btn-to-cart--wrapper">
+        <button
+          className={"donate-btn-to-cart"}
+          disabled={!formState.formIsValid}
+          onClick={() => {
+            cart.addDonations([
+              {
+                price: formState.parts.basePart.inputs.price.value,
+                donatableId: props.donatable._id,
+                title: props.donatable.title,
+                photo: props.donatable.photo,
+                id: new Date().toISOString(),
+                isAnonymous: formState.parts.basePart.inputs.isAnonymous.value,
+              },
+            ]);
+            navigate("/kosik");
+          }}
+        >
+          Přispět {formState.parts.basePart.inputs.price.value}
+          {formState.parts.basePart.inputs.price.value ? ",-" : ""}
+        </button>
+      </div>
     </Fragment>
   );
 };

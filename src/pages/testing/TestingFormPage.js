@@ -98,7 +98,7 @@ const TestingFormPage = () => {
         {formState.parts.addressPart.inputs.zipCode.isValid && <p>isValid</p>}
       </div>
       <p>addressPart: {formState.parts.addressPart.partIsValid && 'isValid'}</p>
-
+        <p>formIsValid: {formState.formIsValid && 'formIsValid'}</p>
     </form>
   );
 };

@@ -27,7 +27,16 @@ import { validate } from '../utils/validators'
 
 const formReducer = (state, action) => {
   const checkFormIsValid = () => {
-    return true;
+    let formIsValid = true;
+    for (const partId in state.parts) {
+      if (!state.parts[partId]) {
+        continue;
+      }
+      if (partId !== action.partId) {
+        formIsValid = formIsValid && state.parts[partId].partIsValid;
+      }
+    }
+    return formIsValid
   };
 
   const checkPartIsValid = (partId) => {
@@ -49,6 +58,7 @@ const formReducer = (state, action) => {
       let partIsValid = checkPartIsValid(action.partId)
       let currentInputIsValid = validate(action.value, action.validators)
       partIsValid = partIsValid && currentInputIsValid
+      let formIsValid = partIsValid && checkFormIsValid()
       return {
         ...state,
         parts: {
@@ -66,7 +76,7 @@ const formReducer = (state, action) => {
             partIsValid: partIsValid
           },
         },
-        formIsValid: checkFormIsValid(),
+        formIsValid: formIsValid,
       }
       case act.TOUCH_HANDLER: {
         return {
@@ -83,8 +93,7 @@ const formReducer = (state, action) => {
                   },
                 },
               },
-            },
-            formIsValid: checkFormIsValid(),
+            }
           }
       }
     default:

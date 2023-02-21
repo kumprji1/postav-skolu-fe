@@ -10,6 +10,7 @@
 
 .donatable-upper-part {
     padding: 1rem;
+    width: 100%;
     @include flexCenterDir(column);
     background-color: white;
 }
@@ -48,12 +49,82 @@
         color: $greyColor;
         text-align: center;
     }
-    
     .donatable-demandedMoney {
         color: $primaryColor;
         text-align: center;
     }
-    
+}
+
+.donate-btn-to-cart--disabled {
+    cursor: not-allowed;
+    background-color: $greyColor;
+}
+
+// Buttons - Donatable Options
+.donate-btn-price {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
+    border: 1px solid $primaryColor;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.donate-btn-price-selected {
+    background-color: $primaryColor;
+    color: white;
+    border: 1px solid white;
+}
+
+.donate-btn-price-not-selected {
+    background-color: $primaryColor;
+    color: white;
+    border: 1px solid $primaryColor;
+}
+
+.donate-btn-to-cart {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
+    border: 1px solid $primaryColor;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $primaryColor;
+    background-color: white;
+    &:disabled {
+        cursor: not-allowed;
+        background-color: $lightPrimaryColor;
+        color: $greyColor;
+        border: 1px solid $greyColor;
+    }
+}
+
+.donatable-choose-visibility--wrapper {
+    background-color: white;
+    max-height: 0rem;
+    overflow: hidden;
+    @include flexCenterDir(column);
+    .donatable-choose-visibility-title {
+        font-size: 1.2rem;
+        color: $primaryColor;
+    }
+    transition: all 1000ms;
+}
+.donatable-choose-visibility--wrapper-show {
+    max-height: 15rem;
+}
+
+.donate-btn-to-cart--wrapper {
+    width: 100%;
+    background-color: $secondaryColor;
+    @include flexCenter();
+}
+
+
+.donatable-input-custom-price {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    max-width: 8rem;
 }
 
 @media (min-width: $contentMaxWidth) {
@@ -63,6 +134,7 @@
 
     .donatable-upper-part {
         @include flexCenterDir(row);
+        justify-content: space-between;
     }
     .donatable-title-desc--wrapper {
         // @include flexCenterDir(row)
