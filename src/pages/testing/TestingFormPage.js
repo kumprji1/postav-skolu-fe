@@ -6,7 +6,7 @@ const TestingFormPage = () => {
   const initFormData = {
     parts: {
       contactPart: {
-        required: true,
+        required: false,
         partIsValid: false,
         inputs: {
           name: {

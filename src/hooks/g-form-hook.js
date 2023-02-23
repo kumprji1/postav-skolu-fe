@@ -26,20 +26,22 @@ import { validate } from '../utils/validators'
  */
 
 const formReducer = (state, action) => {
-  const checkFormIsValid = () => {
+  const checkFormIsValid = (partIsValid) => {
     let formIsValid = true;
     for (const partId in state.parts) {
       if (!state.parts[partId]) {
         continue;
       }
-      if (partId !== action.partId) {
+      if (partId !== action.partId && state.parts[partId].required) {
         formIsValid = formIsValid && state.parts[partId].partIsValid;
+      } else if (state.parts[partId].required) {
+        formIsValid = formIsValid && partIsValid
       }
     }
     return formIsValid
   };
 
-  const checkPartIsValid = (partId) => {
+  const checkPartIsValid = (partId, currentInputIsValid) => {
     let partIsValid = true;
     for (const inputId in state.parts[partId].inputs) {
       if (!state.parts[partId].inputs[inputId]) {
@@ -47,6 +49,8 @@ const formReducer = (state, action) => {
       }
       if (inputId !== action.inputId) {
         partIsValid = partIsValid && state.parts[partId].inputs[inputId].isValid;
+      } else {
+        partIsValid = partIsValid && currentInputIsValid
       }
     }
     return partIsValid
@@ -55,10 +59,9 @@ const formReducer = (state, action) => {
   switch (action.type) {
     case act.INPUT_CHANGE:
       console.log('inputChange action: ', action)
-      let partIsValid = checkPartIsValid(action.partId)
       let currentInputIsValid = validate(action.value, action.validators)
-      partIsValid = partIsValid && currentInputIsValid
-      let formIsValid = partIsValid && checkFormIsValid()
+      let partIsValid = checkPartIsValid(action.partId, currentInputIsValid)
+      let formIsValid = checkFormIsValid(partIsValid)
       return {
         ...state,
         parts: {
