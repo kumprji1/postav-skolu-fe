@@ -28,9 +28,9 @@ const ProjectsSection = () => {
 
   return (
     <section className="projects-section">
-      {auth.role == Roles.ADMIN && <NavLink className='bbutton-outline' to="/novy-projekt">Nový projekt</NavLink>}
       <h1 className="title">Přehled projektů s výtěžkem pro výstavbu školy:</h1>
       <Projects projects={projects} />
+      {auth.role == Roles.ADMIN && <NavLink className='bbutton-outline' to="/novy-projekt">Nový projekt</NavLink>}
     </section>
   );
 };

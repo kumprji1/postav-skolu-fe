@@ -124,6 +124,66 @@ Base-Componenets
 
 // Form Components
 
+.form-title {
+  position: absolute;
+  padding: 0 0.2rem;
+  top: -0.5rem;
+  background-color: white;
+  left: 0.5rem;
+  color: $primaryColor;
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.form-inputs--wrapper {
+  // background-color: $primaryColor;
+  max-width: 20rem;
+  position: relative;
+  border: 2px solid $secondaryColor;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  &:focus-within {
+    border: 2px solid $primaryColor;
+  }
+  transition: all $transMedium;
+}
+
+.form-input--wrapper {
+  @include flexCenterDir(column);
+  align-items: flex-start;
+  &:focus-within {
+    .form-input-text-label {
+      color: $primaryColor;
+    }
+  }
+
+  .form-input-text-label {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: rgba($color: $primaryColor, $alpha: 0.7);  
+  }
+  .form-input-text-error {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: $dangerCol;
+  }
+  .form-input-text {
+    font-size: 1rem;
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid $lightPrimaryColor;
+    margin-bottom: 0.5rem;
+    &:focus {
+      border-color: $primaryColor;
+    }
+    transition: all $transMedium;
+  }
+}
+
 .input-text {
   padding: 0.5rem 1rem;
   margin: 0.5rem 1rem;

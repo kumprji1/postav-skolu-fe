@@ -41,6 +41,22 @@ const formReducer = (state, action) => {
     return formIsValid
   };
 
+  const checkFormIsValid_reauiredChanged = () => {
+    let formIsValid = true;
+    for (const partId in state.parts) {
+      if (!state.parts[partId]) {
+        continue;
+      }
+      if (partId !== action.partId && state.parts[partId].required) {
+        formIsValid = formIsValid && state.parts[partId].partIsValid;
+      } else if (action.value) {
+        formIsValid = formIsValid && state.parts[partId].partIsValid
+      }
+    }
+    return formIsValid
+  };
+
+
   const checkPartIsValid = (partId, currentInputIsValid) => {
     let partIsValid = true;
     for (const inputId in state.parts[partId].inputs) {
@@ -99,6 +115,22 @@ const formReducer = (state, action) => {
             }
           }
       }
+      case act.SET_REQUIRED: {
+        let formIsValid = checkFormIsValid_reauiredChanged()
+        const updatedState = {
+          ...state,
+          parts: {
+            ...state.parts,
+            [action.partId]: {
+              ...state.parts[action.partId],
+              required: action.value
+            }
+          },
+          formIsValid: formIsValid
+        }
+        console.log( updatedState)
+        return updatedState
+      }
     default:
       throw new Error("Špatný type v GortozFormHook");
   }
@@ -106,7 +138,8 @@ const formReducer = (state, action) => {
 
 const act = {
   INPUT_CHANGE: "INPUT_CHANGE",
-  TOUCH_HANDLER: 'TOUCH_HANDLER'
+  TOUCH_HANDLER: 'TOUCH_HANDLER',
+  SET_REQUIRED: 'SET_REQUIRED'
 };
 
 export const useGortozForm = (initFormData) => {
@@ -120,9 +153,14 @@ export const useGortozForm = (initFormData) => {
     dispatch({ type: act.TOUCH_HANDLER, partId, inputId });
   };
 
+  const setRequired = (partId, value) => {
+    dispatch({ type: act.SET_REQUIRED, partId, value})
+  }
+
   return {
     formState,
     inputChange,
-    touchHandler
+    touchHandler,
+    setRequired
   };
 };

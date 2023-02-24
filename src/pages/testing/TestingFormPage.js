@@ -1,12 +1,21 @@
 import React from "react";
+import BForm from "../../components/Base/BForm/BForm";
+import BFormBtn from "../../components/Base/BForm/BFormBtn";
+import BFormPart from "../../components/Base/BForm/BFormPart";
+import BInput from "../../components/Base/BForm/BInput";
+import BSubmit from "../../components/Base/BForm/BSubmit";
 import { useGortozForm } from "../../hooks/g-form-hook";
-import { VALIDATOR_MIN, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from "../../utils/validators";
+import {
+  VALIDATOR_MIN,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
+} from "../../utils/validators";
 
 const TestingFormPage = () => {
   const initFormData = {
     parts: {
       contactPart: {
-        required: false,
+        required: true,
         partIsValid: false,
         inputs: {
           name: {
@@ -19,87 +28,188 @@ const TestingFormPage = () => {
             isTouched: false,
             isValid: false,
           },
+          email: {
+            value: "",
+            isTouched: false,
+            isValid: false,
+          },
+          mobile: {
+            value: "",
+            isTouched: false,
+            isValid: false,
+          },
         },
       },
-      addressPart: {
-        required: true,
+      companyPart: {
+        required: false,
         partIsValid: false,
         inputs: {
-          city: {
+          company: {
             value: "",
-            isTouched: false,
             isValid: false,
+            isTouched: false,
           },
-          zipCode: {
+          ico: {
             value: "",
-            isTouched: false,
             isValid: false,
+            isTouched: false,
+          },
+          dic: {
+            value: "",
+            isValid: false,
+            isTouched: false,
           },
         },
       },
+      // certificatePart: {
+      //   required: false,
+      //   partIsValid: false,
+      //   inputs: {
+      //     street_num: {
+      //       value: "",
+      //       isValid: false,
+      //       isTouched: false,
+      //     },
+      //     city: {
+      //       value: "",
+      //       isValid: false,
+      //       isTouched: false,
+      //     },
+      //     zipCode: {
+      //       value: "",
+      //       isValid: false,
+      //       isTouched: false,
+      //     },
+      //   },
+      // },
+      // deliveryPart: {
+      //   required: false,
+      //   partIsValid: false,
+      //   inputs: {
+      //     deliveryMethod: {
+      //       value: "",
+      //       isValid: false,
+      //       isTouched: false,
+      //     },
+      //   },
+      // },
+      // paymentPart: {
+      //   required: false,
+      //   partIsValid: false,
+      //   inputs: {
+      //     paymentMethod: {
+      //       value: "",
+      //       isValid: false,
+      //       isTouched: false,
+      //     },
+      //   },
+      // },
     },
     formIsValid: false,
   };
-  const { formState, inputChange, touchHandler } = useGortozForm(initFormData);
+  const { formState, inputChange, touchHandler, setRequired } =
+    useGortozForm(initFormData);
 
   return (
-    <form>
-      <div>
-        <label>Jméno</label>
-        <input
-          type={"text"}
-          value={formState.parts.contactPart.inputs.name.value}
-          placeholder="name"
-          onChange={(e) =>
-            inputChange("contactPart", "name", e.currentTarget.value, [VALIDATOR_REQUIRE()])
-          }
-          onBlur={() => touchHandler("contactPart", "name")}
+    <BForm>
+      <BFormPart title="Kontaktní údaje">
+        <BInput
+          title="Jméno"
+          input={formState.parts.contactPart.inputs.name}
+          partId="contactPart"
+          inputId="name"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte jméno"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
         />
-        {formState.parts.contactPart.inputs.name.isValid && <p>isValid</p>}
-      </div>
-      <div>
-        <label>Příjmení</label>
-        <input
-          type={"text"}
-          value={formState.parts.contactPart.inputs.surname.value}
-          placeholder="surname"
-          onChange={(e) =>
-            inputChange("contactPart", "surname", e.currentTarget.value, [VALIDATOR_MINLENGTH(5)])
-          }
-          onBlur={() => touchHandler("contactPart", "surname")}
+        <BInput
+          title="Příjmení"
+          input={formState.parts.contactPart.inputs.surname}
+          partId="contactPart"
+          inputId="surname"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte příjmení"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
         />
-        {formState.parts.contactPart.inputs.surname.isValid && <p>isValid</p>}
-      </div>
-      <p>contactPart: {formState.parts.contactPart.partIsValid && 'isValid'}</p>
-      <div>
-        <label>Město</label>
-        <input
-          type={"text"}
-          value={formState.parts.addressPart.inputs.city.value}
-          placeholder="city"
-          onChange={(e) =>
-            inputChange("addressPart", "city", e.currentTarget.value, [VALIDATOR_REQUIRE()])
-          }
-          onBlur={() => touchHandler("addressPart", "city")}
+        <BInput
+          title="Email"
+          input={formState.parts.contactPart.inputs.email}
+          partId="contactPart"
+          inputId="email"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte email"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
         />
-        {formState.parts.addressPart.inputs.city.isValid && <p>isValid</p>}
-      </div>
-      <div>
-        <label>PSČ</label>
-        <input
-          type={"text"}
-          value={formState.parts.addressPart.inputs.zipCode.value}
-          placeholder="PSČ"
-          onChange={(e) =>
-            inputChange("addressPart", "zipCode", e.currentTarget.value, [VALIDATOR_REQUIRE()])
-          }
-          onBlur={() => touchHandler("addressPart", "zipCode")}
+        <BInput
+          title="Tel. číslo"
+          input={formState.parts.contactPart.inputs.mobile}
+          partId="contactPart"
+          inputId="mobile"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte tel. číslo"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
         />
-        {formState.parts.addressPart.inputs.zipCode.isValid && <p>isValid</p>}
-      </div>
-      <p>addressPart: {formState.parts.addressPart.partIsValid && 'isValid'}</p>
-        <p>formIsValid: {formState.formIsValid && 'formIsValid'}</p>
-    </form>
+        <p>
+          contactPart: {formState.parts.contactPart.partIsValid && "isValid"}
+        </p>
+      </BFormPart>
+      {/* <BFormBtn>Nakupuji na firmu</BFormBtn> */}
+      <button
+        className={`${formState.parts.companyPart.required ? 'bbutton' : 'bbutton-outline' } btn-small`}
+        onClick={(e) => { e.preventDefault()
+          setRequired(
+          "companyPart",
+          !formState.parts.companyPart.required
+        )}}
+      >
+        Nakupuji na firmu
+      </button>
+      {formState.parts.companyPart.required && 
+        <BFormPart title="Firemní údaje">
+          <BInput
+            title="Názec společnosti"
+            input={formState.parts.companyPart.inputs.company}
+            partId="companyPart"
+            inputId="company"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte název společnosti"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="IČO"
+            input={formState.parts.companyPart.inputs.ico}
+            partId="companyPart"
+            inputId="ico"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte IČO"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="DIČ"
+            input={formState.parts.companyPart.inputs.dic}
+            partId="companyPart"
+            inputId="dic"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte DIČ"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+
+          <p>
+            companyPart: {formState.parts.companyPart.partIsValid && "isValid"}
+          </p>
+        </BFormPart>
+      }
+
+      <p>formIsValid: {formState.formIsValid && "formIsValid"}</p>
+      <BSubmit>Dokončit objednávku</BSubmit>
+    </BForm>
   );
 };
 
