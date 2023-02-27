@@ -1,6 +1,6 @@
 import React from "react";
 import BForm from "../../components/Base/BForm/BForm";
-import BFormBtn from "../../components/Base/BForm/BFormBtn";
+// import BFormBtn from "../../components/Base/BForm/BFormBtn";
 import BFormPart from "../../components/Base/BForm/BFormPart";
 import BInput from "../../components/Base/BForm/BInput";
 import BSubmit from "../../components/Base/BForm/BSubmit";
@@ -61,27 +61,27 @@ const TestingFormPage = () => {
           },
         },
       },
-      // certificatePart: {
-      //   required: false,
-      //   partIsValid: false,
-      //   inputs: {
-      //     street_num: {
-      //       value: "",
-      //       isValid: false,
-      //       isTouched: false,
-      //     },
-      //     city: {
-      //       value: "",
-      //       isValid: false,
-      //       isTouched: false,
-      //     },
-      //     zipCode: {
-      //       value: "",
-      //       isValid: false,
-      //       isTouched: false,
-      //     },
-      //   },
-      // },
+      certificatePart: {
+        required: true,
+        partIsValid: false,
+        inputs: {
+          street_num: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          city: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          zipCode: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+        },
+      },
       // deliveryPart: {
       //   required: false,
       //   partIsValid: false,
@@ -206,7 +206,53 @@ const TestingFormPage = () => {
           </p>
         </BFormPart>
       }
-
+      <button
+        className={`${formState.parts.certificatePart.required ? 'bbutton' : 'bbutton-outline' } btn-small`}
+        onClick={(e) => { e.preventDefault()
+          setRequired(
+          "certificatePart",
+          !formState.parts.certificatePart.required
+        )}}
+      >
+        Chci certifikát
+      </button>
+      {formState.parts.certificatePart.required && 
+        <BFormPart title="Údaje pro certifikát">
+          <BInput
+            title="Ulice a číslo popisné"
+            input={formState.parts.certificatePart.inputs.street_num}
+            partId="certificatePart"
+            inputId="street_num"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte ulici a č. popisné"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="Město"
+            input={formState.parts.certificatePart.inputs.city}
+            partId="certificatePart"
+            inputId="city"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte město"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="PSČ"
+            input={formState.parts.certificatePart.inputs.zipCode}
+            partId="certificatePart"
+            inputId="zipCode"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte PSČ"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <p>
+            certificatePart: {formState.parts.certificatePart.partIsValid && "isValid"}
+          </p>
+        </BFormPart>
+      }
       <p>formIsValid: {formState.formIsValid && "formIsValid"}</p>
       <BSubmit>Dokončit objednávku</BSubmit>
     </BForm>

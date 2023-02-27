@@ -49,7 +49,8 @@ const formReducer = (state, action) => {
       }
       if (partId !== action.partId && state.parts[partId].required) {
         formIsValid = formIsValid && state.parts[partId].partIsValid;
-      } else if (action.value) {
+      } else if (partId == action.partId && action.value) {
+        console.log('PartId + required: ', action.partId, action.value);
         formIsValid = formIsValid && state.parts[partId].partIsValid
       }
     }
