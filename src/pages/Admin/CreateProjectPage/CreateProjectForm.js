@@ -1,79 +1,92 @@
-import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import React from 'react'
+import BForm from '../../../components/Base/BForm/BForm'
+import BFormPart from '../../../components/Base/BForm/BFormPart'
+import BInput from '../../../components/Base/BForm/BInput'
+import BSubmit from '../../../components/Base/BForm/BSubmit'
+import { useGortozForm } from '../../../hooks/g-form-hook'
+import { VALIDATOR_REQUIRE } from '../../../utils/validators'
 
-import { useHttp } from "../../../hooks/http-hook";
+const CreateProjectForm = () => {
+    const initFormData = {
+        parts: {
+            basePart: {
+                required: true,
+                partIsValid: false,
+                inputs: {
+                    title: {
+                        value: '',
+                        isValid: false,
+                        isTouched: false
+                    },
+                    desc: {
+                        value: '',
+                        isValid: false,
+                        isTouched: false
+                    },
+                    urlTitle: {
+                        value: '',
+                        isValid: false,
+                        isTouched: false
+                    },
+                    photo: {
+                        value: '',
+                        isValid: false,
+                        isTouched: false
+                    }
+                }
+            }
+        },
+        formIsValid: false
+    }
 
-import { AuthContext } from "../../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-
-
-const CreateProjectForm = (props) => {
-  const auth = useContext(AuthContext)
-  const navigate = useNavigate()
-  const { sendRequest } = useHttp();
-  // Form (react-hook-form)
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      title: '',
-      desc: '',
-      urlTitle: '',
-      photo: '',
-    },
-  });
-
-  const onSubmit = async (data) => {
-    try {
-        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/create-project`, 'POST', JSON.stringify(data), {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + auth.token
-        })
-        console.log('data:', data)
-        if (responseData.msg === 'OK') navigate(`/projekt/${data.urlTitle}`)
-    } catch (err) {}
-  };
-
+    const { formState, inputChange, touchHandler } = useGortozForm(initFormData)
   return (
-    <form className="edit-project-form" onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        className="input-text"
-        placeholder="Název"
-        {...register("title", { required: "Zadejte jméno", maxLength: 80 })}
-      />
-      {errors.title && <p role="alert">{errors.title?.message}</p>}
-      <textarea
-      placeholder="Popis"
-        {...register("desc", {
-          required: "Zadejte popis projektu",
-          maxLength: 1000,
-        })}
-      />
-      <input
-        type="text"
-        className="input-text"
-        placeholder="URL Název"
-        {...register("urlTitle", {
-          required: "Zadejte url-adresu projektu",
-          min: 3,
-          maxLength: 100,
-        })}
-      />
-      <input
-        type="text"
-        className="input-text"
-        placeholder="Obrázek"
-        {...register("photo", {
-          required: "Zadejte URL obrázku",
-          maxLength: 2000,
-        })}
-      />
-      {Object.keys(errors).length === 0 && <input type="submit" className="btn-warning-outline" value='Vytvořit projekt' />} 
-    </form>
-  );
-};
+    <BForm classNames="edit-project-form">
+        <BFormPart title="Informace o projektu">
+        <BInput
+          title="Název"
+          input={formState.parts.basePart.inputs.title}
+          partId="basePart"
+          inputId="title"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte název"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="Popis"
+          input={formState.parts.basePart.inputs.desc}
+          partId="basePart"
+          inputId="desc"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte popis"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="URL název"
+          input={formState.parts.basePart.inputs.urlTitle}
+          partId="basePart"
+          inputId="urlTitle"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte URL název"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="Obrázek"
+          input={formState.parts.basePart.inputs.photo}
+          partId="basePart"
+          inputId="photo"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte URL obrázku"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        </BFormPart>
+        <BSubmit isValid={formState.formIsValid}>Vytvořit projekt</BSubmit>
+    </BForm>
+  )
+}
 
-export default CreateProjectForm;
+export default CreateProjectForm

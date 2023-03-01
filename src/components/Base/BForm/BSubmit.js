@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
 
 const BSubmit = (props) => {
   return (
-    <input type="submit" value={props.children} />
-  )
-}
+    <button
+      type="submit"
+      onClick={props.onClick}
+      className={`${props.isValid ? "bbutton" : "bbutton-outline"}`}
+      disabled={!props.isValid}
+    >
+      {props.children}
+    </button>
+  );
+};
 
-export default BSubmit
+export default BSubmit;

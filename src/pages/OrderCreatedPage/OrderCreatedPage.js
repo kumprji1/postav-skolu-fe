@@ -1,11 +1,19 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const OrderCreated = () => {
-    const { orderId } = useParams();
-  return (
-    <div>Objednávka s id {orderId} vytvořena! (ID ale nezobraovat)</div>
-  )
-}
+  const { orderId } = useParams();
+  const [searchParams] = useSearchParams();
 
-export default OrderCreated
+  console.log()
+
+  return (
+    <div>
+      <p>Objednávka s id {orderId} vytvořena! (ID ale nezobraovat)</p>
+      {searchParams.get('success') && <p>Objednávka zaplacena</p>}
+      {searchParams.get('canceled') && <p>Platba neproběhla</p>}
+    </div>
+  );
+};
+
+export default OrderCreated;

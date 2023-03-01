@@ -2,7 +2,7 @@ import React from 'react'
 
 const BForm = (props) => {
   return (
-    <form>{props.children}</form>
+    <form className={props.classNames}>{props.children}</form>
   )
 }
 

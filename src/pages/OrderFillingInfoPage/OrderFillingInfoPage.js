@@ -1,350 +1,343 @@
-// import React, { Fragment, useContext, useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import BForm from "../../components/Base/BForm/BForm";
+import BFormPart from "../../components/Base/BForm/BFormPart";
+import BInput from "../../components/Base/BForm/BInput";
+import BSubmit from "../../components/Base/BForm/BSubmit";
 
-// import Input from "../../components/UI/FormElements/Input";
+import Input from "../../components/UI/FormElements/Input";
+import SwingSpinner from "../../components/UI/Spinners/SwingSpinner";
 
-// // Contexts
-// import { CartContext } from "../../contexts/CartContext";
+// Contexts
+import { CartContext } from "../../contexts/CartContext";
 
-// // Hooks
-// import { useMyForm } from "../../hooks/form-hook";
-// import { useGortozForm } from "../../hooks/g-form-hook";
-// import { useHttp } from "../../hooks/http-hook";
+// Hooks
+import { useMyForm } from "../../hooks/form-hook";
+import { useGortozForm } from "../../hooks/g-form-hook";
+import { useHttp } from "../../hooks/http-hook";
 
-// // Validators
-// import {
-//   VALIDATOR_EMAIL,
-//   VALIDATOR_MINLENGTH,
-//   VALIDATOR_REQUIRE,
-// } from "../../utils/validators";
+// Validators
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
+} from "../../utils/validators";
 
-// const OrderFillingInfoPage = () => {
-//   const navigate = useNavigate();
-//   const { sendRequest } = useHttp();
+import './OrderFillingInfoPage.scss'
 
-//   // Data
-//   const cart = useContext(CartContext);
+const OrderFillingInfoPage = () => {
+  const navigate = useNavigate();
+  const { sendRequest, isLoading } = useHttp();
 
-//   const [wantsCertificate, setWantsCertificate] = useState(false);
-//   const [buyingAsCompany, setBuyingAsCompany] = useState(false);
-//   const [paymentMethod, setPaymentMethod] = useState(null);
-//   const [deliveryMethod, setdeliveryMethod] = useState(null);
+  // Data
+  const cart = useContext(CartContext);
 
-//   const areProducts = true;
-//   const areDonations = cart.cartState.donations.length > 0;
+  const [wantsCertificate, setWantsCertificate] = useState(false);
+  const [buyingAsCompany, setBuyingAsCompany] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [deliveryMethod, setdeliveryMethod] = useState(null);
 
-//   // const [formState, inputHandler, setFormData] = useMyForm();
-//   const initFormData = {
-//     parts: {
-//       contactPart: {
-//         required: true,
-//         partIsValid: false,
-//         inputs: {
-//           name: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           surname: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           email: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           mobile: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//         },
-//       },
-//       companyPart: {
-//         required: false,
-//         partIsValid: false,
-//         inputs: {
-//           company: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           ico: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           dic: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//         },
-//       },
-//       certificatePart: {
-//         required: false,
-//         partIsValid: false,
-//         inputs: {
-//           street_num: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           city: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//           zipCode: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           }
-//         }
-//       },
-//       deliveryPart: {
-//         required: false,
-//         partIsValid: false,
-//         inputs: {
-//           deliveryMethod: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//         },
-//       },
-//       paymentPart: {
-//         required: false,
-//         partIsValid: false,
-//         inputs: {
-//           paymentMethod: {
-//             value: "",
-//             isValid: false,
-//             isTouched: false,
-//           },
-//         },
-//       },
-//     },
+  const areProducts = true;
+  const areDonations = cart.cartState.donations.length > 0;
 
-//     formIsValid: false,
-//   };
-//   const { formState, inputChange, touchHandler, setRequired } = useGortozForm(initFormData);
+  // const [formState, inputHandler, setFormData] = useMyForm();
+  const initFormData = {
+    parts: {
+      contactPart: {
+        required: true,
+        partIsValid: false,
+        inputs: {
+          name: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          surname: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          email: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          mobile: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+        },
+      },
+      companyPart: {
+        required: false,
+        partIsValid: false,
+        inputs: {
+          company: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          ico: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          dic: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+        },
+      },
+      certificatePart: {
+        required: false,
+        partIsValid: false,
+        inputs: {
+          street_num: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          city: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+          zipCode: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          }
+        }
+      },
+    //   deliveryPart: {
+    //     required: false,
+    //     partIsValid: false,
+    //     inputs: {
+    //       deliveryMethod: {
+    //         value: "",
+    //         isValid: false,
+    //         isTouched: false,
+    //       },
+    //     },
+    //   },
+      paymentPart: {
+        required: false,
+        partIsValid: false,
+        inputs: {
+          paymentMethod: {
+            value: "",
+            isValid: false,
+            isTouched: false,
+          },
+        },
+      },
+    },
+    formIsValid: false,
+  };
+  const { formState, inputChange, touchHandler, setRequired } = useGortozForm(initFormData);
 
-//   const postCreateOrder = async () => {
-//     try {
-//       const formData = {
-//         contact: {
-//           name: formState.inputs.name.value,
-//           surname: formState.inputs.surname.value,
-//           email: formState.inputs.email.value,
-//           mobile: formState.inputs.mobile.value,
-//         },
-//         paymentMethod: paymentMethod,
-//         deliveryMethod: deliveryMethod,
-//         buyingAsCompany: buyingAsCompany,
-//         companyInfo: {
-//           title: buyingAsCompany ? formState.inputs.company.value : "",
-//           ico: buyingAsCompany ? formState.inputs.ico.value : "",
-//           dic: buyingAsCompany ? formState.inputs.dic.value : "",
-//         },
-//         wantsCertificate: wantsCertificate,
-//         certificateInfo: {
-//           street_num: wantsCertificate ? formState.inputs.street_num.value : "",
-//           city: wantsCertificate ? formState.inputs.city.value : "",
-//           zipCode: wantsCertificate ? formState.inputs.zipCode.value : "",
-//         },
-//         products: cart.cartState.products,
-//         donations: cart.cartState.donations,
-//         pieces: cart.cartState.pieces,
-//       };
-//       console.log(formData);
+  const submitFormHandler = (e) => {
+    e.preventDefault()
+    const postCreateOrder = async () => {
+        try {
+            const formData = {
+              contact: {
+                name: formState.parts.contactPart.inputs.name.value,
+                surname: formState.parts.contactPart.inputs.surname.value,
+                email: formState.parts.contactPart.inputs.email.value,
+                mobile: formState.parts.contactPart.inputs.mobile.value,
+              },
+              paymentMethod: 'CARD',
+              deliveryMethod: '',
+              buyingAsCompany: formState.parts.companyPart.required,
+              companyInfo: {
+                title: buyingAsCompany ? formState.parts.companyPart.inputs.company.value : "",
+                ico: buyingAsCompany ? formState.parts.companyPart.inputs.ico.value : "",
+                dic: buyingAsCompany ? formState.parts.companyPart.inputs.dic.value : "",
+              },
+              wantsCertificate: formState.parts.certificatePart.required,
+              certificateInfo: {
+                street_num: wantsCertificate ? formState.parts.certificatePart.inputs.street_num.value : "",
+                city: wantsCertificate ? formState.parts.certificatePart.inputs.city.value : "",
+                zipCode: wantsCertificate ? formState.parts.certificatePart.inputs.zipCode.value : "",
+              },
+              products: cart.cartState.products,
+              donations: cart.cartState.donations,
+            };
+            console.log(formData);
+      
+            const responseData = await sendRequest(
+              `${process.env.REACT_APP_BACKEND_URL}/api/create-order`,
+              "POST",
+              JSON.stringify(formData),
+              {
+                "Content-type": "application/json",
+              }
+            );
+              console.log('responseData: ', responseData)
+            if (responseData.orderId) {
+              cart.clearCart();
+              window.location.replace(responseData.sessionUrl);
+            } else {
+              console.log('Něco je wrong')
+            }
+          } catch (err) {}      
+    }
+    postCreateOrder()
+  };
 
-//       const responseData = await sendRequest(
-//         `${process.env.REACT_APP_BACKEND_URL}/api/create-order`,
-//         "POST",
-//         JSON.stringify(formData),
-//         {
-//           "Content-type": "application/json",
-//         }
-//       );
+  return (
+    <section className="order-filling-info-section">
+    <BForm>
+      <BFormPart title="Kontaktní údaje">
+        <BInput
+          title="Jméno"
+          input={formState.parts.contactPart.inputs.name}
+          partId="contactPart"
+          inputId="name"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte jméno"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="Příjmení"
+          input={formState.parts.contactPart.inputs.surname}
+          partId="contactPart"
+          inputId="surname"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte příjmení"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="Email"
+          input={formState.parts.contactPart.inputs.email}
+          partId="contactPart"
+          inputId="email"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte email"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="Tel. číslo"
+          input={formState.parts.contactPart.inputs.mobile}
+          partId="contactPart"
+          inputId="mobile"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte tel. číslo"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        {/* <p>
+          contactPart: {formState.parts.contactPart.partIsValid && "isValid"}
+        </p> */}
+      </BFormPart>
+      {/* <BFormBtn>Nakupuji na firmu</BFormBtn> */}
+      <button
+        className={`${formState.parts.companyPart.required ? 'bbutton' : 'bbutton-outline' } btn-small`}
+        onClick={(e) => { e.preventDefault()
+          setRequired(
+          "companyPart",
+          !formState.parts.companyPart.required
+        )}}
+      >
+        Nakupuji na firmu
+      </button>
+      {formState.parts.companyPart.required && 
+        <BFormPart title="Firemní údaje">
+          <BInput
+            title="Názec společnosti"
+            input={formState.parts.companyPart.inputs.company}
+            partId="companyPart"
+            inputId="company"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte název společnosti"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="IČO"
+            input={formState.parts.companyPart.inputs.ico}
+            partId="companyPart"
+            inputId="ico"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte IČO"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="DIČ"
+            input={formState.parts.companyPart.inputs.dic}
+            partId="companyPart"
+            inputId="dic"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte DIČ"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
 
-//       if (responseData.orderId) {
-//         cart.clearCart();
-//         navigate(`/objednavka/${responseData.orderId}`);
-//       }
-//     } catch (err) {}
-//   };
+          {/* <p>
+            companyPart: {formState.parts.companyPart.partIsValid && "isValid"}
+          </p> */}
+        </BFormPart>
+      }
+      <button
+        className={`${formState.parts.certificatePart.required ? 'bbutton' : 'bbutton-outline' } btn-small`}
+        onClick={(e) => { e.preventDefault()
+          setRequired(
+          "certificatePart",
+          !formState.parts.certificatePart.required
+        )}}
+      >
+        Chci certifikát
+      </button>
+      {formState.parts.certificatePart.required && 
+        <BFormPart title="Údaje pro certifikát">
+          <BInput
+            title="Ulice a číslo popisné"
+            input={formState.parts.certificatePart.inputs.street_num}
+            partId="certificatePart"
+            inputId="street_num"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte ulici a č. popisné"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="Město"
+            input={formState.parts.certificatePart.inputs.city}
+            partId="certificatePart"
+            inputId="city"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte město"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          <BInput
+            title="PSČ"
+            input={formState.parts.certificatePart.inputs.zipCode}
+            partId="certificatePart"
+            inputId="zipCode"
+            validators={[VALIDATOR_REQUIRE()]}
+            error="Prosím, zadejte PSČ"
+            inputChange={inputChange}
+            touchHandler={touchHandler}
+          />
+          {/* <p>
+            certificatePart: {formState.parts.certificatePart.partIsValid && "isValid"}
+          </p> */}
+        </BFormPart>
+      }
+      {/* <p>formIsValid: {formState.formIsValid && "formIsValid"}</p> */}
+      <BSubmit isValid={formState.formIsValid} onClick={submitFormHandler}>Dokončit objednávku</BSubmit>
+    </BForm>
+    { isLoading && <SwingSpinner />}
+    </section>
+  );
+};
 
-//   const setBuyAsCompany = () => {
-//     setRequired('companyPart', true)
-//   }
-
-//   const setBuyAsPerson = () => {
-//     setRequired('companyPart', false)
-//   }
-
-//   return (
-//     <section className="order-filling-info-section">
-//       <div>OrderFillingInfoPage</div>
-//       <p>Nakoupit jako {buyingAsCompany ? "Firma" : "Osoba"}</p>
-//       <button onClick={setBuyAsCompany}>Firma</button>
-//       <button onClick={setBuyAsPerson}>Fyzická osoba</button>
-//       <button onClick={() => setWantsCertificate((prev) => !prev)}>
-//         Chci certifikát
-//       </button>
-//       <h3>Kontaktní údaje</h3>
-//       <Input
-//         id="name"
-//         element="input"
-//         type="text"
-//         label="Jméno"
-//         validators={[VALIDATOR_MINLENGTH(1)]}
-//         errorText="Prosím zadejte jméno."
-//         onInput={inputHandler}
-//         initialValue={""}
-//         initialValid={false}
-//       />
-//       <Input
-//         id="surname"
-//         element="input"
-//         type="text"
-//         label="Příjmení"
-//         validators={[VALIDATOR_REQUIRE()]}
-//         errorText="Prosím zadejte příjmení."
-//         onInput={inputHandler}
-//         initialValue={""}
-//         initialValid={false}
-//       />
-//       <Input
-//         id="email"
-//         element="input"
-//         type="text"
-//         label="Email"
-//         validators={[VALIDATOR_EMAIL()]}
-//         errorText="Prosím zadejte email."
-//         onInput={inputHandler}
-//         initialValue={""}
-//         initialValid={false}
-//       />
-//       <Input
-//         id="mobile"
-//         element="input"
-//         type="text"
-//         label="Tel. číslo"
-//         validators={[VALIDATOR_MINLENGTH(9)]}
-//         errorText="Prosím zadejte telefonní číslo."
-//         onInput={inputHandler}
-//         initialValue={""}
-//         initialValid={false}
-//       />
-//       {buyingAsCompany && (
-//         <Fragment>
-//           <h3>Firemní údaje</h3>
-//           <Input
-//             id="company"
-//             element="input"
-//             type="text"
-//             label="Název společnosti"
-//             validators={[VALIDATOR_MINLENGTH(9)]}
-//             errorText="Prosím zadejte název společnosti."
-//             onInput={inputHandler}
-//             initialValue={""}
-//             initialValid={false}
-//           />
-//           <Input
-//             id="ico"
-//             element="input"
-//             type="text"
-//             label="IČO"
-//             validators={[VALIDATOR_MINLENGTH(3)]}
-//             errorText="Prosím zadejte IČO."
-//             onInput={inputHandler}
-//             initialValue={""}
-//             initialValid={false}
-//           />
-//           <Input
-//             id="dic"
-//             element="input"
-//             type="text"
-//             label="DIČ"
-//             validators={[VALIDATOR_MINLENGTH(3)]}
-//             errorText="Prosím zadejte DIČ."
-//             onInput={inputHandler}
-//             initialValue={""}
-//             initialValid={false}
-//           />
-//         </Fragment>
-//       )}
-//       {wantsCertificate && (
-//         <Fragment>
-//           <h3>Certifikát</h3>
-//           <Input
-//             id="street_num"
-//             element="input"
-//             type="text"
-//             label="Ulice a číslo popisné"
-//             validators={[VALIDATOR_MINLENGTH(9)]}
-//             errorText="Prosím zadejte ulici a číslo popisné."
-//             onInput={inputHandler}
-//             initialValue={""}
-//             initialValid={false}
-//           />
-//           <Input
-//             id="city"
-//             element="input"
-//             type="text"
-//             label="Obec"
-//             validators={[VALIDATOR_MINLENGTH(3)]}
-//             errorText="Prosím zadejte obec."
-//             onInput={inputHandler}
-//             initialValue={""}
-//             initialValid={false}
-//           />
-//           <Input
-//             id="zipCode"
-//             element="input"
-//             type="text"
-//             label="PSČ"
-//             validators={[VALIDATOR_MINLENGTH(3)]}
-//             errorText="Prosím zadejte PSČ."
-//             onInput={inputHandler}
-//             initialValue={""}
-//             initialValid={false}
-//           />
-//         </Fragment>
-//       )}
-//       <fieldset>
-//         <legend>Vyberte způsob platby</legend>
-//         <div>
-//           <button onClick={() => setPaymentMethod("card")}>
-//             Platební karta
-//           </button>
-//           <label for="card">Platební karta</label>
-//         </div>
-//         <div>
-//           <button onClick={() => setPaymentMethod("banking")}>
-//             Bankovním převodem
-//           </button>
-//           <label for="send">Bankovní převod</label>
-//         </div>
-//       </fieldset>
-//       {areDonations && (
-//         <h2>
-//           V košíku jsou i fyzické produkty, sdělte nám prosím doručovací adresu
-//         </h2>
-//       )}
-//       <p>Validní vše: {formState.isValid ? "Ano" : "Ne"}</p>
-//       <h2>Shrnutí objednávky</h2>
-//       {cart.cartState.pieces.map((p) => (
-//         <p key={p.number}>
-//           Název: {p.title} Cena: {p.price}
-//         </p>
-//       ))}
-//       <button onClick={postCreateOrder}>Dokončit ojednávku</button>
-//     </section>
-//   );
-// };
-
-// export default OrderFillingInfoPage;
+export default OrderFillingInfoPage;

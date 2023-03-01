@@ -24,7 +24,7 @@ const ProjectsSection = () => {
       } catch (err) {}
     };
     fetchProjects();
-  }, []);
+  }, [sendRequest]);
 
   return (
     <section className="projects-section">
