@@ -1,12 +1,13 @@
 import React from "react";
 
-const SwingSpinner = () => {
+const SwingSpinner = (props) => {
   return (
     <svg
+      visibility={props.isLoading ? 'visible' : 'hidden'}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="200px"
-      height="200px"
+      width="100px"
+      height="100px"
       viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid"
     >
