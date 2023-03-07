@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BForm from "../../components/Base/BForm/BForm";
 // import BFormBtn from "../../components/Base/BForm/BFormBtn";
 import BFormPart from "../../components/Base/BForm/BFormPart";
 import BInput from "../../components/Base/BForm/BInput";
 import BSubmit from "../../components/Base/BForm/BSubmit";
 import { useGortozForm } from "../../hooks/g-form-hook";
+import { useHttp } from "../../hooks/http-hook";
 import {
   VALIDATOR_MIN,
   VALIDATOR_MINLENGTH,
@@ -12,6 +13,15 @@ import {
 } from "../../utils/validators";
 
 const TestingFormPage = () => {
+  const { sendRequest } = useHttp();
+
+  useEffect(() =>{
+    const fetchData = async () => {
+      const responseData = await sendRequest('https://api.publicapis.org/entries')
+      console.log(responseData)
+    }
+    fetchData()
+  } ,[])
   const initFormData = {
     parts: {
       contactPart: {
@@ -255,6 +265,7 @@ const TestingFormPage = () => {
       }
       <p>formIsValid: {formState.formIsValid && "formIsValid"}</p>
       <BSubmit>Dokončit objednávku</BSubmit>
+
     </BForm>
   );
 };

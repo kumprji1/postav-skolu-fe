@@ -4,8 +4,24 @@ button {
   font-family: $coprIdentityFont;
   transition: all 100ms;
 }
+.btn--secondary {
+  background-color: white;
+  color: $primaryColor;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid $primaryColor;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+  }
+}
 
-.btn--primary {
+.btn--primary, .active {
   background-color: $primaryColor;
   color: white;
   padding: 0.6rem 1.2rem;
@@ -22,18 +38,3 @@ button {
   transition: all $transMedium;
 }
 
-.btn--secondary {
-  background-color: white;
-  color: $primaryColor;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  font-weight: 400;
-  border: 1px solid $primaryColor;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
-  }
-}

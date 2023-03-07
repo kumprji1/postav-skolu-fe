@@ -138,8 +138,7 @@ const OrderFillingInfoPage = () => {
   };
   const { formState, inputChange, touchHandler, setRequired } = useGortozForm(initFormData);
 
-  const submitFormHandler = (e) => {
-    e.preventDefault()
+  const submitFormHandler = () => {
     const postCreateOrder = async () => {
         try {
             const formData = {
@@ -335,7 +334,7 @@ const OrderFillingInfoPage = () => {
       {/* <p>formIsValid: {formState.formIsValid && "formIsValid"}</p> */}
       <BSubmit isValid={formState.formIsValid} onClick={submitFormHandler}>Dokončit objednávku</BSubmit>
     </BForm>
-    { isLoading && <SwingSpinner />}
+    <SwingSpinner isLoading={isLoading} />
     </section>
   );
 };

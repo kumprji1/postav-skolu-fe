@@ -20,7 +20,7 @@ export const useHttp = () => {
           (reqCtrl) => reqCtrl !== httpAbortCtrl
         );
         if (!response.ok) {
-          throw new Error(responseData.message);
+          throw new Error(responseData.msg);
         }
         setIsLoading(false);
         return responseData;

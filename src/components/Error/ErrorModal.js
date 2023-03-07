@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import ErrorBackdrop from "./ErrorBackdrop.js";
-import "./ErrorModal.css";
+import "./ErrorModal.scss";
 
 const ErrorModal = (props) => {
   const content = (

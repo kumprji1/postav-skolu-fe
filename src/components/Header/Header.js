@@ -9,17 +9,16 @@ const Header = (props) => {
   return (
     <header>
       <div className="header-content">
-        <NavLink to="/" className="header__logo-cele-wrapper">
+        <a href="/" className="header__logo-cele-wrapper">
           <img src={DiakonieLogoCele} alt="Logo Diakonie" />
-        </NavLink>
+        </a>
         <div className="right">
           {props.auth.token ? (
-            <button onClick={props.auth.logout}>Odhlásit se</button>
+            <button className="btn--secondary btn-small" onClick={props.auth.logout}>Odhlásit se</button>
           ) : (
             <Fragment>
-              <NavLink to="/prihlaseni">Přihlásit se</NavLink>
-              <NavLink to="/registrace">Registrace</NavLink>
-              <NavLink to="/kosik">Košík</NavLink>
+              <NavLink className="btn--secondary btn-small" to="/prihlaseni">Přihlásit se</NavLink>
+              <NavLink className="btn--secondary btn-small" to="/kosik">Košík</NavLink>
             </Fragment>
           )}
 

@@ -26,6 +26,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { Roles } from "../../utils/roles";
 import { VALIDATOR_EMAIL, VALIDATOR_REQUIRE } from "../../utils/validators";
 import SwingSpinner from "../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../components/Error/ErrorModal";
 
 // import "./SigninPage.css";
 
@@ -34,6 +35,10 @@ const SigninPage = () => {
   const { sendRequest, isLoading, error, clearError } = useHttp();
   const navigate = useNavigate();
   const googleDivRef = useRef()
+
+  useEffect(() => {
+    console.log(error)
+  }, [error])
 
   // Google Login
   const postLoginGoogle = async (email, name, surname) => {
@@ -69,7 +74,9 @@ const SigninPage = () => {
   }
   const google = window.google
   const handleCallbackResponse = (res) => {
+    console.log(res.credential)
     const user = jwt_decode(res.credential)
+    console.log(user)
     postLoginGoogle(user.email, user.given_name, user.family_name)
   }
   useEffect(() => {
@@ -170,8 +177,7 @@ const SigninPage = () => {
         </div>
         <NavLink to="/registrace" className="btn--secondary btn-small">Registrovat</NavLink>
         <SwingSpinner isLoading={isLoading} />
-      {/* {error && <ErrorModal error={error} onClear={clearError} />}
-      <div className="spinner--wrapper"> {isLoading && <Spinner />}</div> */}
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </div>
   );
 };
