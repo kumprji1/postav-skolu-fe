@@ -14,11 +14,28 @@ const Header = (props) => {
         </a>
         <div className="right">
           {props.auth.token ? (
-            <button className="btn--secondary btn-small" onClick={props.auth.logout}>Odhlásit se</button>
+            <Fragment>
+              <NavLink className="btn--secondary btn-small" to="/moje-objednavky">
+                Moje objednávky
+              </NavLink>
+              <NavLink className="btn--secondary btn-small" to="/kosik">
+                Košík
+              </NavLink>
+              <button
+                className="btn--secondary btn-small"
+                onClick={props.auth.logout}
+              >
+                Odhlásit se
+              </button>
+            </Fragment>
           ) : (
             <Fragment>
-              <NavLink className="btn--secondary btn-small" to="/prihlaseni">Přihlásit se</NavLink>
-              <NavLink className="btn--secondary btn-small" to="/kosik">Košík</NavLink>
+              <NavLink className="btn--secondary btn-small" to="/prihlaseni">
+                Přihlásit se
+              </NavLink>
+              <NavLink className="btn--secondary btn-small" to="/kosik">
+                Košík
+              </NavLink>
             </Fragment>
           )}
 

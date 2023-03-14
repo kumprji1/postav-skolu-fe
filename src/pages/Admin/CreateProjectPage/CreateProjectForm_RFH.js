@@ -5,11 +5,11 @@ import { useHttp } from "../../../hooks/http-hook";
 
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import ImageUpload from "../../../components/UI/FormElements/ImageUpload";
 
 const CreateProjectForm = (props) => {
-  const auth = useContext(AuthContext)
-  const navigate = useNavigate()
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const { sendRequest } = useHttp();
   // Form (react-hook-form)
   const {
@@ -18,21 +18,26 @@ const CreateProjectForm = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: '',
-      desc: '',
-      urlTitle: '',
-      photo: '',
+      title: "",
+      desc: "",
+      urlTitle: "",
+      photo: "",
     },
   });
 
   const onSubmit = async (data) => {
     try {
-        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/create-project`, 'POST', JSON.stringify(data), {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + auth.token
-        })
-        console.log('data:', data)
-        if (responseData.msg === 'OK') navigate(`/projekt/${data.urlTitle}`)
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/create-project`,
+        "POST",
+        JSON.stringify(data),
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token,
+        }
+      );
+      console.log("data:", data);
+      if (responseData.msg === "OK") navigate(`/projekt/${data.urlTitle}`);
     } catch (err) {}
   };
 
@@ -46,7 +51,7 @@ const CreateProjectForm = (props) => {
       />
       {errors.title && <p role="alert">{errors.title?.message}</p>}
       <textarea
-      placeholder="Popis"
+        placeholder="Popis"
         {...register("desc", {
           required: "Zadejte popis projektu",
           maxLength: 1000,
@@ -71,7 +76,13 @@ const CreateProjectForm = (props) => {
           maxLength: 2000,
         })}
       />
-      {Object.keys(errors).length === 0 && <input type="submit" className="btn-warning-outline" value='Vytvořit projekt' />} 
+      {Object.keys(errors).length === 0 && (
+        <input
+          type="submit"
+          className="btn-warning-outline"
+          value="Vytvořit projekt"
+        />
+      )}
     </form>
   );
 };
