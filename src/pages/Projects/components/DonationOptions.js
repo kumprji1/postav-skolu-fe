@@ -4,6 +4,7 @@ import { CartContext } from "../../../contexts/CartContext";
 import { useBaseDonation } from "../../../hooks/base-donation-hook";
 import { useGortozForm } from "../../../hooks/g-form-hook";
 import {
+  VALIDATOR_MAXLENGTH,
   VALIDATOR_MIN,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
@@ -29,6 +30,11 @@ const DonationOptions = (props) => {
           isAnonymous: {
             value: null,
             isValid: false,
+            isTouched: false,
+          },
+          note: {
+            value: null,
+            isValid: true,
             isTouched: false,
           },
         },
@@ -97,46 +103,57 @@ const DonationOptions = (props) => {
           value={formState.parts.basePart.inputs.price.value}
         ></input>
       )}
-      {
-        <div
-          className={`donatable-choose-visibility--wrapper ${
-            formState.parts.basePart.inputs.price.isValid &&
-            " donatable-choose-visibility--wrapper-show"
+
+      <div
+        className={`donatable-choose-visibility--wrapper ${
+          formState.parts.basePart.inputs.price.isValid &&
+          " donatable-choose-visibility--wrapper-show"
+        }`}
+      >
+        <h1 className="donatable-choose-visibility-title">
+          Chcete zveřejnit své jméno u daru?
+        </h1>
+        <button
+          className={`${
+            formState.parts.basePart.inputs.isAnonymous.value === false
+              ? "bbutton"
+              : "bbutton-outline"
           }`}
+          onClick={(e) =>
+            inputChange("basePart", "isAnonymous", false, [VALIDATOR_REQUIRE()])
+          }
         >
-          <h1 className="donatable-choose-visibility-title">
-            Zvolte viditelnost jména dárce
-          </h1>
-          <button
-            className={`${
-              formState.parts.basePart.inputs.isAnonymous.value === false
-                ? "bbutton"
-                : "bbutton-outline"
-            }`}
-            onClick={(e) =>
-              inputChange("basePart", "isAnonymous", false, [
-                VALIDATOR_REQUIRE(),
-              ])
-            }
-          >
-            Zvěřejnit jméno u daru
-          </button>
-          <button
-            className={`${
-              formState.parts.basePart.inputs.isAnonymous.value === true
-                ? "bbutton"
-                : "bbutton-outline"
-            }`}
-            onClick={(e) =>
-              inputChange("basePart", "isAnonymous", true, [
-                VALIDATOR_REQUIRE(),
-              ])
-            }
-          >
-            Skrýt jméno (Anonymní dar)
-          </button>
-        </div>
-      }
+          Ano
+        </button>
+        <button
+          className={`${
+            formState.parts.basePart.inputs.isAnonymous.value === true
+              ? "bbutton"
+              : "bbutton-outline"
+          }`}
+          onClick={(e) =>
+            inputChange("basePart", "isAnonymous", true, [VALIDATOR_REQUIRE()])
+          }
+        >
+          Ne
+        </button>
+      </div>
+      <div>
+        <input
+          value={formState.parts.basePart.inputs.note.value}
+          onChange={(e) =>
+            inputChange('basePart', 'note', e.currentTarget.value, [VALIDATOR_MAXLENGTH(100)])
+          }
+          type="text"
+          className={`donatable-chci-sdelit-input ${
+            formState.parts.basePart.inputs.price.isValid &&
+            formState.parts.basePart.inputs.isAnonymous.isValid
+              ? " donatable-chci-sdelit-input-show"
+              : ""
+          }`}
+          placeholder="Chci vám sdělit..."
+        />
+      </div>
       <div className="donate-btn-to-cart--wrapper">
         <button
           className={"donate-btn-to-cart"}
@@ -150,6 +167,7 @@ const DonationOptions = (props) => {
                 photo: props.donatable.photo,
                 id: new Date().toISOString(),
                 isAnonymous: formState.parts.basePart.inputs.isAnonymous.value,
+                note: formState.parts.basePart.inputs.note.value
               },
             ]);
             navigate("/kosik");

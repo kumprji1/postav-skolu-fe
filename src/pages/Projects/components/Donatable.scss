@@ -114,6 +114,28 @@
     max-height: 15rem;
 }
 
+.donatable-chci-sdelit-input {
+    color: $primaryColor;
+    text-align: center;
+    font-size: 1.2rem;
+    max-height: 0rem;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-top: 1px solid $secondaryColor;
+    padding: 0;
+    display: block;
+    transition: all 1000ms;
+    &::placeholder {
+        color: $primaryColor;
+    }
+}
+
+.donatable-chci-sdelit-input-show {
+    max-height: 10rem;
+    padding: 0.2rem 0.4rem;
+}
+
 .donate-btn-to-cart--wrapper {
     width: 100%;
     background-color: $secondaryColor;

@@ -5,7 +5,7 @@ const BSubmit = (props) => {
     <button
       type="submit"
       onClick={(e) => {e.preventDefault(); props.onClick()}}
-      className={`${props.isValid ? "bbutton" : "bbutton-outline"}`}
+      className={`${props.isValid ? "btn--primary" : "btn--secondary"}`}
       disabled={!props.isValid}
     >
       {props.children}
