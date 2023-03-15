@@ -24,7 +24,7 @@ const Donatables = (props) => {
   return (
     <section className='section-donatables'>
         <h2 className='donatables-na-co-chci-darovat'>Na co chci darovat: </h2>
-        {donatable.map(d => <Donatable donatable={d}/>)}
+        {donatable.map((d,i) => <Donatable donatable={d} key={i} />)}
         {auth.role == Roles.ADMIN &&  <NavLink className='bbutton-outline' to={`/novy-darovatelny-box/${projectId}`}>Přidat darovatelný box</NavLink>}
     </section>
   )

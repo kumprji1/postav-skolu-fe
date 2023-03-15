@@ -33,7 +33,7 @@ const DonationOptions = (props) => {
             isTouched: false,
           },
           note: {
-            value: null,
+            value: '',
             isValid: true,
             isTouched: false,
           },

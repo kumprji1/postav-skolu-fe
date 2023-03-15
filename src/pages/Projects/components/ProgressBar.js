@@ -2,11 +2,13 @@ import React from "react";
 
 import './ProgressBar.scss'
 
-const ProgressBar = () => {
+const ProgressBar = (props) => {
+  const width = props.earnedMoney / props.demandedMoney * 100
+  console.log(width)
   return (
     <div className="container-progress-bar">
       <div className="progress progress-moved">
-        <div className="progress-bar"></div>
+        <div style={{width: `${width}%`}} className="progress-bar"></div>
       </div>
     </div>
   );

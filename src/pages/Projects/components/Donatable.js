@@ -19,12 +19,12 @@ const Donatable = (props) => {
           <p className="donatable-desc">{props.donatable.desc}</p>
         </div>
         <div className="donatable-money-stats">
-        <h2 className="donatable-earnedMoney">Již máme: {props.donatable.earnedMoney}</h2>
         <h2 className="donatable-demandedMoney">Potřebujeme vybrat: {props.donatable.demandedMoney}</h2>
+        <h2 className="donatable-earnedMoney">Již máme: {props.donatable.earnedMoney}</h2>
         </div>
       </div>
       <div className="donatable-bottom-part">
-      <ProgressBar />
+      <ProgressBar earnedMoney={props.donatable.earnedMoney} demandedMoney={props.donatable.demandedMoney} />
         <DonationOptions donatable={props.donatable} />
       </div>
     </div>

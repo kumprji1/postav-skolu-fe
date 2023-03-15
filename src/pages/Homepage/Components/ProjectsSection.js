@@ -18,7 +18,7 @@ const ProjectsSection = () => {
     const fetchProjects = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/api/get-projects-by-category/dvur`
+          `${process.env.REACT_APP_BACKEND_URL}/api/projects`
         );
         setProjects(responseData);
       } catch (err) {}
