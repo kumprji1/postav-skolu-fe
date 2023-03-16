@@ -8,11 +8,12 @@ const secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
 const s3 = new aws.S3({
     region,
     accessKeyId,
-    secretAccessKey
+    secretAccessKey,
+    signatureVersion: 'v4'
 })
 
 export const generateUploadURL = async () => {
-    const imageName = "random image name"
+    const imageName = "img_postav_skolu_" + new Date().toDateString() + '.jpg'
 
     const params = ({
         Bucket: bucketName,
@@ -20,5 +21,6 @@ export const generateUploadURL = async () => {
         Expires: 60
     })
 
-    // const uploadURL = await
+    const uploadURL = await s3.getSignedUrlPromise('putObject', params)
+    return uploadURL
 }

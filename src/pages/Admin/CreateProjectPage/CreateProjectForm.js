@@ -105,10 +105,10 @@ const CreateProjectForm = () => {
         <ImageUpload
           id="image"
           onInput={inputChange}
-          errorText="Please provide an image."
+          errorText="Prosím nahrajte obrázek"
         />
-
         <BInput
+          classNames="hidden"
           title="Obrázek"
           input={formState.parts.basePart.inputs.photo}
           partId="basePart"

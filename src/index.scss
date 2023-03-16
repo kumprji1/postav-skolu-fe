@@ -55,6 +55,10 @@ input:-webkit-autofill:active {
   @include flexCenterDir(column)
 }
 
+.hidden {
+  display: none !important;
+}
+
 /*
 Base-Componenets 
 */

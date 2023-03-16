@@ -13,11 +13,13 @@ const CartPage = () => {
   const auth = useContext(AuthContext);
   const cart = useContext(CartContext);
 
-  const totalPrice =
-    cart.cartState.donations.reduce((partSum, i) => partSum + i.price, 0)
-    // +
-    // cart.cartState.products.reduce((partSum, i) => partSum + i.price, 0) +
-    // cart.cartState.pieces.reduce((partSum, i) => partSum + i.price, 0);
+  const totalPrice = cart.cartState.donations.reduce(
+    (partSum, i) => partSum + i.price,
+    0
+  );
+  // +
+  // cart.cartState.products.reduce((partSum, i) => partSum + i.price, 0) +
+  // cart.cartState.pieces.reduce((partSum, i) => partSum + i.price, 0);
 
   return (
     <section className="cart-section">
@@ -26,9 +28,13 @@ const CartPage = () => {
         <Fragment>
           {/* <h2>Darovat</h2> */}
           <section className="cart-items-donations-section">
-          {cart.cartState.donations.map((don, i) => (
-            <CartItem_Donation key={i} don={don} removeF={() => cart.removeDonation(don.id)} />
-          ))}
+            {cart.cartState.donations.map((don, i) => (
+              <CartItem_Donation
+                key={i}
+                don={don}
+                removeF={() => cart.removeDonation(don.id)}
+              />
+            ))}
           </section>
         </Fragment>
       )}
@@ -40,10 +46,19 @@ const CartPage = () => {
           <p key={prod.number}>{prod.title}</p>
         ))}
       <p>Cena celkem: {totalPrice}</p>
-      {!auth.token ? (
-        <NavLink className='bbutton' to={`/nakup`}>Nákup bez registrace</NavLink>
-      ) : (
-        <NavLink className='btn--primary' to={`/nakup`}>Nakoupit</NavLink>
+      {cart.cartState.donations.length !== 0 && (
+        <Fragment>
+          {" "}
+          {!auth.token ? (
+            <NavLink className="bbutton" to={`/nakup`}>
+              Nákup bez registrace
+            </NavLink>
+          ) : (
+            <NavLink className="btn--primary" to={`/nakup`}>
+              Nakoupit
+            </NavLink>
+          )}
+        </Fragment>
       )}
     </section>
   );

@@ -3,7 +3,7 @@ import React from 'react'
 const BInput = (props) => {
   const type = props.secret ? 'password' : 'text'
   return (
-    <div className="form-input--wrapper" >
+    <div className={`form-input--wrapper ${props.classNames}`} >
           {(props.input.isValid || !props.input.isTouched) && <label className="form-input-text-label">{props.title}</label>}
           {(!props.input.isValid && props.input.isTouched) && <label className="form-input-text-error">{props.error}</label>}
           <input
