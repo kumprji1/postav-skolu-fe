@@ -4,6 +4,8 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { useHttp } from "../../hooks/http-hook";
 import MyOrderList from "./components/MyOrderList";
 
+import './MyOrdersPage.scss'
+
 const MyOrdersPage = () => {
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttp();
@@ -29,7 +31,7 @@ const MyOrdersPage = () => {
   }, [sendRequest, auth.token]);
 
   return (
-    <section>
+    <section className="my-orders-section">
       <BTitle>Moje objednávky</BTitle>
       <MyOrderList orders={loadedOrders} />
     </section>

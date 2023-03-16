@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../../../components/UI/Button/Button";
 
 import DiaLogoBG from "../../../images/Diakonie/Diakonie_Logo_znak.png";
@@ -11,7 +12,7 @@ const AboutSection = () => {
       <div className="left">
         <h1>Postavte s námi školu... </h1>
         <h2>buď ten, kvůli kterému někteří věří v dobro!</h2>
-        <Button classes="btn--primary">Chci pomoci</Button>
+        <Link to="/projekt/kup-si-svoji-cast-pozemku" className="btn--primary">Chci pomoci</Link>
       </div>
       <div className="right">
         <div className="img-wrapper">

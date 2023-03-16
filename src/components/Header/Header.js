@@ -9,9 +9,9 @@ const Header = (props) => {
   return (
     <header>
       <div className="header-content">
-        <a href="/" className="header__logo-cele-wrapper">
+        <Link to="/" className="header__logo-cele-wrapper">
           <img src={DiakonieLogoCele} alt="Logo Diakonie" />
-        </a>
+        </Link>
         <div className="right">
           {props.auth.token ? (
             <Fragment>

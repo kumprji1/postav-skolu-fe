@@ -1,0 +1,8 @@
+@import '../../styles/shared';
+
+.my-orders-list {
+    @include flexCenterDir(column);
+    .my-orders-list--item {
+        margin: 0.2rem 0 0.4rem 0;
+    }
+}

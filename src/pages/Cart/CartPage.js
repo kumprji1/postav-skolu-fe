@@ -14,9 +14,10 @@ const CartPage = () => {
   const cart = useContext(CartContext);
 
   const totalPrice =
-    cart.cartState.donations.reduce((partSum, i) => partSum + i.price, 0) +
-    cart.cartState.products.reduce((partSum, i) => partSum + i.price, 0) +
-    cart.cartState.pieces.reduce((partSum, i) => partSum + i.price, 0);
+    cart.cartState.donations.reduce((partSum, i) => partSum + i.price, 0)
+    // +
+    // cart.cartState.products.reduce((partSum, i) => partSum + i.price, 0) +
+    // cart.cartState.pieces.reduce((partSum, i) => partSum + i.price, 0);
 
   return (
     <section className="cart-section">
