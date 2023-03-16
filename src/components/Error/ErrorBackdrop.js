@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const ErrorBackdrop = props => {
   return ReactDOM.createPortal(
-    <div className="error-backdrop" onClick={props.onClick}>d</div>,
+    <div className="error-backdrop2" onClick={props.onClick}>d</div>,
     document.getElementById('error-backdrop')
   );
 };

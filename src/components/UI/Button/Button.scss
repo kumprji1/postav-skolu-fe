@@ -5,6 +5,7 @@ button {
   transition: all 100ms;
 }
 .btn--secondary {
+  text-decoration: none;
   background-color: white;
   color: $primaryColor;
   padding: 0.6rem 1.2rem;
@@ -22,6 +23,7 @@ button {
 }
 
 .btn--primary, .active {
+  text-decoration: none;
   background-color: $primaryColor;
   color: white;
   padding: 0.6rem 1.2rem;

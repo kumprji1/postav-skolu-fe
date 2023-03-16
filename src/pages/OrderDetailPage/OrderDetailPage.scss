@@ -1,0 +1,59 @@
+@import "../../styles/shared";
+
+.my-order-detail-section {
+}
+
+.my-order-detail-section--success-info {
+  margin: 1rem 0;
+  font-weight: normal;
+  padding: 1rem;
+  border: 2px solid rgb(22, 162, 9);
+  border-radius: 10px;
+  color: #3d601a;
+  background-color: #d4ffbd;
+}
+
+.my-order-detail-section--canceled-info {
+  margin: 1rem 0;
+  font-weight: normal;
+  padding: 1rem;
+  border: 2px solid rgb(162, 27, 9);
+  border-radius: 10px;
+  color: #6b0b06;
+  background-color: #ffd3bd;
+}
+
+.my-order-detail--wrapper {
+}
+
+table.my-order-detail--table {
+  margin: 1rem 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: #ccc;
+  border-style: solid;
+  color: #000000;
+}
+
+table.my-order-detail--table td,
+table.my-order-detail--table th {
+  border-width: 1px;
+  border-color: #a5a5a5;
+  border-style: solid;
+  padding: 0.4rem;
+}
+
+table.my-order-detail--table thead {
+  background-color: $primaryColor;
+}
+
+table.my-order-detail--table tr > td:first-child {
+    background-color: $secondaryColor;
+    color: rgb(32, 32, 32);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    text-align: left;
+}
+

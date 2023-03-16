@@ -42,7 +42,7 @@ const CartPage = () => {
       {!auth.token ? (
         <NavLink className='bbutton' to={`/nakup`}>Nákup bez registrace</NavLink>
       ) : (
-        <NavLink to={`/nakup`}>Nakoupit</NavLink>
+        <NavLink className='btn--primary' to={`/nakup`}>Nakoupit</NavLink>
       )}
     </section>
   );

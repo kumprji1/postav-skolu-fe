@@ -14,11 +14,12 @@ import SigninPage from "./pages/Auth/SigninPage";
 import ProjectDetailPage from "./pages/Projects/ProjectDetailPage/ProjectDetailPage";
 import CartPage from "./pages/Cart/CartPage";
 import OrderFillingInfoPage from "./pages/OrderFillingInfoPage/OrderFillingInfoPage";
-import OrderCreatedPage from "./pages/OrderCreatedPage/OrderCreatedPage";
+import OrderDetailPage from "./pages/OrderDetailPage/OrderDetailPage";
 import EditProjectPage from "./pages/Admin/EditProjectPage/EditProjectPage";
 import CreateProjectPage from "./pages/Admin/CreateProjectPage/CreateProjectPage";
 import CreateDonatablePage from "./pages/Admin/CreateDonatablePage/CreateDonatablePage";
 import TestingFormPage from "./pages/testing/TestingFormPage";
+import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
 
 import { AuthContext } from "./contexts/AuthContext";
 import { CartContext } from "./contexts/CartContext";
@@ -65,9 +66,12 @@ function App() {
 
                   <Route path="/kosik" element={<CartPage />} />
                   <Route path="/nakup" element={<OrderFillingInfoPage />} />
+
+                  // Orders
+                  <Route path="/moje-objednavky" element={<MyOrdersPage /> } />
                   <Route
                     path="/objednavka/:orderId"
-                    element={<OrderCreatedPage />}
+                    element={<OrderDetailPage />}
                   />
 
                   // Auth
