@@ -5,6 +5,7 @@ import { AuthContext } from '../../../contexts/AuthContext'
 import { Roles } from "../../../utils/roles";
 
 import Donatables from "../components/Donatables";
+import News from "../components/News/News";
 
 
 import "./ProjectDetailDonatePage.scss";
@@ -27,6 +28,7 @@ const ProjectDetailDonatePage = (props) => {
         </div>
         <p className="project-detail-desc">{props.project.desc}</p>
       </section>
+      <News urlTitle={props.project.urlTitle} projectId={props.project._id} />
       <Donatables project={props.project} />
       {/* <DonationOptions preparedPrices={props.project.preparedPrices} project={props.project} /> */}
     </Fragment>

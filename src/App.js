@@ -20,6 +20,7 @@ import CreateProjectPage from "./pages/Admin/CreateProjectPage/CreateProjectPage
 import CreateDonatablePage from "./pages/Admin/CreateDonatablePage/CreateDonatablePage";
 import TestingFormPage from "./pages/testing/TestingFormPage";
 import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
+import CreateNewsPage from "./pages/Admin/CreateNewsPage/CreateNewsPage";
 
 import { AuthContext } from "./contexts/AuthContext";
 import { CartContext } from "./contexts/CartContext";
@@ -55,11 +56,14 @@ function App() {
 
                   // Projects
                   {auth.role == Roles.ADMIN && <Route path="/novy-projekt" element={<CreateProjectPage />} />}
-                  {auth.role == Roles.ADMIN && <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />}
+                  {auth.role == Roles.ADMIN && <Route path="/upravit/projekt/:urlTitle" element={<EditProjectPage />} />}
                   <Route
                     path={`/projekt/:urlTitle`}
                     element={<ProjectDetailPage />}
                   />
+
+                  // News
+                  {auth.role == Roles.ADMIN && <Route path="/nova-aktualita/:urlTitle" element={<CreateNewsPage />} />}
 
                   // Donatables
                   {auth.role == Roles.ADMIN && <Route path="/novy-darovatelny-box/:projectId" element={<CreateDonatablePage />} />}

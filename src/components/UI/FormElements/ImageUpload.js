@@ -96,6 +96,9 @@ const ImageUpload = (props) => {
         </button>
         {file && showConfirm && (
           <button
+          style={{
+            marginTop: '0.5rem'
+          }}
             className="btn--primary"
             onClick={(e) => {
               e.preventDefault();
@@ -106,7 +109,7 @@ const ImageUpload = (props) => {
           </button>
         )}
       </div>
-      {!isValid && <p>{props.errorText}</p>}
+      {/* {!isValid && <p>{props.errorText}</p>} */}
       {isLoading && <SwingSpinner isLoading={isLoading} />}
     </div>
   );

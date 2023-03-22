@@ -1,0 +1,38 @@
+@import '../../../../styles/shared';
+
+.project-news-section {
+    color: black;
+    // background-color: $primaryColor;
+    // border: 2px solid $primaryColor;
+    padding: 1rem 0.5rem;
+    margin: 0 0 2rem 0;
+}
+
+.project-news-section__title {
+    padding: 0 0 1rem 0;
+}
+
+.project-news--item {
+    border: 2px solid $primaryColor;
+    border-radius: 5px;
+    &:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+    padding: 0.5rem;
+}
+
+.project-news--item__title {
+    color: $primaryColor;
+}
+.project-news--item__date {
+    color: $greyColor;
+    padding-left: 0.2rem;
+    margin-bottom: 0.6rem;
+}
+.project-news--item__text {
+        
+}
+
+.project-news--addItem-btn {
+    margin-top: 1rem;
+}

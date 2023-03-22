@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BForm from "../../../components/Base/BForm/BForm";
 import BFormPart from "../../../components/Base/BForm/BFormPart";
 import BInput from "../../../components/Base/BForm/BInput";
@@ -11,11 +11,11 @@ import { useGortozForm } from "../../../hooks/g-form-hook";
 import { useHttp } from "../../../hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../utils/validators";
 
-const CreateProjectForm = () => {
+const CreateNewsForm = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
   const { sendRequest } = useHttp();
-
+  const { urlTitle } = useParams()
   const initFormData = {
     parts: {
       basePart: {
@@ -27,21 +27,11 @@ const CreateProjectForm = () => {
             isValid: false,
             isTouched: false,
           },
-          desc: {
+          text: {
             value: "",
             isValid: false,
             isTouched: false,
-          },
-          urlTitle: {
-            value: "",
-            isValid: false,
-            isTouched: false,
-          },
-          photo: {
-            value: "",
-            isValid: false,
-            isTouched: false,
-          },
+          }
         },
       },
     },
@@ -49,30 +39,28 @@ const CreateProjectForm = () => {
   };
   const { formState, inputChange, touchHandler } = useGortozForm(initFormData);
 
-  const postCreateProject = async () => {
+  const postCreateNews = async () => {
     try {
       const responseData = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/api/admin/create-project`,
+        `${process.env.REACT_APP_BACKEND_URL}/api/admin/create-news/${urlTitle}`,
         "POST",
         JSON.stringify({
           title: formState.parts.basePart.inputs.title.value,
-          desc: formState.parts.basePart.inputs.desc.value,
-          urlTitle: formState.parts.basePart.inputs.urlTitle.value,
-          photo: formState.parts.basePart.inputs.photo.value,
-        }),
+          text: formState.parts.basePart.inputs.text.value
+      }),
         {
           "Content-Type": "application/json",
           Authorization: "Bearer " + auth.token,
         }
       );
       if (responseData.msg === "OK")
-        navigate(`/projekt/${formState.parts.basePart.inputs.urlTitle.value}`);
+        navigate(`/projekt/${urlTitle}`);
     } catch (err) {}
   };
 
   return (
     <BForm classNames="edit-project-form">
-      <BFormPart title="Informace o projektu">
+      <BFormPart title="Nová aktualita">
         <BInput
           title="Název"
           input={formState.parts.basePart.inputs.title}
@@ -85,56 +73,20 @@ const CreateProjectForm = () => {
         />
         <BTextarea
           title="Popis"
-          input={formState.parts.basePart.inputs.desc}
+          input={formState.parts.basePart.inputs.text}
           partId="basePart"
-          inputId="desc"
+          inputId="text"
           validators={[VALIDATOR_REQUIRE()]}
           error="Prosím, zadejte popis"
-          inputChange={inputChange}
-          touchHandler={touchHandler}
-        />
-        {/* <BInput
-          title="Popis"
-          input={formState.parts.basePart.inputs.desc}
-          partId="basePart"
-          inputId="desc"
-          validators={[VALIDATOR_REQUIRE()]}
-          error="Prosím, zadejte popis"
-          inputChange={inputChange}
-          touchHandler={touchHandler}
-        /> */}
-        <BInput
-          title="URL název"
-          input={formState.parts.basePart.inputs.urlTitle}
-          partId="basePart"
-          inputId="urlTitle"
-          validators={[VALIDATOR_REQUIRE()]}
-          error="Prosím, zadejte URL název"
-          inputChange={inputChange}
-          touchHandler={touchHandler}
-        />
-        <ImageUpload
-          id="image"
-          onInput={inputChange}
-          errorText="Prosím nahrajte obrázek"
-        />
-        <BInput
-          // classNames="hidden"
-          title="Obrázek"
-          input={formState.parts.basePart.inputs.photo}
-          partId="basePart"
-          inputId="photo"
-          validators={[VALIDATOR_REQUIRE()]}
-          error="Prosím, zadejte URL obrázku"
           inputChange={inputChange}
           touchHandler={touchHandler}
         />
       </BFormPart>
-      <BSubmit onClick={postCreateProject} isValid={formState.formIsValid}>
-        Vytvořit projekt
+      <BSubmit onClick={postCreateNews} isValid={formState.formIsValid}>
+        Vytvořit aktualitu
       </BSubmit>
     </BForm>
   );
 };
 
-export default CreateProjectForm;
+export default CreateNewsForm;

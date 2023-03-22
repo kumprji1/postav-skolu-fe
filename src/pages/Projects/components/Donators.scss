@@ -1,0 +1,19 @@
+@import '../../../styles/shared';
+
+.donatable-donator--item {
+    display: flex;
+    flex-direction: row;
+    color: black;
+    border-bottom: 1px solid #aeaeae;
+    padding: 0.4rem;
+
+    .donators-name {
+        width: 35%;
+    }
+    .donators-note {
+        width: 50%;
+    }
+    .donators-price {
+        width: 15%;
+    }
+}

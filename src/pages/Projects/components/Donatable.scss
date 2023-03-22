@@ -55,6 +55,20 @@
     }
 }
 
+.donatable-show-donators--btn {
+    margin-top: 0.2rem;
+}
+
+.donatable-donators--wrapper {
+    background-color: $lightPrimaryColor;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 1000ms;
+}
+
+.donatable-donators--wrapper--show {
+    max-height: 30rem;
+}
 .donate-btn-to-cart--disabled {
     cursor: not-allowed;
     background-color: $greyColor;
@@ -150,10 +164,6 @@
 }
 
 @media (min-width: $contentMaxWidth) {
-    .donatable {
-
-    }
-
     .donatable-upper-part {
         @include flexCenterDir(row);
         justify-content: space-between;

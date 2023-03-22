@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import DonationOptions from "./DonationOptions";
 
-import "./Donatable.scss";
 import ProgressBar from "./ProgressBar";
+import Donators from "./Donators";
+
+import "./Donatable.scss";
 
 const Donatable = (props) => {
+  const [showDonators, setShowDonators] = useState(false);
+
   return (
     <div className="donatable">
       <div className="donatable-upper-part">
@@ -19,12 +23,28 @@ const Donatable = (props) => {
           <p className="donatable-desc">{props.donatable.desc}</p>
         </div>
         <div className="donatable-money-stats">
-        <h2 className="donatable-demandedMoney">Potřebujeme vybrat: {props.donatable.demandedMoney}</h2>
-        <h2 className="donatable-earnedMoney">Již máme: {props.donatable.earnedMoney}</h2>
+          <h2 className="donatable-demandedMoney">
+            Potřebujeme vybrat: {props.donatable.demandedMoney}
+          </h2>
+          <h2 className="donatable-earnedMoney">
+            Již máme: {props.donatable.earnedMoney}
+          </h2>
+          <button
+            className={`${
+              showDonators ? "btn--primary" : "btn--secondary"
+            } btn--small donatable-show-donators--btn`}
+            onClick={() => setShowDonators((prev) => !prev)}
+          >
+            Přispěvatelé
+          </button>
         </div>
       </div>
       <div className="donatable-bottom-part">
-      <ProgressBar earnedMoney={props.donatable.earnedMoney} demandedMoney={props.donatable.demandedMoney} />
+        <Donators show={showDonators} donatableId={props.donatable._id} />
+        <ProgressBar
+          earnedMoney={props.donatable.earnedMoney}
+          demandedMoney={props.donatable.demandedMoney}
+        />
         <DonationOptions donatable={props.donatable} />
       </div>
     </div>
