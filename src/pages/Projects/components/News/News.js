@@ -5,6 +5,7 @@ import { useHttp } from "../../../../hooks/http-hook";
 import { Roles } from "../../../../utils/roles";
 
 import "./News.scss";
+import NewsItem from "./NewsItem";
 const News = (props) => {
   const auth = useContext(AuthContext);
   const { sendRequest, isLoading } = useHttp();
@@ -16,37 +17,32 @@ const News = (props) => {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/news/${props.projectId}`
         );
-        setLoadedNews(responseData);
+        setLoadedNews(responseData.reverse());
       } catch (err) {}
     };
     fetchNews();
   }, [props.projectId]);
+
+  const deleteNewsHandler = async (newsId) => {
+    console.log('Delete: ', newsId)
+    try {
+      const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/news/delete/${newsId}`, 'PATCH', null, {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + auth.token
+      })
+      // if (responseData.msg === 'ok') {
+        setLoadedNews(loadedNews.filter(news => news._id !== newsId))
+      // }
+    } catch (err) {
+      
+    }
+  }
+
   return (
     <section className="project-news-section">
       <h1 className="project-news-section__title">Aktuality:</h1>
       <div className="project-news--list">
-        {loadedNews.map((news) => (
-          <div className="project-news--item">
-            <h1 className="project-news--item__title">
-              {news.title}
-            </h1>
-            <p className="project-news--item__date">{news.date}</p>
-            <p className="project-news--item__text">
-             {news.text}
-            </p>
-          </div>
-        ))}
-
-        <div className="project-news--item">
-          <h1 className="project-news--item__title">
-            Jsme na začátku. Pomozte!
-          </h1>
-          <p className="project-news--item__date">22. 3. 2023</p>
-          <p className="project-news--item__text">
-            Snažíme se ffdfsdf fsd fs fds f s ff s fds mfksdo mfsio fmsido fsiod
-            fidos
-          </p>
-        </div>
+        {loadedNews.map((news) => <NewsItem news={news} key={news._id} deleteNewsHandler={() => deleteNewsHandler(news._id)} /> )}
       </div>
       {auth.role == Roles.ADMIN && (
         <Link

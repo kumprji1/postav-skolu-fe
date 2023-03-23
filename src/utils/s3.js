@@ -1,4 +1,5 @@
 import aws from 'aws-sdk'
+import { v4 as uuidv4 } from 'uuid';
 
 const region = process.env.REACT_APP_REGION
 const bucketName = process.env.REACT_APP_BUCKET_NAME
@@ -13,8 +14,8 @@ const s3 = new aws.S3({
 })
 
 export const generateUploadURL = async () => {
-    const imageName = "img_postav_skolu_" + new Date().toDateString() + '.jpg'
-
+    const imageName = "img_postav_skolu_" + uuidv4() + '.jpg'
+    console.log(imageName)
     const params = ({
         Bucket: bucketName,
         Key: imageName,

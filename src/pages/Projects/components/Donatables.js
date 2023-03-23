@@ -10,21 +10,36 @@ const Donatables = (props) => {
   const projectId = props.project._id
   const { sendRequest } = useHttp()  
 
-  const [donatable, setDonatables] = useState([])
+  const [donatables, setDonatables] = useState([])
 
   useEffect(() => {
     const fetchDonatables = async () => {
       console.log('Fetching Donatables');
-      const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/donatables/${projectId}`)
+      const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/donatables-by-project-id/${projectId}`)
       setDonatables(responseData)
     }
     fetchDonatables()
   }, [projectId])
 
+  const deleteDonatableHandler = async (donatableId) => {
+    console.log('Delete: ', donatableId)
+    try {
+      const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/donatable/delete/${donatableId}`, 'PATCH', null, {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ' + auth.token
+      })
+      // if (responseData.msg === 'ok') {
+        setDonatables(donatables.filter(don => don._id !== donatableId))
+      // }
+    } catch (err) {
+      
+    }
+  }
+
   return (
     <section className='section-donatables'>
         <h2 className='donatables-na-co-chci-darovat'>Na co chci darovat: </h2>
-        {donatable.map((d,i) => <Donatable donatable={d} key={i} />)}
+        {donatables.map((d,i) => <Donatable donatable={d} key={i} deleteHandler={() => deleteDonatableHandler(d._id)} />)}
         {auth.role == Roles.ADMIN &&  <NavLink className='bbutton-outline' to={`/novy-darovatelny-box/${projectId}`}>Přidat darovatelný box</NavLink>}
     </section>
   )

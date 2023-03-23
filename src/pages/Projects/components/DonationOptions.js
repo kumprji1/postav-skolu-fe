@@ -58,7 +58,7 @@ const DonationOptions = (props) => {
 
   return (
     <Fragment>
-      {props.donatable.preparedPrices.map((p) => (
+      {props.donatable.preparedPrices.split(',').map((p) => (
         <button
           className={
             p == formState.parts.basePart.inputs.price.value

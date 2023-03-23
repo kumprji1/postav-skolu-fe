@@ -17,7 +17,7 @@ const Header = (props) => {
           </Link>
           <div className="right">
             <button
-              className="btn--secondary btn-small nav-menu-btn"
+              className="btn--secondary nav-menu-btn"
               onClick={() => setShowMobileNav((prev) => !prev)}
             >
               MENU
@@ -26,16 +26,16 @@ const Header = (props) => {
               {props.auth.token ? (
                 <Fragment>
                   <NavLink
-                    className="btn--secondary btn-small"
+                    className="btn--secondary"
                     to="/moje-objednavky"
                   >
                     Moje objednávky
                   </NavLink>
-                  <NavLink className="btn--secondary btn-small" to="/kosik">
+                  <NavLink className="btn--secondary" to="/kosik">
                     Košík
                   </NavLink>
                   <button
-                    className="btn--secondary btn-small"
+                    className="btn--secondary"
                     onClick={props.auth.logout}
                   >
                     Odhlásit se
@@ -44,12 +44,12 @@ const Header = (props) => {
               ) : (
                 <Fragment>
                   <NavLink
-                    className="btn--secondary btn-small"
+                    className="btn--secondary"
                     to="/prihlaseni"
                   >
                     Přihlásit se
                   </NavLink>
-                  <NavLink className="btn--secondary btn-small" to="/kosik">
+                  <NavLink className="btn--secondary" to="/kosik">
                     Košík
                   </NavLink>
                 </Fragment>
@@ -67,16 +67,16 @@ const Header = (props) => {
           {props.auth.token ? (
                 <Fragment>
                   <NavLink
-                    className="btn--secondary btn-small"
+                    className="btn--secondary"
                     to="/moje-objednavky"
                   >
                     Moje objednávky
                   </NavLink>
-                  <NavLink className="btn--secondary btn-small" to="/kosik">
+                  <NavLink className="btn--secondary" to="/kosik">
                     Košík
                   </NavLink>
                   <button
-                    className="btn--secondary btn-small"
+                    className="btn--secondary"
                     onClick={props.auth.logout}
                   >
                     Odhlásit se
@@ -85,12 +85,12 @@ const Header = (props) => {
               ) : (
                 <Fragment>
                   <NavLink
-                    className="btn--secondary btn-small"
+                    className="btn--secondary"
                     to="/prihlaseni"
                   >
                     Přihlásit se
                   </NavLink>
-                  <NavLink className="btn--secondary btn-small" to="/kosik">
+                  <NavLink className="btn--secondary" to="/kosik">
                     Košík
                   </NavLink>
                 </Fragment>

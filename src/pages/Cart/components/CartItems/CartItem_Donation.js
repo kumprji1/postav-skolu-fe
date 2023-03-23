@@ -9,7 +9,7 @@ const CartItem_Donation = (props) => {
     <div className="cart-item-donation">
       <div className="cart-item-donation-upper"> 
       <div className="cart-item-donation-photo--wrapper">
-        <img src={`${process.env.REACT_APP_BACKEND_URL}` + props.don.photo} />
+        <img src={props.don.photo} />
       </div>
       <h2 className="cart-item-donation-title">{props.don.title} {props.don.isAnonymous ? '(anonymně)' : ''}</h2>
       <p>Cena: {props.don.price}</p>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import DonationOptions from "./DonationOptions";
 
@@ -6,17 +6,19 @@ import ProgressBar from "./ProgressBar";
 import Donators from "./Donators";
 
 import "./Donatable.scss";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import { Roles } from "../../../utils/roles";
 
 const Donatable = (props) => {
   const [showDonators, setShowDonators] = useState(false);
-
+  const [showDeleteBtn, setShowDeleteBtn] = useState(false)
+  const auth = useContext(AuthContext)
   return (
     <div className="donatable">
       <div className="donatable-upper-part">
         <div className="donatable-photo--wrapper">
-          <img
-            src={`${process.env.REACT_APP_BACKEND_URL}` + props.donatable.photo}
-          />
+          <img src={props.donatable.photo} />
         </div>
         <div className="donatable-title-desc--wrapper">
           <h1 className="donatable-title">{props.donatable.title}</h1>
@@ -46,6 +48,40 @@ const Donatable = (props) => {
           demandedMoney={props.donatable.demandedMoney}
         />
         <DonationOptions donatable={props.donatable} />
+        {auth.role === Roles.ADMIN && (
+          <div>
+            <Link
+              to={`/upravit/sbirka/${props.donatable._id}`}
+              className="btn--secondary btn-small"
+            >
+              Upravit
+            </Link>
+            {!showDeleteBtn && (
+              <button
+                onClick={() => setShowDeleteBtn(true)}
+                className="btn--secondary btn-small"
+              >
+                Odstranit
+              </button>
+            )}
+            {showDeleteBtn && (
+              <div>
+                <button
+                  onClick={() => setShowDeleteBtn(false)}
+                  className="btn--secondary btn-small"
+                >
+                  Zpět
+                </button>
+                <button
+                  onClick={props.deleteHandler}
+                  className="btn-danger btn-small"
+                >
+                  Doopravdy odstanit
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
