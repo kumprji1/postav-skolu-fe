@@ -1,77 +1,125 @@
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
 
 import { useHttp } from "../../../hooks/http-hook";
 
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import BForm from "../../../components/Base/BForm/BForm";
+import BFormPart from "../../../components/Base/BForm/BFormPart";
+import BInput from "../../../components/Base/BForm/BInput";
+import { useGortozForm } from "../../../hooks/g-form-hook";
+import { VALIDATOR_MIN, VALIDATOR_REQUIRE } from "../../../utils/validators";
+import BTextarea from "../../../components/Base/BForm/BTextarea";
+import BSubmit from "../../../components/Base/BForm/BSubmit";
+import ImageUpload from "../../../components/UI/FormElements/ImageUpload";
 
 const EditProjectForm = (props) => {
-  const auth = useContext(AuthContext)
-  const navigate = useNavigate()
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const { sendRequest } = useHttp();
-  // Form (react-hook-form)
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      title: props.project.title,
-      desc: props.project.desc,
-      urlTitle: props.project.urlTitle,
-      photo: props.project.photo,
-    },
-  });
 
-  const onSubmit = async (data) => {
+  const initFormData = {
+    parts: {
+      basePart: {
+        required: true,
+        partIsValid: true,
+        inputs: {
+          title: {
+            value: props.project.title,
+            isValid: true,
+            isTouched: false,
+          },
+          desc: {
+            value: props.project.desc,
+            isValid: true,
+            isTouched: false,
+          },
+          photo: {
+            value: props.project.photo,
+            isValid: true,
+            isTouched: false,
+          },
+          urlTitle: {
+            value: props.project.urlTitle,
+            isValid: true,
+            isTouched: false,
+          }
+        },
+      },
+    },
+    formIsValid: true,
+  };
+  const { formState, inputChange, touchHandler } = useGortozForm(initFormData);
+
+  const updateProjectHandler = async () => {
     try {
-        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/edit-project/${props.project._id}`, 'PATCH', JSON.stringify(data), {
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/edit-project/${props.project._id}`, 'PATCH', JSON.stringify({
+            title: formState.parts.basePart.inputs.title.value,
+            urlTitle: formState.parts.basePart.inputs.urlTitle.value,
+            desc: formState.parts.basePart.inputs.desc.value,
+            photo: formState.parts.basePart.inputs.photo.value
+        }), {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + auth.token
         })
-        console.log('data:', data)
-        if (responseData.msg === 'OK') navigate(`/projekt/${data.urlTitle}`)
+        if (responseData.msg === 'OK') navigate(-1)
     } catch (err) {}
-  };
+  }
 
   return (
-    <form className="edit-project-form" onSubmit={handleSubmit(onSubmit)}>
-      <input
-        type="text"
-        className="input-text"
-        placeholder="Název"
-        {...register("title", { required: "Zadejte jméno", maxLength: 80 })}
-      />
-      {errors.title && <p role="alert">{errors.title?.message}</p>}
-      <textarea
-        {...register("desc", {
-          required: "Zadejte popis projektu",
-          maxLength: 1000,
-        })}
-      />
-      <input
-        type="text"
-        className="input-text"
-        placeholder="URL Název"
-        {...register("urlTitle", {
-          required: "Zadejte url-adresu projektu",
-          min: 3,
-          maxLength: 100,
-        })}
-      />
-      <input
-        type="text"
-        className="input-text"
-        placeholder="Obrázek"
-        {...register("photo", {
-          required: "Zadejte URL obrázku",
-          maxLength: 2000,
-        })}
-      />
-      {Object.keys(errors).length === 0 && <input type="submit" className="btn-warning-outline" value='Aktualizovat' />} 
-    </form>
+    <BForm classNames="edit-project-form">
+      <BFormPart title="Informace o projektu">
+        <BInput
+          title="Název"
+          input={formState.parts.basePart.inputs.title}
+          partId="basePart"
+          inputId="title"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte název"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BTextarea
+          title="Popis"
+          input={formState.parts.basePart.inputs.desc}
+          partId="basePart"
+          inputId="desc"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte popis"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <BInput
+          title="URL název"
+          input={formState.parts.basePart.inputs.urlTitle}
+          partId="basePart"
+          inputId="urlTitle"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte URL název"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+        <ImageUpload
+          id="image"
+          onInput={inputChange}
+          errorText="Prosím nahrajte obrázek"
+        />
+        <BInput
+          // classNames="hidden"
+          title="Obrázek"
+          input={formState.parts.basePart.inputs.photo}
+          partId="basePart"
+          inputId="photo"
+          validators={[VALIDATOR_REQUIRE()]}
+          error="Prosím, zadejte URL obrázku"
+          inputChange={inputChange}
+          touchHandler={touchHandler}
+        />
+      </BFormPart>
+      <BSubmit onClick={updateProjectHandler} isValid={formState.formIsValid}>
+        Aktualizovat projekt
+      </BSubmit>
+    </BForm>
   );
 };
 
