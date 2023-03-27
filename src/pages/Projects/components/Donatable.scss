@@ -164,6 +164,9 @@
 }
 
 @media (min-width: $contentMaxWidth) {
+    .donatable {
+        width: 45rem
+    }
     .donatable-upper-part {
         @include flexCenterDir(row);
         justify-content: space-between;

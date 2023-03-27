@@ -21,14 +21,14 @@ const EditNewsForm = (props) => {
     parts: {
       basePart: {
         required: true,
-        partIsValid: false,
+        partIsValid: true,
         inputs: {
           title: {
             value: props.news.title,
             isValid: true,
             isTouched: false,
           },
-          desc: {
+          text: {
             value: props.news.text,
             isValid: true,
             isTouched: false,

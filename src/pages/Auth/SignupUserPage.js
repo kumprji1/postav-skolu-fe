@@ -70,11 +70,12 @@ const SignupUserPage = () => {
     formIsValid: false,
   };
   const { formState, inputChange, touchHandler } = useGortozForm(initFormData);
+
   // On Submit Form
   const postRegisterHandler = async () => {
     let responseData;
     try {
-      // Retrieving user data
+      // seding user data
       responseData = await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/auth/register-user`,
         "POST",

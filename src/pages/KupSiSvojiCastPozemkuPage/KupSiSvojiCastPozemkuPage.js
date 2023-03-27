@@ -109,7 +109,7 @@ const KupSiSvojiCastPozemkuPage = (props) => {
         <div className="project-detail-main-img--wrapper">
           <img
             className="project-detail-main-img"
-            src={`${process.env.REACT_APP_BACKEND_URL}` + props.project.photo}
+            src={props.project.photo}
           />
         </div>
         <p className="project-detail-desc">{props.project.desc}</p>

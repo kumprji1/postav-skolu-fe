@@ -120,7 +120,7 @@ const CreateDonatableForm = (props) => {
           touchHandler={touchHandler}
         />
         <BInput
-          title="Chceme vybrat"
+          title="Předpřipravené částky"
           input={formState.parts.basePart.inputs.preparedPrices}
           partId="basePart"
           inputId="preparedPrices"

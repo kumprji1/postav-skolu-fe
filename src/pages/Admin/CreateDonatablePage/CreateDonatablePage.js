@@ -8,7 +8,7 @@ const CreateDonatablePage = () => {
     const { projectId } = useParams()
   return (
     <>
-        <BTitle>Vytvořit darovatlný box</BTitle>
+        <BTitle>Vytvořit darovatelný box</BTitle>
         <CreateDonatableForm projectId={projectId} />
     </>
   )

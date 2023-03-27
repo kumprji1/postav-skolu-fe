@@ -10,7 +10,7 @@ const ProjectItem = ({project}) => {
         &rsquo;&rsquo;{project.title}&rsquo;&rsquo;
       </h1>
       <div className="project-item__img--wrapper">
-        <img className="project-item__img" src={`${process.env.REACT_APP_BACKEND_URL}` + project.photo}/>
+        <img className="project-item__img" src={project.photo}/>
       </div>
     </Link>
   );
