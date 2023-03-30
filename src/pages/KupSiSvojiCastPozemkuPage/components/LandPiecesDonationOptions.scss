@@ -12,3 +12,20 @@
 .land-pieces-donation-options--wrapper {
     @include useShadows();
 }    
+
+.land-pieces-input-custom-note {
+    padding: 0.5rem 1rem;
+    margin: 0 0 1rem 1rem;
+    font-size: 1rem;
+}
+
+
+.land-pieces-btn-to-cart {
+    background-color: $primaryColor;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}

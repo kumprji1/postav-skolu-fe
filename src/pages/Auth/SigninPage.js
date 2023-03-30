@@ -73,15 +73,14 @@ const SigninPage = () => {
     } catch (err) {}
   }
   const google = window.google
+
   const handleCallbackResponse = (res) => {
-    console.log(res.credential)
     const user = jwt_decode(res.credential)
-    console.log(user)
     postLoginGoogle(user.email, user.given_name, user.family_name)
   }
   useEffect(() => {
         google.accounts.id.initialize({
-            client_id: "40931816978-2vktfobt4l4kn9pusobsel4jm27mj2af.apps.googleusercontent.com",
+            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
             callback: handleCallbackResponse
         })
         google.accounts.id.renderButton(

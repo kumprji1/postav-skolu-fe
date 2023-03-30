@@ -68,14 +68,14 @@ const LandPiecesDonationOptions = ({ baseDonationData }) => {
           </select> */}
           </div>
           <input
-            className="donatable-input-custom-note"
+            className="land-pieces-input-custom-note"
             placeholder="Chci sdělit:"
             type="text"
             onChange={(e) => baseDonationData.inputNote(e.currentTarget.value)}
             value={baseDonationData.baseDonationState.note}
           ></input>
           <NavLink
-            className={"donate-btn-to-cart"}
+            className={"land-pieces-btn-to-cart"}
             to={"/kosik"}
             onClick={() =>
               cart.addDonations([
@@ -85,7 +85,7 @@ const LandPiecesDonationOptions = ({ baseDonationData }) => {
                   isAnonymous: baseDonationData.baseDonationState.isAnonymous,
                   note: baseDonationData.baseDonationState.note,
                   title: "Kup si svoji část pozemku",
-                  photo: "/imgs/projects/3ac.jpg",
+                  photo: "https://postav-skolu.s3.eu-central-1.amazonaws.com/img_postav_skolu_ec08ea65-bb19-4c21-b745-fd20e6181d62.jpg",
                   id: new Date().toISOString(),
                 },
               ])

@@ -8,7 +8,6 @@ import Footer from "./components/Footer/Footer";
 // Pages
 import Homepage from "./pages/Homepage/Homepage";
 import KupSiSvojiCastPozemkuPage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuPage";
-import ProjectDetailDonatePage from "./pages/Projects/ProjectDetailPage/ProjectDetailDonatePage";
 import SignupUserPage from "./pages/Auth/SignupUserPage";
 import SigninPage from "./pages/Auth/SigninPage";
 import ProjectDetailPage from "./pages/Projects/ProjectDetailPage/ProjectDetailPage";
@@ -33,6 +32,7 @@ import { useCart } from "./hooks/cart-hook";
 import { Roles } from "./utils/roles";
 
 import "./App.scss";
+import KupSiSvojiCastPozemkuStaraVerzePage from "./pages/KupSiSvojiCastPozemkuPage/KupSiSvojiCastPozemkuStaraVerzePage";
 
 function App() {
   const auth = useAuth();
@@ -55,6 +55,8 @@ function App() {
               <Main classes="main-content--wide(tedNe)">
                 <Routes>
                   <Route path="/" element={<Homepage />} />
+
+                  <Route path="/kup-si-svoji-cast-pozemku-stara-verze" element={<KupSiSvojiCastPozemkuStaraVerzePage />} />
 
                   // Projects
                   {auth.role == Roles.ADMIN && <Route path="/novy-projekt" element={<CreateProjectPage />} />}

@@ -20,7 +20,7 @@ const Experience_Land = (props) => {
   return (
     <>
       <OrbitControls
-        zoomSpeed={1}
+        zoomSpeed={3}
         mouseButtons={{
           LEFT: MOUSE.PAN,
           RIGHT: MOUSE.PAN,
