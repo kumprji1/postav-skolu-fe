@@ -2,13 +2,14 @@
 
 footer {
     @include flexCenter();
-    background-color: aquamarine;
+    padding: 1rem 0;
+    background-color: $secondaryColor;
 }
 
 .footer-content {
     @include flexCenter();
     width: 100%;
-    background-color: beige;
+    background-color: $secondaryColor;
 }
 
 @media(min-width: $contentMaxWidth) {

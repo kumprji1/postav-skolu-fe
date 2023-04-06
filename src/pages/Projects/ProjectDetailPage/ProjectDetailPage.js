@@ -13,7 +13,7 @@ const ProjectDetailPage = () => {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/projects-by-title/${urlTitle}`)  
+        const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/projects-by-url-title/${urlTitle}`)  
         setProject(responseData)
       } catch (err) {  
       }  

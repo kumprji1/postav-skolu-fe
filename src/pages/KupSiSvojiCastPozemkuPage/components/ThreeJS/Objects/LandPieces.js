@@ -78,7 +78,7 @@ const testDonations = [
 const LandPieces = (props) => {
   const [landPieces, setLandPieces] = useState([]);
   useEffect(() => {
-    console.log("LandPieces(useEffect)");
+
     const createdLandPieces = [];
 
     let landPieceOffset_X = 0;
@@ -92,7 +92,7 @@ const LandPieces = (props) => {
     };
 
     const createLandPiece = (donationWidth, donation) => {
-      // Move to the center of donation piece to display
+      // Umístit do poloviny velikosti daru pro zobrazení
       landPieceOffset_X += donationWidth / 2;
       createdLandPieces.push(
         <LandPiece
@@ -101,14 +101,11 @@ const LandPieces = (props) => {
           offsetX={landPieceOffset_X}
           offsetY={landPieceOffset_Y}
           donation={donation}
-          // setSelectedPiece={props.setSelectedPiece}
         />
       );
-
-      // Sum the second half of donation to get at the end of last don
+      // Přičíst druhou polovinu daru pro získání pozice na konci daru.
       landPieceOffset_X += donationWidth / 2;
-
-      // Update avaible width for next donation(landPiece)
+      // Aktualizace dostupné šířky pro další dar
       avaibleRowWidth -= donationWidth;
     };
 
@@ -116,45 +113,32 @@ const LandPieces = (props) => {
       for (let i = 0; i < props.donations.length; i++) {
         let donationIsWholeDrawn = false;
         let donationWidth = (props.donations[i].price / 100) * A_LENGTH;
-
         while (!donationIsWholeDrawn) {
-          // if (avaibleRowWidth < A_LENGTH) {
-          // //     Start a new row when current row is fully filled (these is no place on the current row even for the smallest donation)
-          //     startNewRow()
-          //  }
           if (avaibleRowWidth < donationWidth) {
-            // Drawing to the end of row
-            console.log("Kreslím do konce řádku: ", avaibleRowWidth);
+            // Dar bude třeba segmentovat, protože se nevejde do konce řádku
             const widthToDrawNext = donationWidth - avaibleRowWidth;
             createLandPiece(avaibleRowWidth, props.donations[i]);
             donationWidth = widthToDrawNext;
             startNewRow();
-            console.log("Zbývá vykreslit: ", widthToDrawNext, donationWidth);
           }
           if (donationWidth <= avaibleRowWidth) {
-            console.log("Donation (no-split)");
+            // Dar není třeba rozdělit na více částí
             createLandPiece(donationWidth, props.donations[i]);
             donationIsWholeDrawn = true;
           }
         }
-        if (i + 1 == props.donations.length) {
+        if (i + 1 === props.donations.length) {
           setLastOffsets(landPieceOffset_X, landPieceOffset_Y);
         }
       }
     };
+
     createLandPieces();
     setLandPieces(createdLandPieces);
-    // console.log('createdLandPieces: ', createdLandPieces)
   }, [props.donations]);
   return (
     <>
-      {/* <Suspense fallback={null}>
-        <Bounds clip margin={0.8}> */}
-          {/* <SelectToZoom> */}
-            {landPieces}
-          {/* </SelectToZoom> */}
-        {/* </Bounds>
-      </Suspense> */}
+      {landPieces}
     </>
   );
 };

@@ -97,7 +97,7 @@ const DonationOptions = (props) => {
           type="text"
           onChange={(e) => {
             inputChange("basePart", "price", e.currentTarget.value, [
-              VALIDATOR_MIN(100),
+              VALIDATOR_MIN(10),
             ]);
           }}
           value={formState.parts.basePart.inputs.price.value}

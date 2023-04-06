@@ -5,7 +5,6 @@ import BFormPart from "../../../components/Base/BForm/BFormPart";
 import BInput from "../../../components/Base/BForm/BInput";
 import BSubmit from "../../../components/Base/BForm/BSubmit";
 import BTextarea from "../../../components/Base/BForm/BTextarea";
-import ImageUpload from "../../../components/UI/FormElements/ImageUpload";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useGortozForm } from "../../../hooks/g-form-hook";
 import { useHttp } from "../../../hooks/http-hook";
