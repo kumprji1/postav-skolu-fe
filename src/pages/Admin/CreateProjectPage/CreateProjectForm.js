@@ -10,11 +10,13 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { useGortozForm } from "../../../hooks/g-form-hook";
 import { useHttp } from "../../../hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../utils/validators";
+import SwingSpinner from "../../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const CreateProjectForm = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
 
   const initFormData = {
     parts: {
@@ -133,6 +135,8 @@ const CreateProjectForm = () => {
       <BSubmit onClick={postCreateProject} isValid={formState.formIsValid}>
         Vytvořit projekt
       </BSubmit>
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </BForm>
   );
 };

@@ -9,7 +9,7 @@ const Homepage = () => {
     <Fragment>
       <AboutSection />
       <ProjectsSection />
-      <ImageSection />
+      {/* <ImageSection /> */}
     </Fragment>
   );
 };

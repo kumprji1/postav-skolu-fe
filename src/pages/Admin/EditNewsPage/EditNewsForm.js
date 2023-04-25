@@ -11,11 +11,13 @@ import { useGortozForm } from "../../../hooks/g-form-hook";
 import { VALIDATOR_REQUIRE } from "../../../utils/validators";
 import BTextarea from "../../../components/Base/BForm/BTextarea";
 import BSubmit from "../../../components/Base/BForm/BSubmit";
+import SwingSpinner from "../../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const EditNewsForm = (props) => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
 
   const initFormData = {
     parts: {
@@ -78,6 +80,8 @@ const EditNewsForm = (props) => {
         />
       </BFormPart>
       <BSubmit isValid={formState.formIsValid} onClick={updateNewsHandler}>Aktualizovat</BSubmit>
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </BForm>
   );
 };

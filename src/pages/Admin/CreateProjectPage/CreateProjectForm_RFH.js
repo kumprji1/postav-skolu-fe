@@ -36,7 +36,6 @@ const CreateProjectForm = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      console.log("data:", data);
       if (responseData.msg === "OK") navigate(`/projekt/${data.urlTitle}`);
     } catch (err) {}
   };

@@ -18,7 +18,6 @@ const TestingFormPage = () => {
   useEffect(() =>{
     const fetchData = async () => {
       const responseData = await sendRequest('https://api.publicapis.org/entries')
-      console.log(responseData)
     }
     fetchData()
   } ,[])

@@ -9,12 +9,14 @@ import ImageUpload from "../../../components/UI/FormElements/ImageUpload";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useGortozForm } from "../../../hooks/g-form-hook";
 import { useHttp } from "../../../hooks/http-hook";
-import { VALIDATOR_MIN, VALIDATOR_REQUIRE } from "../../../utils/validators";
+import { VALIDATOR_MIN, VALIDATOR_PREPARED_PRICES, VALIDATOR_REQUIRE } from "../../../utils/validators";
+import SwingSpinner from "../../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const CreateDonatableForm = (props) => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
 
   const initFormData = {
     parts: {
@@ -124,8 +126,8 @@ const CreateDonatableForm = (props) => {
           input={formState.parts.basePart.inputs.preparedPrices}
           partId="basePart"
           inputId="preparedPrices"
-          validators={[VALIDATOR_REQUIRE()]}
-          error="Prosím, zadejte předpřipravené částky"
+          validators={[VALIDATOR_REQUIRE(), VALIDATOR_PREPARED_PRICES()]}
+          error="Prosím, zadetjte alespoň 3 předpřipravené částky oddělné čárkou"
           placeholder="100,200,500"
           inputChange={inputChange}
           touchHandler={touchHandler}
@@ -150,7 +152,10 @@ const CreateDonatableForm = (props) => {
       <BSubmit onClick={postCreateDonatable} isValid={formState.formIsValid}>
         Vytvořit sbírku
       </BSubmit>
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </BForm>
+    
   );
 };
 

@@ -13,6 +13,10 @@
     @include useShadows();
 }    
 
+.land-pieces-donation-options--items {
+    height: auto;
+}
+
 .land-pieces-input-custom-note {
     padding: 0.5rem 1rem;
     margin: 0 0 1rem 1rem;
@@ -24,6 +28,7 @@
     background-color: $primaryColor;
     padding: 0.5rem 1rem;
     margin: 0 1rem;
+    // margin-bottom: 2rem;
     color: white;
     text-decoration: none;
     font-size: 1.2rem;

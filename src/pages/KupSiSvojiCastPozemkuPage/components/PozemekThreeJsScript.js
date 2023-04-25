@@ -19,7 +19,7 @@ const parameters = {
   backgroundC: "#ffffff",
   O3_hoverC: "#ff6600",
   O4_hoverC: "#4033f0",
-  avaibleC: "#cccccc",
+  availableC: "#cccccc",
 };
 
 //  gui.addColor(parameters, 'backgroundC')
@@ -174,7 +174,7 @@ const drawLandPiece = (donationWidth, donation) => {
   // Sum the second half of donation to get at the end of last don
   landPieceOffset_X += donationWidth / 2;
 
-  // Update avaible width for next donation(landPiece)
+  // Update available width for next donation(landPiece)
   avaibleRowWidth -= donationWidth;
 };
 
@@ -294,7 +294,6 @@ export const pozemekThreeStart = (
   scene.add(mapGrey)
 
   if (priceToDonate) {
-    console.log("Budu kreslit kolik chci přispět: ", priceToDonate);
     visualizePriceOnMap(priceToDonate);
   }
   /**
@@ -360,7 +359,7 @@ export const pozemekThreeStart = (
   //         O3_obj.userData = {
   //                         i: i,
   //                         j: j,
-  //                         avaible: !o3Data.isBought,
+  //                         available: !o3Data.isBought,
   //                         selected: false
   //                     }
   //                     objectsToTest.push(O3_obj)
@@ -376,7 +375,7 @@ export const pozemekThreeStart = (
   // //         O3_obj.userData = {
   // //             i: i,
   // //             j: j,
-  // //             avaible: true,
+  // //             available: true,
   // //             selected: false
   // //         }
   // //         if (i === j) O3_obj.userData.selected = true
@@ -391,13 +390,13 @@ export const pozemekThreeStart = (
       if (i === j) {
         O3_mat = new THREE.MeshBasicMaterial({ color: parameters.O3_hoverC })
       } else {
-        O3_mat = new THREE.MeshBasicMaterial({ color: parameters.avaibleC })
+        O3_mat = new THREE.MeshBasicMaterial({ color: parameters.availableC })
       }
       const O3_obj = new THREE.Mesh(O3_geo, O3_mat)
       O3_obj.translateY(i * 3 + offsetY)
       O3_obj.translateX(j * 3 + offsetX)
       O3_obj.rotateZ(angle_90)
-      O3_obj.userData = {i: i,j: j,avaible: true,selected: false}
+      O3_obj.userData = {i: i,j: j,available: true,selected: false}
       if (i === j) O3_obj.userData.selected = true
       objectsToTest.push(O3_obj)
       O3_group.add(O3_obj)
@@ -415,7 +414,6 @@ export const pozemekThreeStart = (
   // O3_group.translateX(0)
   // O3_group.translateY(0)
   // scene.add(O3_group)
-  console.log("O3Group shown");
 
   /**
    * BluePlane (O4 - Object 4 edges(vertices)) 200,-
@@ -437,7 +435,7 @@ export const pozemekThreeStart = (
   //             O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.O4_hoverC})
 
   //         } else {
-  //             O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.avaibleC})
+  //             O4_mat = new THREE.MeshBasicMaterial({ color:  parameters.availableC})
   //         }
   //         const O4_obj = new THREE.Mesh(O4_geo, O4_mat)
   //         O4_obj.translateY(i * 3 + offsetY)
@@ -446,7 +444,7 @@ export const pozemekThreeStart = (
   //         O4_obj.userData = {
   //             i: i,
   //             j: j,
-  //             avaible: true,
+  //             available: true,
   //             selected: false
   //         }
   //         if (i === j) O4_obj.userData.selected = true
@@ -476,7 +474,6 @@ export const pozemekThreeStart = (
     width: window.innerWidth,
     height: window.innerHeight,
   };
-  console.log(sizes);
 
   window.addEventListener("resize", () => {
     // // Update sizes
@@ -514,32 +511,27 @@ export const pozemekThreeStart = (
 
     // Clicks to Objects
     // Objects
-    console.log("objectsToTest in click listener: ", objectsToTest);
     const intersects = raycaster.intersectObjects(objectsToTest);
 
-    console.log("Intersects: ", intersects);
     for (const intersect of intersects) {
-      if (intersect.object.userData.avaible) {
-        // pozemek lze zakoupit
+
+      if (intersect.object.userData.available) {
+        // segment lze zakoupit
         if (intersect.object.userData.selected) {
-          // pozemek již vybrán
-          intersect.object.material.color.set(parameters.avaibleC);
-          intersect.object.userData.selected = false;
-          console.log("Odvybírám");
-          removePiece(intersect.object.userData.number);
-          // odebrat z košíku
+          // segment již vybrán, odebrat ze seznamu vybraných částí
+          intersect.object.material.color.set(parameters.availableC)
+          intersect.object.userData.selected = false
+          removePiece(intersect.object.userData.number)
         } else {
-          // vybrání pozemku
-          intersect.object.material.color.set(parameters.O3_hoverC);
-          intersect.object.userData.selected = true;
-          console.log("Vybírám");
-          console.log("selected:", { ...intersect.object.userData });
-          addToBuy({ ...intersect.object.userData });
+          // vybrání segmentu
+          intersect.object.material.color.set(parameters.O3_hoverC)
+          intersect.object.userData.selected = true
+          addToBuy({ ...intersect.object.userData })
         }
       } else {
-        // pozemek již zakoupen (zobrazení jména kupujícího v html)
-        console.log("Show in HTML");
+        // segment již zakoupen (zobrazení jména a poznámky kupujícího)
       }
+
     }
 
     // Clicks to Areas
@@ -552,7 +544,6 @@ export const pozemekThreeStart = (
           intersect.object.visible = false;
 
           controls.target = O3_area.position;
-          console.log("Pozice oblasti: ", O3_area.position);
 
           // controls.position0 = new THREE.Vector3(...cameraPositions.O3_area)
           camera.position.set(
@@ -567,7 +558,6 @@ export const pozemekThreeStart = (
           intersect.object.visible = false;
 
           controls.target = O3_area.position;
-          console.log("Pozice oblasti: ", O3_area.position);
 
           // controls.position0 = new THREE.Vector3(...cameraPositions.O3_area)
           camera.position.set(
@@ -601,7 +591,7 @@ export const pozemekThreeStart = (
   controls.enableDamping = true;
   controls.enableRotate = true;
   controls.mouseButtons = {
-    LEFT: THREE.MOUSE.ROTATE,
+    LEFT: THREE.MOUSE.PAN,
     MIDDLE: THREE.MOUSE.DOLLY,
     RIGHT: THREE.MOUSE.PAN,
   };
@@ -649,7 +639,7 @@ export const pozemekThreeStart = (
     // {
     //     if(!intersects.find(intersect => intersect.object === object))
     //     {
-    //         object.material.color.set(parameters.avaibleC)
+    //         object.material.color.set(parameters.availableC)
     //     }
     // }
     // console.log(camera.position)
@@ -665,7 +655,6 @@ export const pozemekThreeStart = (
 
 export const reRender_O3 = (loaded_O3) => {
   objectsToTest.splice(0, objectsToTest.length);
-  console.log("Délka pole: ", loaded_O3.length);
   scene.remove(O3_group);
   let my_X = 0;
   let my_Y = 0;
@@ -674,12 +663,11 @@ export const reRender_O3 = (loaded_O3) => {
   let offY = 0;
   let tempJ = 0;
   for (let i = 0; i < loaded_O3.length; i++) {
-    console.log("I: ", i, " J: ", j);
     const o3Data = loaded_O3[i];
     const O3_obj = new THREE.Mesh(
       O3_geo,
       new THREE.MeshBasicMaterial({
-        color: o3Data.isBought ? parameters.O3_hoverC : parameters.avaibleC,
+        color: o3Data.isBought ? parameters.O3_hoverC : parameters.availableC,
       })
     );
     O3_obj.translateY(my_Y * 3);
@@ -690,7 +678,7 @@ export const reRender_O3 = (loaded_O3) => {
       number: o3Data.number,
       i: i,
       j: j,
-      avaible: !o3Data.isBought,
+      available: !o3Data.isBought,
       selected: false,
       title: o3Data.title,
       price: o3Data.price,
@@ -699,7 +687,6 @@ export const reRender_O3 = (loaded_O3) => {
     };
     objectsToTest.push(O3_obj);
     O3_group.add(O3_obj);
-    console.log("Increment J?: ", i % 10 == 0);
     my_Y = my_Y + 1;
     if (my_Y % 20 == 0) {
       my_X = my_X + 1;
@@ -714,7 +701,6 @@ export const reRender_O3 = (loaded_O3) => {
 
 // Show Price to Donate
 export const visualizePriceOnMap = (price) => {
-  console.log("Vizualizuji!");
   const width = (price / 100) * A_LENGTH;
   drawLandPiece(width, { price: price });
 };
@@ -727,7 +713,7 @@ export const visualizePriceOnMap = (price) => {
 //         O3_obj.userData = {
 //             i: i,
 //             j: j,
-//             avaible: true,
+//             available: true,
 //             selected: false
 //         }
 //         if (i === j) O3_obj.userData.selected = true

@@ -46,7 +46,6 @@ const ImageUpload = (props) => {
     setShowConfirm(false);
     setIsLoading(false)
     props.onInput("basePart", "photo", imageUrl, []);
-    console.log(imageUrl);
   };
 
   const pickedHandler = (event) => {

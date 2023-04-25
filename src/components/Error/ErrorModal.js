@@ -10,7 +10,7 @@ const ErrorModal = (props) => {
       <ErrorBackdrop onClick={props.onClear} />
         <div className={`error-modal`}>
           <header className={`error-modal__header`}>
-            <h2>Švihnout a mávnout!</h2>
+            <h2>Upozornění</h2>
           </header>
           <div className={`error-modal__content ${props.contentClass}`}>
             {props.error}
@@ -18,9 +18,9 @@ const ErrorModal = (props) => {
           <button className="error-modal__button-ok" onClick={props.onClear}>
             Zavřít
           </button>
-          <footer className={`error-modal__footer ${props.footerClass}`}>
+          <section className={`error-modal__footer ${props.footerClass}`}>
             {props.footer}
-          </footer>
+          </section>
         </div>
     </React.Fragment>
   );

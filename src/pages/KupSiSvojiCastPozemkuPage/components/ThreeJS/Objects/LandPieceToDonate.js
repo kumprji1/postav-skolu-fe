@@ -5,7 +5,6 @@ import { A_LENGTH, getColorByPrice, landPieceInitPosAndRot, lastOffsets } from '
 import SelectToZoom from './SelectToZoom'
 
 const LandPieceToDonate = (props) => {
-    console.log(props.priceToDonate)
     const [opacity, setOpacity] = useState(0.4)
     useFrame((state, delta) => {
       // change opacity from 0.4 to 0.8 in time and back to 0.4

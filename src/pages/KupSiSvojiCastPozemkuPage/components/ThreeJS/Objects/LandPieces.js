@@ -83,17 +83,17 @@ const LandPieces = (props) => {
 
     let landPieceOffset_X = 0;
     let landPieceOffset_Y = 0;
-    let avaibleRowWidth = landFrameData.width;
+    let availableRowWidth = landFrameData.width;
 
     const startNewRow = () => {
       landPieceOffset_Y -= A_LENGTH;
       landPieceOffset_X = 0;
-      avaibleRowWidth = landFrameData.width;
+      availableRowWidth = landFrameData.width;
     };
 
     const createLandPiece = (donationWidth, donation) => {
       // Umístit do poloviny velikosti daru pro zobrazení
-      landPieceOffset_X += donationWidth / 2;
+      landPieceOffset_X += donationWidth / 2
       createdLandPieces.push(
         <LandPiece
           key={Math.random()}
@@ -102,36 +102,36 @@ const LandPieces = (props) => {
           offsetY={landPieceOffset_Y}
           donation={donation}
         />
-      );
-      // Přičíst druhou polovinu daru pro získání pozice na konci daru.
-      landPieceOffset_X += donationWidth / 2;
+      )
+      // Přičíst druhou polovinu daru pro získání pozice na konci daru
+      landPieceOffset_X += donationWidth / 2
       // Aktualizace dostupné šířky pro další dar
-      avaibleRowWidth -= donationWidth;
-    };
+      availableRowWidth -= donationWidth
+    }
 
     const createLandPieces = () => {
       for (let i = 0; i < props.donations.length; i++) {
-        let donationIsWholeDrawn = false;
-        let donationWidth = (props.donations[i].price / 100) * A_LENGTH;
+        let donationIsWholeDrawn = false
+        let donationWidth = (props.donations[i].price / 100) * A_LENGTH
         while (!donationIsWholeDrawn) {
-          if (avaibleRowWidth < donationWidth) {
+          if (availableRowWidth < donationWidth) {
             // Dar bude třeba segmentovat, protože se nevejde do konce řádku
-            const widthToDrawNext = donationWidth - avaibleRowWidth;
-            createLandPiece(avaibleRowWidth, props.donations[i]);
-            donationWidth = widthToDrawNext;
-            startNewRow();
+            const widthToDrawNext = donationWidth - availableRowWidth
+            createLandPiece(availableRowWidth, props.donations[i])
+            donationWidth = widthToDrawNext
+            startNewRow()
           }
-          if (donationWidth <= avaibleRowWidth) {
+          if (donationWidth <= availableRowWidth) {
             // Dar není třeba rozdělit na více částí
-            createLandPiece(donationWidth, props.donations[i]);
-            donationIsWholeDrawn = true;
+            createLandPiece(donationWidth, props.donations[i])
+            donationIsWholeDrawn = true
           }
         }
         if (i + 1 === props.donations.length) {
-          setLastOffsets(landPieceOffset_X, landPieceOffset_Y);
+          setLastOffsets(landPieceOffset_X, landPieceOffset_Y)
         }
       }
-    };
+    }
 
     createLandPieces();
     setLandPieces(createdLandPieces);

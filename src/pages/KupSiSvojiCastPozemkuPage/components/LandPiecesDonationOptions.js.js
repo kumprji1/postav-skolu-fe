@@ -34,7 +34,7 @@ const LandPiecesDonationOptions = ({ baseDonationData }) => {
           {baseDonationData.baseDonationState.wantsCustom && (
             <input
               className="donatable-input-custom-price"
-              type="text"
+              type="number"
               onChange={(e) =>
                 baseDonationData.inputHandler(e.currentTarget.value)
               }
@@ -92,7 +92,7 @@ const LandPiecesDonationOptions = ({ baseDonationData }) => {
             }
           >
             Přispět {baseDonationData.baseDonationState.price}
-            {baseDonationData.baseDonationState.price && ",-"}
+            {baseDonationData.baseDonationState.price ? ",-" : ''}
           </NavLink>
         </div>
       </div>

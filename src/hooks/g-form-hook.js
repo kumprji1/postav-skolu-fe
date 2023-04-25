@@ -67,7 +67,6 @@ const formReducer = (state, action) => {
       if (partId !== action.partId && state.parts[partId].required) {
         formIsValid = formIsValid && state.parts[partId].partIsValid;
       } else if (partId == action.partId && action.value) {
-        console.log("PartId + required: ", action.partId, action.value);
         formIsValid = formIsValid && state.parts[partId].partIsValid;
       }
     }
@@ -92,7 +91,6 @@ const formReducer = (state, action) => {
 
   switch (action.type) {
     case act.INPUT_CHANGE:
-      console.log("inputChange action: ", action);
       let currentInputIsValid = validate(action.value, action.validators);
       let partIsValid = checkPartIsValid(action.partId, currentInputIsValid);
       let formIsValid = checkFormIsValid(partIsValid);
@@ -146,7 +144,6 @@ const formReducer = (state, action) => {
         },
         formIsValid: formIsValid,
       };
-      console.log(updatedState);
       return updatedState;
     }
     default:

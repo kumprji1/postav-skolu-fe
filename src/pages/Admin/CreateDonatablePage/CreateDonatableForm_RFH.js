@@ -27,13 +27,11 @@ const CreateDonatableForm = (props) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data)
     try {
         const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/create-donatable/${props.projectId}`, 'POST', JSON.stringify(data), {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + auth.token
         })
-        console.log('data:', data)
         if (responseData.msg === 'OK') navigate(-1)
     } catch (err) {}
   };

@@ -24,7 +24,6 @@ const News = (props) => {
   }, [props.projectId]);
 
   const deleteNewsHandler = async (newsId) => {
-    console.log('Delete: ', newsId)
     try {
       const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/news/delete/${newsId}`, 'PATCH', null, {
         'Content-type': 'application/json',

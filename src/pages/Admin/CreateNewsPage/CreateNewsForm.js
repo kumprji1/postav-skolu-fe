@@ -9,11 +9,13 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { useGortozForm } from "../../../hooks/g-form-hook";
 import { useHttp } from "../../../hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../utils/validators";
+import SwingSpinner from "../../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const CreateNewsForm = () => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
   const { urlTitle } = useParams()
   const initFormData = {
     parts: {
@@ -83,7 +85,9 @@ const CreateNewsForm = () => {
       </BFormPart>
       <BSubmit onClick={postCreateNews} isValid={formState.formIsValid}>
         Vytvořit aktualitu
-      </BSubmit>
+      </BSubmit>   
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </BForm>
   );
 };

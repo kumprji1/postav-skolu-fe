@@ -9,6 +9,7 @@ import LandPiecesDonationOptions from "./components/LandPiecesDonationOptions.js
 import { useBaseDonation } from "../../hooks/base-donation-hook";
 import ThreeJS_Canvas_Land from "./components/ThreeJS/ThreeJS_Canvas_Land";
 import Donatable from '../Projects/components/Donatable'
+import { NavLink } from "react-router-dom";
 
 const KupSiSvojiCastPozemkuPage = (props) => {
   // Utils
@@ -51,7 +52,6 @@ const KupSiSvojiCastPozemkuPage = (props) => {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/donatables/63ee1999742b27920b98e55b`
         );
-        console.log("responseData: ", responseData);
         setDonatable(responseData);
       } catch (err) {}
     };
@@ -65,7 +65,6 @@ const KupSiSvojiCastPozemkuPage = (props) => {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/donations/63ee1999742b27920b98e55b`
         );
-        console.log("responseData: ", responseData);
         setDonations(responseData);
       } catch (err) {}
     };
@@ -84,13 +83,12 @@ const KupSiSvojiCastPozemkuPage = (props) => {
         </div>
         <p className="project-detail-desc">{props.project.desc}</p>
       </section>
+      <button className="btn--secondary" style={{marginBottom: '1rem'}} onClick={() => window.location.replace(process.env.REACT_APP_BACKEND_URL + '/kup-si-svoji-cast-pozemku-stara-verze')}>Odkaz na první částečně implementovanou verzi řešení</button>
       <ThreeJS_Canvas_Land
         donations={donations}
         priceToDonate={baseDonationData.baseDonationState.price}
       />
       <LandPiecesDonationOptions baseDonationData={baseDonationData} />
-      {/* {donatable && <Donatable donatable={donatable} setSelectedPrice={setSelectedPrice} />} */}
-      <p>Tady Dole začne další sekce</p>
     </Fragment>
   );
 };

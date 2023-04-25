@@ -14,7 +14,6 @@ const Donatables = (props) => {
 
   useEffect(() => {
     const fetchDonatables = async () => {
-      console.log('Fetching Donatables');
       const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/donatables-by-project-id/${projectId}`)
       setDonatables(responseData)
     }
@@ -22,7 +21,6 @@ const Donatables = (props) => {
   }, [projectId])
 
   const deleteDonatableHandler = async (donatableId) => {
-    console.log('Delete: ', donatableId)
     try {
       const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/api/admin/donatable/delete/${donatableId}`, 'PATCH', null, {
         'Content-type': 'application/json',

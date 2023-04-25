@@ -45,7 +45,8 @@ const CartPage = () => {
         cart.cartState.products.map((prod) => (
           <p key={prod.number}>{prod.title}</p>
         ))}
-      <p>Cena celkem: {totalPrice}</p>
+      {cart.cartState.donations.length !== 0 && <p>Cena celkem: {totalPrice}</p>}
+      {cart.cartState.donations.length === 0 && <p>Košík je prázdný</p>}
       {cart.cartState.donations.length !== 0 && (
         <Fragment>
           {" "}

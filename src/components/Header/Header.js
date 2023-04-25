@@ -8,6 +8,11 @@ import "./Header.scss";
 
 const Header = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
+
+  const closeMobileNav = () => {
+    setShowMobileNav(false)
+  }
+
   return (
     <Fragment>
       <header>
@@ -69,15 +74,20 @@ const Header = (props) => {
                   <NavLink
                     className="btn--secondary"
                     to="/moje-objednavky"
+                    onClick={closeMobileNav}
                   >
                     Moje objednávky
                   </NavLink>
-                  <NavLink className="btn--secondary" to="/kosik">
+                  <NavLink className="btn--secondary" to="/kosik"
+                  onClick={closeMobileNav}>
                     Košík
                   </NavLink>
                   <button
                     className="btn--secondary"
-                    onClick={props.auth.logout}
+                    onClick={() => {
+                      props.auth.logout()
+                      closeMobileNav()
+                    }}
                   >
                     Odhlásit se
                   </button>
@@ -87,10 +97,12 @@ const Header = (props) => {
                   <NavLink
                     className="btn--secondary"
                     to="/prihlaseni"
+                    onClick={closeMobileNav}
                   >
                     Přihlásit se
                   </NavLink>
-                  <NavLink className="btn--secondary" to="/kosik">
+                  <NavLink className="btn--secondary" to="/kosik"
+                  onClick={closeMobileNav}>
                     Košík
                   </NavLink>
                 </Fragment>

@@ -23,7 +23,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 // Utils
 import { Roles } from "../../utils/roles";
-import { VALIDATOR_EMAIL, VALIDATOR_REQUIRE } from "../../utils/validators";
+import { VALIDATOR_EMAIL, VALIDATOR_REQUIRE, VALIDATOR_STRONG_PASSWORD } from "../../utils/validators";
 import SwingSpinner from "../../components/UI/Spinners/SwingSpinner";
 import ErrorModal from "../../components/Error/ErrorModal";
 
@@ -134,8 +134,8 @@ const SignupUserPage = () => {
             input={formState.parts.basePart.inputs.password}
             partId="basePart"
             inputId="password"
-            validators={[VALIDATOR_REQUIRE()]}
-            error="Prosím, zadejte heslo"
+            validators={[VALIDATOR_REQUIRE(), VALIDATOR_STRONG_PASSWORD()]}
+            error="Prosím, zadejte silné heslo (8 znaků včetně velkého písmene, číslice a speciálního znaku)"
             inputChange={inputChange}
             touchHandler={touchHandler}
             secret={true}

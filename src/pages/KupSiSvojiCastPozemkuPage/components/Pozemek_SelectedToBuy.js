@@ -8,7 +8,6 @@ import "./Pozemek_SelectedToBuy.scss";
 const Pozemek_SelectedToBuy = (props) => {
   const cart = useContext(CartContext);
   const [selectedPieces, setSelectedPieces] = useState([]);
-  console.log(props.selectedToBuy);
   return (
     <section className="pozemek-selected-to-buy-section">
       {props.landPiecesState.piecesToBuy.map((piece) => (

@@ -12,11 +12,13 @@ import { VALIDATOR_MIN, VALIDATOR_REQUIRE } from "../../../utils/validators";
 import BTextarea from "../../../components/Base/BForm/BTextarea";
 import BSubmit from "../../../components/Base/BForm/BSubmit";
 import ImageUpload from "../../../components/UI/FormElements/ImageUpload";
+import SwingSpinner from "../../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const EditProjectForm = (props) => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
 
   const initFormData = {
     parts: {
@@ -119,6 +121,8 @@ const EditProjectForm = (props) => {
       <BSubmit onClick={updateProjectHandler} isValid={formState.formIsValid}>
         Aktualizovat projekt
       </BSubmit>
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </BForm>
   );
 };

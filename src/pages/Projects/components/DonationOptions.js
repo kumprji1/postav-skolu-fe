@@ -7,6 +7,7 @@ import {
   VALIDATOR_MAXLENGTH,
   VALIDATOR_MIN,
   VALIDATOR_MINLENGTH,
+  VALIDATOR_NUMBER,
   VALIDATOR_REQUIRE,
 } from "../../../utils/validators";
 
@@ -66,12 +67,12 @@ const DonationOptions = (props) => {
               : "donate-btn-price-not-selected donate-btn-price"
           }
           onClick={() => {
-            inputChange("basePart", "price", p, [VALIDATOR_MIN(2)]);
+            inputChange("basePart", "price", Number(p), [VALIDATOR_NUMBER()]);
             inputChange("basePart", "wantsCustom", false, []);
           }}
           key={p}
         >
-          {p}
+          {Number(p)}
         </button>
       ))}
       <button
@@ -84,7 +85,7 @@ const DonationOptions = (props) => {
           inputChange(
             "basePart",
             "wantsCustom",
-            !formState.parts.basePart.inputs.wantsCustom.value,
+            true,
             []
           )
         }
@@ -94,11 +95,20 @@ const DonationOptions = (props) => {
       {formState.parts.basePart.inputs.wantsCustom.value && (
         <input
           className="donatable-input-custom-price"
-          type="text"
+          type="number"
           onChange={(e) => {
-            inputChange("basePart", "price", e.currentTarget.value, [
-              VALIDATOR_MIN(10),
-            ]);
+            let value = Number(e.currentTarget.value)
+            if (typeof value != 'number') {
+              inputChange("basePart", "price", 0, [
+                VALIDATOR_MIN(10),
+                VALIDATOR_NUMBER()
+              ]);
+            } else {
+              inputChange("basePart", "price", value, [
+                VALIDATOR_MIN(10),
+                VALIDATOR_NUMBER()
+              ]);  
+            }
           }}
           value={formState.parts.basePart.inputs.price.value}
         ></input>

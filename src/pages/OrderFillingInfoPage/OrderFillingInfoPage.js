@@ -175,12 +175,11 @@ const OrderFillingInfoPage = () => {
                 "Content-type": "application/json",
               }
             );
-              console.log('responseData: ', responseData)
             if (responseData.orderId) {
               cart.clearCart();
               window.location.replace(responseData.sessionUrl);
             } else {
-              console.log('Něco je wrong')
+              console.log('Špatná url')
             }
           } catch (err) {}      
     }

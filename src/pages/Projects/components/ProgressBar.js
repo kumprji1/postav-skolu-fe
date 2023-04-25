@@ -4,7 +4,6 @@ import './ProgressBar.scss'
 
 const ProgressBar = (props) => {
   const width = props.earnedMoney / props.demandedMoney * 100
-  console.log(width)
   return (
     <div className="container-progress-bar">
       <div className="progress progress-moved">

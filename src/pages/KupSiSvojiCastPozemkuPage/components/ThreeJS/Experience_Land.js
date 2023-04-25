@@ -11,12 +11,6 @@ import { useEffect } from "react";
 
 const Experience_Land = (props) => {
   const three = useThree();
-
-  useEffect(() => {
-    console.log(three)
-
-  }, [three])
-  
   return (
     <>
       <OrbitControls

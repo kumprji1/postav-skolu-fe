@@ -15,7 +15,6 @@ const s3 = new aws.S3({
 
 export const generateUploadURL = async () => {
     const imageName = "img_postav_skolu_" + uuidv4() + '.jpg'
-    console.log(imageName)
     const params = ({
         Bucket: bucketName,
         Key: imageName,

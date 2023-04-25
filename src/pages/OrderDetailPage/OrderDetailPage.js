@@ -5,13 +5,15 @@ import { useHttp } from "../../hooks/http-hook";
 import OrderedItem from "./components/OrderedItem";
 
 import "./OrderDetailPage.scss";
+import SwingSpinner from "../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../components/Error/ErrorModal";
 
 const OrderDetailPage = () => {
   const [searchParams] = useSearchParams();
   const [order, setOrder] = useState();
   const { orderId } = useParams();
 
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
   const orderUUID = searchParams.get("uuid");
 
   useEffect(() => {
@@ -19,17 +21,17 @@ const OrderDetailPage = () => {
       const responseData = await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/api/order/${orderId}?uuid=${orderUUID}`
       );
-      console.log(responseData);
       setOrder(responseData);
     };
     fetchOrder();
   }, [orderUUID, orderId, sendRequest]);
 
-  console.log();
-
   return (
     <section className="my-order-detail-section">
-      <BTitle>Objednávka č. {orderId}</BTitle>
+      <BTitle >Detail objednávky</BTitle>
+      <p>Číslo objednávky: {orderId}</p>
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
       {searchParams.get("success") && (
         <h1 className="my-order-detail-section--success-info">
           Platba úspěšně dokončena. Děkujeme!

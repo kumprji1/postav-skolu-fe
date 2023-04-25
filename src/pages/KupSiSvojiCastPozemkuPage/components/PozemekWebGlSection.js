@@ -16,7 +16,7 @@ const PozemekWebGlSection = (props) => {
     }, [props.priceToDonate])
 
     useLayoutEffect(() => {
-      console.log(webGlSectionRef.current.offsetWidth)
+      // console.log(webGlSectionRef.current.offsetWidth)
     }, []);
   return (
     <section ref={webGlSectionRef} className='pozemek-webgl-section'>

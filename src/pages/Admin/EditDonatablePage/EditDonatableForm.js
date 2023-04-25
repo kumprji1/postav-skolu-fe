@@ -8,15 +8,17 @@ import BForm from "../../../components/Base/BForm/BForm";
 import BFormPart from "../../../components/Base/BForm/BFormPart";
 import BInput from "../../../components/Base/BForm/BInput";
 import { useGortozForm } from "../../../hooks/g-form-hook";
-import { VALIDATOR_MIN, VALIDATOR_REQUIRE } from "../../../utils/validators";
+import { VALIDATOR_MIN, VALIDATOR_PREPARED_PRICES, VALIDATOR_REQUIRE } from "../../../utils/validators";
 import BTextarea from "../../../components/Base/BForm/BTextarea";
 import BSubmit from "../../../components/Base/BForm/BSubmit";
 import ImageUpload from "../../../components/UI/FormElements/ImageUpload";
+import SwingSpinner from "../../../components/UI/Spinners/SwingSpinner";
+import ErrorModal from "../../../components/Error/ErrorModal";
 
 const EditDonatableForm = (props) => {
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
+  const { sendRequest, isLoading, error, clearError } = useHttp();
 
   const initFormData = {
     parts: {
@@ -116,12 +118,12 @@ const EditDonatableForm = (props) => {
           touchHandler={touchHandler}
         />
         <BInput
-          title="Chceme vybrat"
+          title="Předpřipravené částky"
           input={formState.parts.basePart.inputs.preparedPrices}
           partId="basePart"
           inputId="preparedPrices"
-          validators={[VALIDATOR_REQUIRE()]}
-          error="Prosím, zadejte předpřipravené částky"
+          validators={[VALIDATOR_REQUIRE(), VALIDATOR_PREPARED_PRICES()]}
+          error="Prosím, zadetjte alespoň 3 předpřipravené částky oddělné čárkou"
           placeholder="100,200,500"
           inputChange={inputChange}
           touchHandler={touchHandler}
@@ -146,6 +148,8 @@ const EditDonatableForm = (props) => {
       <BSubmit onClick={updateDonatableHandler} isValid={formState.formIsValid}>
         Aktualizovat sbírku
       </BSubmit>
+      <SwingSpinner isLoading={isLoading} />
+      {error && <ErrorModal error={error} onClear={clearError} />}
     </BForm>
 
   );

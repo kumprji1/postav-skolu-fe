@@ -50,7 +50,6 @@ const KupSiSvojiCastPozemkuStaraVerzePage = (props) => {
       );
       reRender_O3(responseData);
       setLoaded_O3(responseData);
-      console.log("responseData", responseData);
     } catch (err) {
       console.log(err);
     }
@@ -96,7 +95,6 @@ const KupSiSvojiCastPozemkuStaraVerzePage = (props) => {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/api/donations/63ee1999742b27920b98e55b`
         );
-        console.log("responseData: ", responseData);
         setDonations(responseData);
       } catch (err) {}
     };
