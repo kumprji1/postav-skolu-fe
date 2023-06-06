@@ -28,11 +28,17 @@ const reducer = (state, action) => {
       return updatedState;
     }
     case act.INPUT_HANDLER: {
-      const updatedState = {
+      if (isNaN(action.price) || action.price < 1) {
+        return {
+          ...state,
+          price: null,
+        }
+      }
+       else
+      return {
         ...state,
         price: Number(action.price),
-      };
-      return updatedState;
+      }
     }
     case act.INPUT_NOTE: {
       const updatedState = {

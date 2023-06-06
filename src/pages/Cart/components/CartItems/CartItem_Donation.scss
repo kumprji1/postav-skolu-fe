@@ -3,6 +3,7 @@
 .cart-item-donation {
     max-width: 30rem;
     padding: 0.5rem;
+    border-radius: 10px;
     margin-bottom: 1rem;
     color: $primaryColor;
     @include flexCenterDir(column);

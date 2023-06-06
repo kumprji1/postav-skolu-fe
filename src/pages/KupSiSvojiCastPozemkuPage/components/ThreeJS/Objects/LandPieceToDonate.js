@@ -10,7 +10,7 @@ const LandPieceToDonate = (props) => {
       // change opacity from 0.4 to 0.8 in time and back to 0.4
     })
   return (
-    <Bounds fit >
+    <Bounds fit margin={0.5}> 
     <SelectToZoom>
     <mesh 
     // Tranforms

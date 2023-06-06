@@ -35,14 +35,17 @@ const Experience_Land = (props) => {
       <ambientLight intensity={0.5} />
       <directionalLight intensity={0.5} />
       {/* <axesHelper args={[50, 50, 50]} /> */}
-      <Map />
-      <LandFrame />
-      <LandPieces
-        donations={props.donations}
+      
+        <Map />
+        <group rotation-z={Math.PI * -0.08} position-y={-10}>
+        <LandFrame />
+        <LandPieces
+          donations={props.donations}
         // setSelectedPiece={props.setSelectedPiece}
-      />
+        />
       // Visualization of the landPiece that donator wants to donate
-      {props.priceToDonate && <LandPieceToDonate priceToDonate={props.priceToDonate} />}
+        {props.priceToDonate && <LandPieceToDonate priceToDonate={props.priceToDonate} />}
+      </group>
     </>
   );
 };

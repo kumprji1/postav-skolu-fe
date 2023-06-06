@@ -2,8 +2,6 @@ import React, { Fragment, useState, useEffect} from "react";
 
 import { useHttp } from "../../hooks/http-hook";
 
-
-
 // Components
 import LandPiecesDonationOptions from "./components/LandPiecesDonationOptions.js.js";
 import { useBaseDonation } from "../../hooks/base-donation-hook";
@@ -73,17 +71,6 @@ const KupSiSvojiCastPozemkuPage = (props) => {
 
   return (
     <Fragment>
-      <section className="project-detail-info-section">
-        <h1 className="project-detail-title">{props.project.title}</h1>
-        <div className="project-detail-main-img--wrapper">
-          <img
-            className="project-detail-main-img"
-            src={props.project.photo}
-          />
-        </div>
-        <p className="project-detail-desc">{props.project.desc}</p>
-      </section>
-      <button className="btn--secondary" style={{marginBottom: '1rem'}} onClick={() => window.location.replace(process.env.REACT_APP_BACKEND_URL + '/kup-si-svoji-cast-pozemku-stara-verze')}>Odkaz na první částečně implementovanou verzi řešení</button>
       <ThreeJS_Canvas_Land
         donations={donations}
         priceToDonate={baseDonationData.baseDonationState.price}

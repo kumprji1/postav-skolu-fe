@@ -51,7 +51,7 @@ const CartPage = () => {
         <Fragment>
           {" "}
           {!auth.token ? (
-            <NavLink className="bbutton" to={`/nakup`}>
+            <NavLink className="btn--primary" to={`/nakup`}>
               Nákup bez registrace
             </NavLink>
           ) : (

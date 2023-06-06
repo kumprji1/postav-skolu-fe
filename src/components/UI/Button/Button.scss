@@ -28,9 +28,10 @@ button {
   background-color: $primaryColor;
   color: white;
   padding: 0.6rem 1.2rem;
+  margin: 0.4rem;
   font-size: 1rem;
   font-weight: 400;
-  border: none;
+  border: 1px solid $primaryColor;
   border-radius: 5px;
   cursor: pointer;
   &:hover {

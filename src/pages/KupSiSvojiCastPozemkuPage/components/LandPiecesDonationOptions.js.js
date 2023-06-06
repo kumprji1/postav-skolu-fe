@@ -10,92 +10,91 @@ const LandPiecesDonationOptions = ({ baseDonationData }) => {
 
   return (
     <section className="land-pieces-donation-options-section">
-      <div className="land-pieces-donation-options--wrapper">
-        <div className="land-pieces-donation-options--items">
-          {baseDonationData.baseDonationState.options.map((option) => (
-            <button
-              className={option.isSelected ? `bbutton` : "bbutton-outline "}
-              onClick={() => baseDonationData.selectDonation(option.price)}
-              key={option.price}
-            >
-              {option.price}
-            </button>
-          ))}
+      <h1 className="land-pieces-donation--step-info">1. Zvolte částku, kterou chcete darovat</h1>
+      <div className="land-pieces-donation-options--items">
+        {baseDonationData.baseDonationState.options.map((option) => (
           <button
-            className={
-              baseDonationData.baseDonationState.wantsCustom
-                ? `bbutton`
-                : "bbutton-outline"
-            }
-            onClick={baseDonationData.selectCustomBtn}
+            className={option.isSelected ? `btn--primary` : "btn--secondary "}
+            onClick={() => baseDonationData.selectDonation(option.price)}
+            key={option.price}
           >
-            Vlastní částka
+            {option.price}
           </button>
-          {baseDonationData.baseDonationState.wantsCustom && (
-            <input
-              className="donatable-input-custom-price"
-              type="number"
-              onChange={(e) =>
-                baseDonationData.inputHandler(e.currentTarget.value)
-              }
-              value={baseDonationData.baseDonationState.price}
-            ></input>
-          )}
-          <div>
-            <button
-              className={`${
-                baseDonationData.baseDonationState.isAnonymous
-                  ? "bbutton-outline"
-                  : "bbutton"
-              }`}
-              onClick={() => baseDonationData.setAnonymousMode(false)}
-            >
-              Zobrazit jméno u daru
-            </button>
-            <button
-              className={`${
-                baseDonationData.baseDonationState.isAnonymous
-                  ? "bbutton"
-                  : "bbutton-outline"
-              }`}
-              onClick={() => baseDonationData.setAnonymousMode(true)}
-            >
-              Skrýt jméno (darovat anonymně)
-            </button>
-            {/* <select>
+        ))}
+        <button
+          className={
+            baseDonationData.baseDonationState.wantsCustom
+              ? `btn--primary`
+              : "btn--secondary"
+          }
+          onClick={baseDonationData.selectCustomBtn}
+        >
+          Vlastní částka
+        </button>
+        {baseDonationData.baseDonationState.wantsCustom && (
+          <input
+            className="donatable-input-custom-price"
+            type="text"
+            onChange={(e) =>
+              baseDonationData.inputHandler(e.currentTarget.value)
+            }
+            value={baseDonationData.baseDonationState.price}
+          ></input>
+        )}        </div>
+      <h1 className="land-pieces-donation--step-info">2. Zvolte viditelnost jména dárce</h1>
+      <div className="land-pieces-donation-options--items">
+        <button
+          className={`${baseDonationData.baseDonationState.isAnonymous
+              ? `btn--secondary`
+              : "btn--primary"
+            }`}
+          onClick={() => baseDonationData.setAnonymousMode(false)}
+        >
+          Zobrazit jméno u daru
+        </button>
+        <button
+          className={`${baseDonationData.baseDonationState.isAnonymous
+              ? `btn--primary`
+              : "btn--secondary"
+            }`}
+          onClick={() => baseDonationData.setAnonymousMode(true)}
+        >
+          Skrýt jméno (darovat anonymně)
+        </button>
+        {/* <select>
             <option value="someOption">Dobrá duše</option>
             <option value="otherOption">Já</option>
           </select> */}
-          </div>
-          <input
-            className="land-pieces-input-custom-note"
-            placeholder="Chci sdělit:"
-            type="text"
-            onChange={(e) => baseDonationData.inputNote(e.currentTarget.value)}
-            value={baseDonationData.baseDonationState.note}
-          ></input>
-          <NavLink
-            className={"land-pieces-btn-to-cart"}
-            to={"/kosik"}
-            onClick={() =>
-              cart.addDonations([
-                {
-                  price: baseDonationData.baseDonationState.price,
-                  donatableId: "63ee1999742b27920b98e55b",
-                  isAnonymous: baseDonationData.baseDonationState.isAnonymous,
-                  note: baseDonationData.baseDonationState.note,
-                  title: "Kup si svoji část pozemku",
-                  photo: "https://postav-skolu.s3.eu-central-1.amazonaws.com/img_postav_skolu_ec08ea65-bb19-4c21-b745-fd20e6181d62.jpg",
-                  id: new Date().toISOString(),
-                },
-              ])
-            }
-          >
-            Přispět {baseDonationData.baseDonationState.price}
-            {baseDonationData.baseDonationState.price ? ",-" : ''}
-          </NavLink>
-        </div>
       </div>
+      <h1 className="land-pieces-donation--step-info"> 3. Chci sdělit</h1>
+      <input
+        className="land-pieces-input-custom-note"
+        placeholder="Chci sdělit:"
+        type="text"
+        onChange={(e) => baseDonationData.inputNote(e.currentTarget.value)}
+        value={baseDonationData.baseDonationState.note}
+      ></input>
+      {baseDonationData.baseDonationState.price && <NavLink
+        className={"btn--primary land-pieces-btn-to-cart"}
+        to={"/kosik"}
+        onClick={() =>
+          cart.addDonations([
+            {
+              price: baseDonationData.baseDonationState.price,
+              donatableId: "63ee1999742b27920b98e55b",
+              isAnonymous: baseDonationData.baseDonationState.isAnonymous,
+              note: baseDonationData.baseDonationState.note,
+              title: "Kup si svoji část pozemku",
+              photo: "https://postav-skolu.s3.eu-central-1.amazonaws.com/img_postav_skolu_ec08ea65-bb19-4c21-b745-fd20e6181d62.jpg",
+              id: new Date().toISOString(),
+            },
+          ])
+        }
+      >
+        Přispět {baseDonationData.baseDonationState.price}
+        {baseDonationData.baseDonationState.price ? ",-" : ''}
+      </NavLink>}
+
     </section>
   );
 };

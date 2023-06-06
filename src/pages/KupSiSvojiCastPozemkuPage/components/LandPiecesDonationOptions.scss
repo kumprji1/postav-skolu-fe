@@ -10,27 +10,69 @@
 }
 
 .land-pieces-donation-options--wrapper {
-    @include useShadows();
+    // @include useShadows();
 }    
+.land-pieces-donation--step-info {
+    font-weight: 200;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid $primaryColor;
+}
 
 .land-pieces-donation-options--items {
     height: auto;
+    margin-bottom: 1.5rem;
 }
 
-.land-pieces-input-custom-note {
-    padding: 0.5rem 1rem;
-    margin: 0 0 1rem 1rem;
+.donatable-input-custom-price {
+    text-decoration: none;
+    background-color: white;
+    color: $primaryColor;
+    padding: 0.6rem 1.2rem;
+    margin: 0.4rem;
     font-size: 1rem;
+    font-weight: 400;
+    border: 1px solid $primaryColor;
+    border-radius: 5px;
+    text-decoration: none;
+    &:hover {
+      box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    }  
+}
+.land-pieces-input-custom-note {
+  text-decoration: none;
+  background-color: white;
+  color: $primaryColor;
+  padding: 0.6rem 1.2rem;
+  margin: 0.4rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid $primaryColor;
+  border-radius: 5px;
+  text-decoration: none;
+  &:hover {
+    box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+  }
 }
 
 
 .land-pieces-btn-to-cart {
     background-color: $primaryColor;
-    padding: 0.5rem 1rem;
+    padding: 2rem 4em;
     margin: 0 1rem;
     // margin-bottom: 2rem;
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
     text-transform: uppercase;
+}
+
+@media screen and (min-width: 48rem) {
+    .land-pieces-input-custom-note {
+        width: 30rem;
+    }
 }
