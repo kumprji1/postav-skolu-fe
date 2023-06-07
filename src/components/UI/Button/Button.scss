@@ -4,7 +4,7 @@ button {
   font-family: $coprIdentityFont;
   transition: all 100ms;
 }
-.btn--secondary {
+.btn--secondary, .active {
   text-decoration: none;
   background-color: white;
   color: $primaryColor;
@@ -18,12 +18,12 @@ button {
   cursor: pointer;
   &:hover {
     box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 21px -16px $primaryColor;
     -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
   }
 }
 
-.btn--primary, .active {
+.btn--primary {
   text-decoration: none;
   background-color: $primaryColor;
   color: white;

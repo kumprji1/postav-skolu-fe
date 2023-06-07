@@ -49,6 +49,6 @@ Functions
 
 @mixin useShadows() {
     -webkit-box-shadow: 0px 0px 5px 0px rgba(117,117,117,1);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(117,117,117,1);
+    -moz-box-shadow: 0px 0px 5px 0px $primaryColor;
     box-shadow: 0px 0px 5px 0px rgba(117,117,117,1);
 }

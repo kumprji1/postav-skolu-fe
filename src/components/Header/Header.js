@@ -1,4 +1,4 @@
-import react, { Fragment, useState } from "react";
+import react, { Fragment, useEffect, useState, useMemo } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import DiakonieLogoCele from "../../images/Diakonie/Diakonie_Logo_Cele.png";
@@ -6,17 +6,27 @@ import ErrorBackdrop from "../Error/ErrorBackdrop";
 
 import "./Header.scss";
 
+
 const Header = (props) => {
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showShadowHeader, setShowShadowHeader] = useState(false)
 
+  window.addEventListener('scroll', () => {
+    console.log('Scroll Y changed')
+    if (window.scrollY < 10)
+      setShowShadowHeader(false)
+    else
+      setShowShadowHeader(true)
+  })
+  
   const closeMobileNav = () => {
     setShowMobileNav(false)
   }
 
   return (
     <Fragment>
-      <header>
-        <div className="header-content">
+      <header className={`${showShadowHeader ? 'header-shadow ' : ''}`}>
+        <div className={`header-content`}>
           <Link to="/" className="header__logo-cele-wrapper">
             <img src={DiakonieLogoCele} alt="Logo Diakonie" />
           </Link>
@@ -31,16 +41,16 @@ const Header = (props) => {
               {props.auth.token ? (
                 <Fragment>
                   <NavLink
-                    className="btn--secondary"
+                    className="nav-btn--secondary"
                     to="/moje-objednavky"
                   >
                     Moje objednávky
                   </NavLink>
-                  <NavLink className="btn--secondary" to="/kosik">
+                  <NavLink className="nav-btn--secondary" to="/kosik">
                     Košík
                   </NavLink>
                   <button
-                    className="btn--secondary"
+                    className="nav-btn--secondary"
                     onClick={props.auth.logout}
                   >
                     Odhlásit se
@@ -49,12 +59,12 @@ const Header = (props) => {
               ) : (
                 <Fragment>
                   <NavLink
-                    className="btn--secondary"
+                    className="nav-btn--secondary"
                     to="/prihlaseni"
                   >
                     Přihlásit se
                   </NavLink>
-                  <NavLink className="btn--secondary" to="/kosik">
+                  <NavLink className="nav-btn--secondary" to="/kosik">
                     Košík
                   </NavLink>
                 </Fragment>
@@ -69,44 +79,44 @@ const Header = (props) => {
       {showMobileNav && (
         <Fragment>
           <div className="mobile-nav--wrapper">
-          {props.auth.token ? (
-                <Fragment>
-                  <NavLink
-                    className="btn--secondary"
-                    to="/moje-objednavky"
-                    onClick={closeMobileNav}
-                  >
-                    Moje objednávky
-                  </NavLink>
-                  <NavLink className="btn--secondary" to="/kosik"
+            {props.auth.token ? (
+              <Fragment>
+                <NavLink
+                  className="btn--secondary"
+                  to="/moje-objednavky"
+                  onClick={closeMobileNav}
+                >
+                  Moje objednávky
+                </NavLink>
+                <NavLink className="btn--secondary" to="/kosik"
                   onClick={closeMobileNav}>
-                    Košík
-                  </NavLink>
-                  <button
-                    className="btn--secondary"
-                    onClick={() => {
-                      props.auth.logout()
-                      closeMobileNav()
-                    }}
-                  >
-                    Odhlásit se
-                  </button>
-                </Fragment>
-              ) : (
-                <Fragment>
-                  <NavLink
-                    className="btn--secondary"
-                    to="/prihlaseni"
-                    onClick={closeMobileNav}
-                  >
-                    Přihlásit se
-                  </NavLink>
-                  <NavLink className="btn--secondary" to="/kosik"
+                  Košík
+                </NavLink>
+                <button
+                  className="btn--secondary"
+                  onClick={() => {
+                    props.auth.logout()
+                    closeMobileNav()
+                  }}
+                >
+                  Odhlásit se
+                </button>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <NavLink
+                  className="btn--secondary"
+                  to="/prihlaseni"
+                  onClick={closeMobileNav}
+                >
+                  Přihlásit se
+                </NavLink>
+                <NavLink className="btn--secondary" to="/kosik"
                   onClick={closeMobileNav}>
-                    Košík
-                  </NavLink>
-                </Fragment>
-              )}
+                  Košík
+                </NavLink>
+              </Fragment>
+            )}
           </div>
           <ErrorBackdrop onClick={() => setShowMobileNav(false)} />
         </Fragment>

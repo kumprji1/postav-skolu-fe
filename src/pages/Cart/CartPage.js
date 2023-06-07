@@ -45,20 +45,13 @@ const CartPage = () => {
         cart.cartState.products.map((prod) => (
           <p key={prod.number}>{prod.title}</p>
         ))}
-      {cart.cartState.donations.length !== 0 && <p>Cena celkem: {totalPrice}</p>}
+      {cart.cartState.donations.length !== 0 && <p>Cena celkem: {totalPrice} KČ</p>}
       {cart.cartState.donations.length === 0 && <p>Košík je prázdný</p>}
       {cart.cartState.donations.length !== 0 && (
         <Fragment>
-          {" "}
-          {!auth.token ? (
-            <NavLink className="btn--primary" to={`/nakup`}>
-              Nákup bez registrace
-            </NavLink>
-          ) : (
-            <NavLink className="btn--primary" to={`/nakup`}>
-              Nakoupit
-            </NavLink>
-          )}
+          <NavLink className="btn--primary" to={`/nakup`}>
+            Pokračovat k pokladně
+          </NavLink>
         </Fragment>
       )}
     </section>

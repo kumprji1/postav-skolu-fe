@@ -10,10 +10,13 @@ header {
   background-color: white;
   //   margin-top: 2rem;
   z-index: 100;
-
+  transition: $transMedium all;
   // sticky bude
   // background-color: white;
   // a shadow
+}
+
+.header-shadow {
   box-shadow: 0px 4px 21px -16px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 4px 5px 21px -16px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 4x 21px -16px rgba(0, 0, 0, 0.75);
@@ -39,6 +42,27 @@ header {
 }
 .nav-desktop-buttons {
   display: none;
+}
+
+.nav-btn--secondary {
+  margin: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  color: $primaryColor;
+  padding: 0.6rem 1.2rem;
+  margin: 0.4rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 10px 20px -16px $primaryColor;
+    -moz-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
+  }
+  transition: all $transMedium;
+
 }
 
 .mobile-nav--wrapper {

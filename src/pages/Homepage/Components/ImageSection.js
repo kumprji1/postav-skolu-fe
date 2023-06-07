@@ -10,7 +10,7 @@ const ImageSection = () => {
     <section className="school-image-section">
       <img src={SchoolImg} alt="Škola" />
       <div className="btn-wrapper">
-        <Button classes="btn--secondary">Galerie</Button>
+        <Button classes="btn--secondary">PŘISPĚT</Button>
       </div>
     </section>
   );
