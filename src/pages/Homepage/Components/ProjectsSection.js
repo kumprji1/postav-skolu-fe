@@ -29,13 +29,16 @@ const ProjectsSection = () => {
   }, [sendRequest]);
 
   return (
-    <section className="projects-section">
-      <h1 className="title">Přehled projektů s výtěžkem pro výstavbu školy:</h1>
+    <>
+          <h1 className="title">Přehled sbírek s výtěžkem pro výstavbu školy:</h1>
+          <section className="projects-section">
       {isLoading && <SwingSpinner isLoading={isLoading} />}
       {error && <ErrorModal error={error} onClear={clearError} />}
       <Projects projects={projects} />
       {auth.role == Roles.ADMIN && <NavLink className='bbutton-outline' to="/novy-projekt">Nový projekt</NavLink>}
     </section>
+
+    </>
   );
 };
 

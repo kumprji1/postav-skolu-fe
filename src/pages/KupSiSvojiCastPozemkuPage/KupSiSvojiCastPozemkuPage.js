@@ -13,6 +13,10 @@ const KupSiSvojiCastPozemkuPage = (props) => {
   // Utils
   const { sendRequest } = useHttp();
 
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+
   // New Version
   const [donations, setDonations] = useState([]);
   const [donatable, setDonatable] = useState()

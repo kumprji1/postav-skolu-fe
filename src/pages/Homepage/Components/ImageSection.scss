@@ -12,17 +12,52 @@
     display: block;
     border-radius: 5px;
     opacity: 0.92;
-    -webkit-box-shadow: 0px -3px 10px -5px #000bd5; 
-    box-shadow: 0px -3px 20px -15px #000000;  
+    // -webkit-box-shadow: 0px -3px 10px -5px #000bd5; 
+    // box-shadow: 0px -3px 20px -15px #000000;  
 }
-  .btn-wrapper {
-    padding: 0.35rem 0.35rem 0rem 0.35rem;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+  .btn-main-project-wrapper {
+    padding: 0.5rem;
+    border-radius: 7px;
     background-color: white;
     position: absolute;
-    bottom: 3.5rem;
-    right: 10%;
+    top: 2rem;
+    left: 30%;
     transform: translateX(-50%);
+    // @include useShadows();
+    animation: cubic-bezier(0,.8,.25,2.12) infinite;
+    animation-delay: 1.5s;
+    animation-iteration-count: 1;
+    animation-name: drop;
+    animation-duration: 1.2s;
+  
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: larger;
+      font-weight: 400;
+      display: inline-block;
+      color: white;
+      padding: 1rem 2.5rem;
+      background-color: $primaryColor;
+      border-radius: 7px;
+      &:hover {
+            @include useShadows();
+      }
+    }
   }
 }
+@keyframes drop {
+  0% {
+    top: 2rem;
+    // transform: translateX(-50%) rotateZ(0deg);
+  }
+  65% {
+    top: 1rem;
+    // transform: translateX(-50%) rotateZ(-1.5deg);
+  }
+  100% {
+    top: 2rem;
+    // transform: translateX(-50%) rotateZ(0deg); 
+  }
+}
+

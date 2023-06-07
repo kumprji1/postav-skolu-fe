@@ -3,3 +3,8 @@
 .order-filling-info-section form {
     @include flexCenterDir(column);
 }
+.purchase-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

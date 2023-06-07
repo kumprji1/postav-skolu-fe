@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 // Contexts
@@ -12,6 +12,10 @@ import CartItem_Donation from "./components/CartItems/CartItem_Donation";
 const CartPage = () => {
   const auth = useContext(AuthContext);
   const cart = useContext(CartContext);
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
 
   const totalPrice = cart.cartState.donations.reduce(
     (partSum, i) => partSum + i.price,
@@ -47,6 +51,7 @@ const CartPage = () => {
         ))}
       {cart.cartState.donations.length !== 0 && <p>Cena celkem: {totalPrice} KČ</p>}
       {cart.cartState.donations.length === 0 && <p>Košík je prázdný</p>}
+      <br />
       {cart.cartState.donations.length !== 0 && (
         <Fragment>
           <NavLink className="btn--primary" to={`/nakup`}>

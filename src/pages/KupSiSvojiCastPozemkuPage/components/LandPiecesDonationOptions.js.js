@@ -66,15 +66,15 @@ const LandPiecesDonationOptions = ({ baseDonationData }) => {
             <option value="otherOption">Já</option>
           </select> */}
       </div>
-      <h1 className="land-pieces-donation--step-info"> 3. Chci sdělit</h1>
+      <h1 className="land-pieces-donation--step-info">3. Chci sdělit</h1>
       <input
         className="land-pieces-input-custom-note"
-        placeholder="Chci sdělit:"
+        placeholder="Vaše poznámka..."
         type="text"
         onChange={(e) => baseDonationData.inputNote(e.currentTarget.value)}
         value={baseDonationData.baseDonationState.note}
       ></input>
-      {baseDonationData.baseDonationState.price && <NavLink
+      {baseDonationData.baseDonationState.price && baseDonationData.baseDonationState.price > 15 && <NavLink
         className={"btn--primary land-pieces-btn-to-cart"}
         to={"/kosik"}
         onClick={() =>

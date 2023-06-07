@@ -6,16 +6,16 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    // background-color: rgb(110, 193, 174);
     .left {
         h1 {
             font-family: $coprIdentityFont;
-            font-size: 3rem;
-            font-weight: 400;
+            font-size: 2.8rem;
+            font-weight: 200;
         }
         h2 {
             font-family: $coprIdentityFont;
-            font-size: 2rem;
+            font-style: italic;
+            font-size: 1.6rem;
             font-weight: 300;
             color: $greyColor;
             padding-bottom: 1rem;
@@ -33,4 +33,13 @@
 		opacity: 0.22;
 	}
     }
+}
+
+@media screen and (min-width: $contentMaxWidth) {
+    .about-section {
+
+    .img-wrapper {
+        width: 15rem;
+        top: -2.2rem;
+    }}
 }

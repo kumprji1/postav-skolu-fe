@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../../components/UI/Button/Button";
+import { Link } from "react-router-dom";
 
 import SchoolImg from "../../../images/Skola/about.png";
 
@@ -9,8 +9,8 @@ const ImageSection = () => {
   return (
     <section className="school-image-section">
       <img src={SchoolImg} alt="Škola" />
-      <div className="btn-wrapper">
-        <Button classes="btn--secondary">PŘISPĚT</Button>
+      <div className="btn-main-project-wrapper">
+        <Link to={'/projekt/kup-si-svoji-cast-pozemku'} className="">Chci přispět</Link>
       </div>
     </section>
   );

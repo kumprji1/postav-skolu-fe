@@ -223,9 +223,20 @@ Base-Componenets
   margin: 0.5rem 1rem;
 }
 
+.my-checkbox--wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  input {
+    margin-right: 0.5rem;
+  }
+}
 
-@media(min-width: $contentMaxWidth) {
+@media(min-width: 73rem) {
   section {
     width: $contentMaxWidth;
+    padding: 0;
   }
 }
