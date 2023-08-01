@@ -44,7 +44,7 @@ const KupSiSvojiCastPozemkuPage = (props) => {
     isSelected: false,
     wantsCustom: false,
     note: "",
-    isAnonymous: false,
+    isAnonymous: null,
   });
 
   // fetch Donatables
@@ -74,13 +74,14 @@ const KupSiSvojiCastPozemkuPage = (props) => {
   }, [sendRequest]);
 
   return (
-    <Fragment>
+    <div className="kup-si-cast-pozemku-main">
+      <p className="donate-motivation-text" style={{padding: '0.4rem 0.2rem', color: 'grey', fontStyle: 'italic'}}>Přispějte na nákup pozemku a buďte součástí věčné mapy dárců :)</p>
       <ThreeJS_Canvas_Land
         donations={donations}
         priceToDonate={baseDonationData.baseDonationState.price}
       />
       <LandPiecesDonationOptions baseDonationData={baseDonationData} />
-    </Fragment>
+    </div>
   );
 };
 

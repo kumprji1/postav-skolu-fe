@@ -60,7 +60,7 @@ input:-webkit-autofill:active {
 }
 
 /*
-Base-Componenets 
+Base-Componenets
 */
 
 .bbutton {
@@ -158,34 +158,46 @@ Base-Componenets
 
 // Form Components
 
+// .form--wrapper {
+//   max-width: 20rem;
+// }
+
+.b-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  padding: 0 .2rem;
+}
+
 .form-title {
-  position: absolute;
-  padding: 0 0.2rem;
-  top: -0.5rem;
+  // position: absolute;
+  padding: 0.6rem 0rem;
+  // top: -2rem;
   background-color: white;
-  left: 0.5rem;
+  // left: 0.5rem;
   color: $primaryColor;
   font-weight: bold;
-  font-size: 0.8rem;
-  text-transform: uppercase;
+  font-size: 1rem;
 }
 
 .form-inputs--wrapper {
-  // background-color: $primaryColor;
-  max-width: 20rem;
+  // background-color: black;
+  // max-width: fit-content;
+  width: 100%;
   position: relative;
-  border: 2px solid $secondaryColor;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  &:focus-within {
-    border: 2px solid $primaryColor;
-  }
+  // border: 2px solid $secondaryColor;
+  // padding: 1rem;
+  // margin-bottom: 2rem;
+  // &:focus-within {
+  //   border: 2px solid $primaryColor;
+  // }
   transition: all $transMedium;
 }
 
 .form-input--wrapper {
   @include flexCenterDir(column);
   align-items: flex-start;
+  max-width: 100%;
   &:focus-within {
     .form-input-text-label {
       color: $primaryColor;
@@ -193,23 +205,27 @@ Base-Componenets
   }
 
   .form-input-text-label {
-    text-transform: uppercase;
+    // text-transform: uppercase;
+    padding-bottom: .2rem;
     font-weight: normal;
-    font-size: 0.8rem;
-    color: rgba($color: $primaryColor, $alpha: 0.7);  
+    font-size: .9rem;
+    color: rgba($color: $primaryColor, $alpha: 0.7);
   }
   .form-input-text-error {
-    text-transform: uppercase;
+    padding-bottom: .2rem;
+    // text-transform: uppercase;
     font-weight: bold;
     font-size: 0.8rem;
     color: $dangerCol;
   }
   .form-input-text {
     font-size: 1rem;
+    width: 100%;
     padding: 0.5rem;
     outline: none;
     border: none;
-    border-bottom: 2px solid $lightPrimaryColor;
+    border: 2px solid $lightPrimaryColor;
+    border-radius: 5px;
     margin-bottom: 0.5rem;
     &:focus {
       border-color: $primaryColor;
@@ -221,6 +237,7 @@ Base-Componenets
 .input-text {
   padding: 0.5rem 1rem;
   margin: 0.5rem 1rem;
+  min-width: max-content;
 }
 
 .my-checkbox--wrapper {
@@ -229,12 +246,13 @@ Base-Componenets
   justify-content: center;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
+  align-self: flex-start;
   input {
     margin-right: 0.5rem;
   }
 }
 
-@media(min-width: 73rem) {
+@media(min-width: $contentMaxWidth) {
   section {
     width: $contentMaxWidth;
     padding: 0;

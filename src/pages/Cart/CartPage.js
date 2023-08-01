@@ -49,7 +49,7 @@ const CartPage = () => {
         cart.cartState.products.map((prod) => (
           <p key={prod.number}>{prod.title}</p>
         ))}
-      {cart.cartState.donations.length !== 0 && <p>Cena celkem: {totalPrice} KČ</p>}
+      {cart.cartState.donations.length !== 0 && <p>Cena celkem: {totalPrice} Kč</p>}
       {cart.cartState.donations.length === 0 && <p>Košík je prázdný</p>}
       <br />
       {cart.cartState.donations.length !== 0 && (

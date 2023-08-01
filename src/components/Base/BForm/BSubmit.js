@@ -6,7 +6,7 @@ const BSubmit = (props) => {
       type="submit"
       onClick={(e) => {e.preventDefault(); props.onClick()}}
       className={`${props.isValid ? "btn--primary" : "btn--secondary"}`}
-      disabled={!props.isValid}
+      disabled={!props.isValid || props.isLoading}
     >
       {props.children}
     </button>

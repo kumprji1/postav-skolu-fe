@@ -1,5 +1,14 @@
 @import '../../styles/shared';
 
+.darovat-jeste-na {
+    color: $primaryColor;
+    
+}
+
+.order-filling-info-section {
+    padding-top: 0.5rem;
+}
+
 .order-filling-info-section form {
     @include flexCenterDir(column);
 }
@@ -7,4 +16,50 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.trvale-bydliste-info {
+    font-size: 0.9rem;
+    font-weight: 200s;
+    padding-bottom: 0.2rem;
+    font-style: italic;
+    color: $greyColor;
+}
+
+.order-review-donations-section {
+    margin-bottom: 1rem;
+}
+
+
+
+.form-part-animated--visible {
+    opacity: 1;
+    max-height: 15rem;
+    // transform: scaleY(1); 
+    overflow: hidden;
+    transition: all 400ms;
+}
+
+.form-part-animated--hidden {
+    opacity: 0;
+    max-height: 0;
+    // transform: scaleY(0); 
+    overflow: hidden;
+    transition: all 400ms;
+    // max-height: fit-content;
+}
+
+.order-filling-info__form {
+    display: flex;
+    flex-direction: row;
+    max-width: 20rem;
+    padding: 0 .2rem;
+}
+
+@media(min-width: 768px){
+    .order-filling-info__form {
+        display: flex;
+        flex-direction: row;
+        min-width: 20rem;
+    }
 }

@@ -12,7 +12,6 @@ const Header = (props) => {
   const [showShadowHeader, setShowShadowHeader] = useState(false)
 
   window.addEventListener('scroll', () => {
-    console.log('Scroll Y changed')
     if (window.scrollY < 10)
       setShowShadowHeader(false)
     else
@@ -58,6 +57,18 @@ const Header = (props) => {
                 </Fragment>
               ) : (
                 <Fragment>
+                  <NavLink
+                    className="nav-btn--secondary"
+                    to="/nas-pribeh"
+                  >
+                    Náš příběh
+                  </NavLink>
+                  <NavLink
+                    className="nav-btn--secondary"
+                    to="/projekty"
+                  >
+                    Projekty
+                  </NavLink>
                   <NavLink
                     className="nav-btn--secondary"
                     to="/prihlaseni"

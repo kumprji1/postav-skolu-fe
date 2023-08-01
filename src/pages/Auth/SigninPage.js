@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { Fragment, useContext, useEffect, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -145,8 +145,8 @@ const SigninPage = () => {
   };
 
   return (
-    <div className="form--wrapper column">
-        <BForm classNames='column'>
+    <Fragment>
+        <BForm classNames=' column'>
             <BFormPart title="Přihlašovací údaje">
                 <BInput 
                     title="Email"
@@ -170,14 +170,14 @@ const SigninPage = () => {
                     secret={true}
                 />
             </BFormPart>
-            <BSubmit isValid={formState.formIsValid} onClick={postLoginHandler}>Přihlásit</BSubmit>
+            <BSubmit isValid={formState.formIsValid} isLoading={isLoading} onClick={postLoginHandler}>Přihlásit</BSubmit>
         </BForm>
         <div ref={googleDivRef} style={{marginTop: '1rem', marginBottom: '1rem'}}>
         </div>
         <NavLink to="/registrace" className="btn--secondary btn-small">Registrovat</NavLink>
         <SwingSpinner isLoading={isLoading} />
       {error && <ErrorModal error={error} onClear={clearError} />}
-    </div>
+    </Fragment>
   );
 };
 

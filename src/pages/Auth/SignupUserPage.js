@@ -152,7 +152,7 @@ const SignupUserPage = () => {
             secret={true}
           />
         </BFormPart>
-        <BSubmit isValid={formState.formIsValid} onClick={postRegisterHandler}>
+        <BSubmit isValid={formState.formIsValid} onClick={postRegisterHandler} isLoading={isLoading}>
           Registrovat
         </BSubmit>
       </BForm>

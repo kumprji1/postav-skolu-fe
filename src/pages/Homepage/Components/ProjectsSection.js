@@ -30,7 +30,7 @@ const ProjectsSection = () => {
 
   return (
     <>
-          <h1 className="title">Přehled sbírek s výtěžkem pro výstavbu školy:</h1>
+          <h1 className="projects-section--title">Přehled sbírek s výtěžkem pro výstavbu školy:</h1>
           <section className="projects-section">
       {isLoading && <SwingSpinner isLoading={isLoading} />}
       {error && <ErrorModal error={error} onClear={clearError} />}

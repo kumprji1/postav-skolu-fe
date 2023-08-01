@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BForm from "../../components/Base/BForm/BForm";
 import BFormPart from "../../components/Base/BForm/BFormPart";
 import BInput from "../../components/Base/BForm/BInput";
@@ -27,6 +27,8 @@ import {
 } from "../../utils/validators";
 
 import './OrderFillingInfoPage.scss'
+import CartItem_Donation from "../Cart/components/CartItems/CartItem_Donation";
+import BTitle from "../../components/Base/BTitle/BTitle";
 
 const OrderFillingInfoPage = () => {
   const navigate = useNavigate();
@@ -39,6 +41,12 @@ const OrderFillingInfoPage = () => {
 
   // Data
   const cart = useContext(CartContext);
+
+  const totalPrice = cart.cartState.donations.reduce(
+    (partSum, i) => partSum + i.price,
+    0
+  );
+
 
   const [wantsCertificate, setWantsCertificate] = useState(false);
   const [buyingAsCompany, setBuyingAsCompany] = useState(false);
@@ -196,10 +204,36 @@ const OrderFillingInfoPage = () => {
 
   return (
     <section className="order-filling-info-section">
-      <BForm>
+              <section className="order-review-donations-section">
+      <BTitle>Daruji:</BTitle>
+      {cart.cartState.donations && (
+        <Fragment>
+          {/* <h2>Darovat</h2> */}
+          <section className="order-review-donations-section">
+            {cart.cartState.donations.map((don, i) => (
+              <CartItem_Donation
+                key={i}
+                don={don}
+                removeF={() => cart.removeDonation(don.id)}
+              />
+            ))}
+          </section>
+        </Fragment>
+      )}
+      {cart.cartState.pieces &&
+        cart.cartState.pieces.map((p) => <p key={p.number}>{p.title}</p>)}
+      {/* {cart.cartState.products && <h2>Produkty</h2>} */}
+      {cart.cartState.products &&
+        cart.cartState.products.map((prod) => (
+          <p key={prod.number}>{prod.title}</p>
+        ))}
+      <Link className="darovat-jeste-na" to="/projekty">Darovat ještě na...</Link>
+    </section>
+
+      <BForm classNames={'order-filling-info__form'}>
         <BFormPart title="Kontaktní údaje">
           <BInput
-            title="Jméno"
+            title="Jméno:"
             input={formState.parts.contactPart.inputs.name}
             partId="contactPart"
             inputId="name"
@@ -209,7 +243,7 @@ const OrderFillingInfoPage = () => {
             touchHandler={touchHandler}
           />
           <BInput
-            title="Příjmení"
+            title="Příjmení:"
             input={formState.parts.contactPart.inputs.surname}
             partId="contactPart"
             inputId="surname"
@@ -219,7 +253,7 @@ const OrderFillingInfoPage = () => {
             touchHandler={touchHandler}
           />
           <BInput
-            title="Email"
+            title="E-mail:"
             input={formState.parts.contactPart.inputs.email}
             partId="contactPart"
             inputId="email"
@@ -229,7 +263,7 @@ const OrderFillingInfoPage = () => {
             touchHandler={touchHandler}
           />
           <BInput
-            title="Tel. číslo"
+            title="Tel. číslo:"
             input={formState.parts.contactPart.inputs.mobile}
             partId="contactPart"
             inputId="mobile"
@@ -250,7 +284,7 @@ const OrderFillingInfoPage = () => {
           )
         }}>
           <input type="checkbox" name="buyingAsCompany" checked={formState.parts.companyPart.required} />
-          <label htmlFor="buyingAsCompany">Nakupuji na firmu</label>
+          <label htmlFor="buyingAsCompany">Darovat jako firma</label>
         </div>
         {/* <button
           className={`${formState.parts.companyPart.required ? 'bbutton' : 'bbutton-outline'} btn-small`}
@@ -264,10 +298,9 @@ const OrderFillingInfoPage = () => {
         >
           Nakupuji na firmu
         </button> */}
-        {formState.parts.companyPart.required &&
-          <BFormPart title="Firemní údaje">
+          <BFormPart classNames={`${formState.parts.companyPart.required ? 'form-part-animated--visible' : 'form-part-animated--hidden'} `}>
             <BInput
-              title="Názec společnosti"
+              title="Název firmy:"
               input={formState.parts.companyPart.inputs.company}
               partId="companyPart"
               inputId="company"
@@ -277,7 +310,7 @@ const OrderFillingInfoPage = () => {
               touchHandler={touchHandler}
             />
             <BInput
-              title="IČO"
+              title="IČO:"
               input={formState.parts.companyPart.inputs.ico}
               partId="companyPart"
               inputId="ico"
@@ -287,7 +320,7 @@ const OrderFillingInfoPage = () => {
               touchHandler={touchHandler}
             />
             <BInput
-              title="DIČ"
+              title="DIČ:"
               input={formState.parts.companyPart.inputs.dic}
               partId="companyPart"
               inputId="dic"
@@ -301,7 +334,7 @@ const OrderFillingInfoPage = () => {
             companyPart: {formState.parts.companyPart.partIsValid && "isValid"}
           </p> */}
           </BFormPart>
-        }
+        
         <div className="my-checkbox--wrapper" onClick={(e) => {
           setRequired(
             "certificatePart",
@@ -309,7 +342,7 @@ const OrderFillingInfoPage = () => {
           )
         }}>
           <input type="checkbox" name="wantsCertificate" checked={formState.parts.certificatePart.required} />
-          <label htmlFor="wantsCertificate">Chci certifikát</label>
+          <label htmlFor="wantsCertificate">Chci zaslat potvrzení o daru</label>
         </div>
         {/* <button
           className={`${formState.parts.certificatePart.required ? 'bbutton' : 'bbutton-outline'} btn-small`}
@@ -323,10 +356,10 @@ const OrderFillingInfoPage = () => {
         >
           Chci certifikát
         </button> */}
-        {formState.parts.certificatePart.required &&
-          <BFormPart title="Údaje pro certifikát">
+          <BFormPart classNames={`${formState.parts.certificatePart.required ? 'form-part-animated--visible' : 'form-part-animated--hidden'} `}>
+            <p className="trvale-bydliste-info">Vyplňte prosím adresu trvalého bydliště:</p>
             <BInput
-              title="Ulice a číslo popisné"
+              title="Ulice a číslo popisné:"
               input={formState.parts.certificatePart.inputs.street_num}
               partId="certificatePart"
               inputId="street_num"
@@ -336,7 +369,7 @@ const OrderFillingInfoPage = () => {
               touchHandler={touchHandler}
             />
             <BInput
-              title="Město"
+              title="Obec:"
               input={formState.parts.certificatePart.inputs.city}
               partId="certificatePart"
               inputId="city"
@@ -346,7 +379,7 @@ const OrderFillingInfoPage = () => {
               touchHandler={touchHandler}
             />
             <BInput
-              title="PSČ"
+              title="PSČ:"
               input={formState.parts.certificatePart.inputs.zipCode}
               partId="certificatePart"
               inputId="zipCode"
@@ -359,16 +392,15 @@ const OrderFillingInfoPage = () => {
             certificatePart: {formState.parts.certificatePart.partIsValid && "isValid"}
           </p> */}
           </BFormPart>
-        }
         {/* <p>formIsValid: {formState.formIsValid && "formIsValid"}</p> */}
         {/* <BSubmit isValid={formState.formIsValid} onClick={submitFormHandler}><img src={CardIcon} style={{width: "50px"}} />Dokončit objednávku</BSubmit> */}
         <button
       type="submit"
       onClick={(e) => {e.preventDefault(); submitFormHandler()}}
       className={`purchase-btn ${formState.formIsValid ? "btn--primary" : "btn--secondary"}`}
-      disabled={!formState.formIsValid}
+      disabled={!formState.formIsValid || isLoading}
     >
-      <img src={CardIcon} style={{width: "50px", marginRight: "0.5rem"}} />Dokončit objednávku
+      <img src={CardIcon} style={{width: "50px", marginRight: "0.5rem"}} />Přejít k platbě {totalPrice} Kč
     </button>
       </BForm>
       <SwingSpinner isLoading={isLoading} />

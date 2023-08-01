@@ -2,6 +2,7 @@
 
 .project-item {
     padding: 0.2rem;
+    margin: 2.5rem 0rem ;
   min-width: 10rem;
   min-height: 10rem;
   background-color: white;
@@ -20,9 +21,7 @@
         background-color: $primaryColor;
     }
 }
-  &:not(:first-child) {
-    margin-top: 6rem;
-  }
+
   transition: all $transMedium;
 }
 

@@ -8,7 +8,7 @@ const ThreeJS_Canvas_Land = (props) => {
   const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
-    document.body.style.cursor = hovered ? 'pointer' : 'auto'
+    document.body.style.cursor = hovered ? 'grab' : 'auto'
   }, [hovered])
 
 
@@ -19,7 +19,7 @@ const ThreeJS_Canvas_Land = (props) => {
         fov: 45,
         near: 0.1,
         far: 5000,
-        position: [0, 0, 1000],
+        position: [0, 0, 850],
       }}
       // Events
       onPointerEnter={(e) => {

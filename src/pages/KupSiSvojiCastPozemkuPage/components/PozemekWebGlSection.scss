@@ -1,5 +1,13 @@
 @import '../../../styles/shared';
 
+.kup-si-cast-pozemku-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100%;
+}
+
 .pozemek-webgl-section {
     background-color: grey;
     position: relative;
@@ -8,6 +16,7 @@
     width: 100%;
     position: relative;
     border: 2px dashed black;
+    transform: 300ms all;
 }
 
 canvas.pozemek-webgl {
@@ -21,7 +30,9 @@ canvas.pozemek-webgl {
 
 .canvas-land {
     // min-width: 80vw !important;
-    min-height: 60vh !important;
+    min-height: 40h !important;
+    max-height: 45vh !important;
+    
 }
 
 .landPiece-donation-info--wrapper {
@@ -32,4 +43,14 @@ canvas.pozemek-webgl {
     background-color: white;
     color: $primaryColor;
     @include useShadows();
+    transition: 200ms all;
+}
+
+@media (min-width: $contentMaxWidth){
+    .canvas-land {
+        // min-width: 80vw !important;
+        min-height: 60vh !important;
+        max-height: 60vh !important;
+        // @include useShadows();
+    }
 }

@@ -6,7 +6,7 @@
     // top: 10vw;
     z-index: 1;
     background-color: white;
-    padding: 1rem;
+    margin: 1rem;
 }
 
 .land-pieces-donation-options--wrapper {
@@ -42,6 +42,7 @@
 }
 .land-pieces-input-custom-note {
   text-decoration: none;
+  text-align: left;
   background-color: white;
   color: $primaryColor;
   padding: 0.6rem 1.2rem;
@@ -49,9 +50,13 @@
   margin-bottom: 1rem;
   font-size: 1rem;
   font-weight: 400;
-  border: 1px solid $primaryColor;
-  border-radius: 5px;
+  border: none;
+  border-bottom: 1px solid $primaryColor;
+  // border-radius: 5px;
   text-decoration: none;
+  &:focus {
+    outline: none;
+  }
   &:hover {
     box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 10px 10px 21px -16px rgba(0, 0, 0, 0.75);
@@ -71,6 +76,49 @@
     text-transform: uppercase;
 }
 
+.land-pieces-donation--custon-note-and-submit--wrapper,
+.land-pieces-donation--choose-visibility--wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CSS ANIMATION GROUP */
+
+.land-pieces-donation--choose-visibility--wrapper-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .land-pieces-donation--choose-visibility--wrapper-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .land-pieces-donation--choose-visibility--wrapper-exit {
+    opacity: 1;
+  }
+  .land-pieces-donation--choose-visibility--wrapper-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .land-pieces-donation--custon-note-and-submit--wrapper-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .land-pieces-donation--custon-note-and-submit--wrapper-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .land-pieces-donation--custon-note-and-submit--wrapper-exit {
+    opacity: 1;
+  }
+  .land-pieces-donation--custon-note-and-submit--wrapper-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
+  }
 @media screen and (min-width: 48rem) {
     .land-pieces-input-custom-note {
         width: 30rem;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import SchoolImg from "../../../images/Skola/about.png";
+import SchoolImg from "../../../images/Skola/skola_laplan.png";
 
 import "./ImageSection.scss";
 

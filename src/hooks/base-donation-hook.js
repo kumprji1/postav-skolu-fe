@@ -60,6 +60,7 @@ const reducer = (state, action) => {
         ...state,
         options: updatedOptions,
         wantsCustom: true,
+        price: null
       };
     }
     default: {

@@ -51,7 +51,7 @@ export const validate = (value, validators) => {
       isValid = isValid && +value <= validator.val;
     }
     if (validator.type === VALIDATOR_TYPE_EMAIL) {
-      isValid = isValid && /^\S+@\S+\.\S+$/.test(value);
+      isValid = isValid && /^\S+@\S+\.\S+$/.test(value.trim());
     }
     if (validator.type === VALIDATOR_STRONG_PASSWORD) {
       isValid = isValid && new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})').test(value)

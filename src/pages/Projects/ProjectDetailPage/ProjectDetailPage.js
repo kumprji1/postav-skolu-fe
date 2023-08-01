@@ -12,6 +12,9 @@ const ProjectDetailPage = () => {
   const { sendRequest, isLoading, error, clearError } = useHttp();
   const { urlTitle } = useParams();
   useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+  useEffect(() => {
     const fetchProject = async () => {
       try {
         const responseData = await sendRequest(

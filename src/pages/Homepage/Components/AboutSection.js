@@ -11,7 +11,7 @@ const AboutSection = () => {
   return (
     <section className="about-section">
       <div className="left">
-        <h1>Postavte s námi školu... </h1>
+        <h1>Postavte s námi školu...(Já jsem tu taky) </h1>
         <h2>buď ten, kvůli kterému někteří věří v dobro!</h2>
         {/* <Link to="/projekt/kup-si-svoji-cast-pozemku" className="btn--primary">Chci pomoci</Link> */}
       </div>
