@@ -57,12 +57,12 @@ const Header = (props) => {
                 </Fragment>
               ) : (
                 <Fragment>
-                  <NavLink
+                  {/* <NavLink
                     className="nav-btn--secondary"
                     to="/nas-pribeh"
                   >
                     Náš příběh
-                  </NavLink>
+                  </NavLink> */}
                   <NavLink
                     className="nav-btn--secondary"
                     to="/projekty"
@@ -122,6 +122,13 @@ const Header = (props) => {
                 >
                   Přihlásit se
                 </NavLink>
+                <NavLink
+                    className="btn--secondary"
+                    to="/projekty"
+                    onClick={closeMobileNav}
+                  >
+                    Projekty
+                  </NavLink>
                 <NavLink className="btn--secondary" to="/kosik"
                   onClick={closeMobileNav}>
                   Košík

@@ -22,6 +22,7 @@ import MyOrdersPage from "./pages/MyOrdersPage/MyOrdersPage";
 import CreateNewsPage from "./pages/Admin/CreateNewsPage/CreateNewsPage";
 import EditNewsPage from "./pages/Admin/EditNewsPage/EditNewsPage";
 import EditDonatablePage from "./pages/Admin/EditDonatablePage/EditDonatablePage";
+import ProjectsPage from "./pages/Projects/ProjectsPage/ProjectsPage";
 
 import { AuthContext } from "./contexts/AuthContext";
 import { CartContext } from "./contexts/CartContext";
@@ -59,6 +60,7 @@ function App() {
                   <Route path="/kup-si-svoji-cast-pozemku-stara-verze" element={<KupSiSvojiCastPozemkuStaraVerzePage />} />
 
                   // Projects
+                  <Route path="/projekty" element={<ProjectsPage />} />
                   {auth.role == Roles.ADMIN && <Route path="/novy-projekt" element={<CreateProjectPage />} />}
                   {auth.role == Roles.ADMIN && <Route path="/upravit/projekt/:projectId" element={<EditProjectPage />} />}
                   <Route

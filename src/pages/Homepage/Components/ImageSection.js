@@ -10,7 +10,7 @@ const ImageSection = () => {
     <section className="school-image-section">
       <img src={SchoolImg} alt="Škola" />
       <div className="btn-main-project-wrapper">
-        <Link to={'/projekt/kup-si-svoji-cast-pozemku'} className="">Chci přispět</Link>
+        <Link to={'/projekt/kup-si-svoji-cast-pozemku'} className="">Rád přispěji</Link>
       </div>
     </section>
   );
